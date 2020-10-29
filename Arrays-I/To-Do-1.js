@@ -1,7 +1,17 @@
+var array = [1,2,3,4,5,6];
+var value = 22;
+
 // Push Front
 // Given an array and an additional value, insert this value at the beginning of the array. 
 // Do this without using any built-in array methods.
-var pushFrontArray = [1,2,3,4,5,6];
+function pushFront(array, value){
+    for (var i = array.length; i > 0; i--) {
+        array[i] = array[i-1];
+        
+        array[0] = value;
+    }
+}
+console.log(pushFront);
 
 
 
