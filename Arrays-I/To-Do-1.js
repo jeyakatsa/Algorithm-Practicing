@@ -1,43 +1,54 @@
 var array = [1,2,3,4,5,6];
 var value = 22;
+var index = 0;
 
 // Push Front
 // Given an array and an additional value, insert this value at the beginning of the array. 
 // Do this without using any built-in array methods.
 function pushFront(array, value){
-    for (var i = array.length; i > 0; i--) {
+    for (var i = array.length; i > 0; i--)
         array[i] = array[i-1];
         
-        array[0] = value;
-    }
+    array[0] = value; 
 }
-console.log(pushFront);
-
 
 
 // Pop Front
 // Given an array, remove and return the value at the beginning of the array. 
 // Do this without using any built-in array methods except pop().
-var popFrontArray = [1,2,3,4,5,6];
-
+function popFront(array) {
+	var val = array[0];
+	for(let i = 0; i < array.length; i++)
+		array[i] = array[i + 1];
+	array.length = array.length - 1;
+	return val;
+}
 
 
 // Insert At
 // Given an array, index, and additional value, insert the value into array at given index. 
 // Do this without using built-in array methods. 
 // You can think of pushFront(arr,val) as equivalent to insertAt(arr,0,val).
-var insertArray =  [1,2,3,4,5,6];
-var insertVal = 1;
-var insertIndex = insertArray.indexOf(3);
-
+function insertAt(array, index, value) {
+	for(let i = array.length; i > index; i--)
+		array[i] = array[i-1];
+	
+	array[index] = value;
+}
 
 
 // Remove At
 // Given an array and an index into array, remove and return the array value at that index. 
 //Do this without using built-in array methods except pop(). Think of popFront(arr) as 
 // equivalent to removeAt(arr,0).
-var removeAtArray = [1,2,3,4,5,6];
-var removeAtIndex = removeAtArray.indexOf(3);
+function removeAt(array, index) {
+    toRemove = array[index];
+    for(let i = index; i < array.length-1; i++) {
+        array[i] = array[i+1];
+    }
+    array.length = array.length-1;
+    return toRemove;
+}
 
 
 
@@ -46,7 +57,13 @@ var removeAtIndex = removeAtArray.indexOf(3);
 // do not change the final element. For [1,2,3,4], return [2,1,4,3]. For example,
 // change input ["Brendan",true,42] to [true,"Brendan",42]. As with all array challenges,
 // do this without using any built-in array methods.
-var swapPairsArray = [1,2,3,4,5,6];
+function swapPairs(array) {
+	for(let i = 0; i < array.length - 1; i = i + 2) {
+		let temp = array[i];
+		array[i] = array[i + 1];
+		array[i + 1] = temp;
+	}
+}
 
 
 
@@ -58,3 +75,11 @@ var swapPairsArray = [1,2,3,4,5,6];
 // challenges, do this without using any built-in array methods.
 
 // Second: Solve this without using any nested loops.
+function removeDupesUnnested(array) {
+	let newArr = [];
+	for(let i = 0; i < array.length; i++) {
+		if(array[i] !== array[i+1]) 
+			newArr.push(array[i])
+	}
+	return newArr;
+}
