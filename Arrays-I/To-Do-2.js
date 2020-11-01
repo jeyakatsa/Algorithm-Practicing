@@ -1,10 +1,23 @@
+var arr = [6,5,4,3,2,1];
+var idx = 0;
+
 //Reverse
 //Given a numerical array, reverse the order of values, in-place. 
 //The reversed array should have the same length, with existing elements moved 
 //to other indices so that order of elements is reversed. Working ‘in-place’ 
 //means that you cannot use a second array – move values within the array that 
 //you are given. As always, do not use built-in array functions such as splice().
-var array = [6,5,4,3,2,1];
+
+function reverse(arr) {
+    // loop through half of the array
+    for(var i=0; i<arr.length/2; i++) {
+        // swap values across midpoint
+        var temp = arr[i];
+        arr[i] = arr[arr.length-1-i];
+        arr[arr.length-1-i] = temp;
+    }
+}
+
 
 
 //Rotate
@@ -18,7 +31,27 @@ var array = [6,5,4,3,2,1];
 //Third: minimize memory usage. With no new array, handle arrays/shiftBys in the millions.
 //--
 //Fourth: minimize the touches of each element.
+function rotate(arr, shiftBy) {
+	let t = Math.abs(shiftBy);
+	while(t > 0) {
 
+		if(shiftBy > 0) {
+			let temp = arr[arr.length-1]
+			
+			for(let i = arr.length - 1; i > 0; i--)
+				arr[i] = arr[i-1];
+			arr[0] = temp;
+
+		} else {
+			let temp = arr[0];
+			for(let i = 0; i < arr.length - 1; i++) {
+				arr[i] = arr[i + 1];
+			}
+			arr[arr.length-1] = temp;
+		}
+		t--;
+	}
+}
 
 
 
@@ -27,6 +60,17 @@ var array = [6,5,4,3,2,1];
 //within a specific known range. Given arr and values min and max, retain only 
 //the array values between min and max. Work in-place: return the array you are given, 
 //with values in original order. No built-in array functions.
+function filterRange(arr, min, max) {
+	for(let i = 0; i < arr.length; i++) {
+		if(arr[i] > min && arr[i] < max) {
+			for(let j = i; j < arr.length - 1; j++) {
+                arr[j] = arr[j + 1];
+            }
+            arr.length = arr.length - 1;
+			i--;
+		}
+	}
+}
 
 
 
