@@ -1,83 +1,56 @@
-// Remove Blanks
-// Create a function that, given a string, returns all of that string’s contents, 
-// but without blanks. 
-// ---
-// If given the string " Pl ayTha tF u nkyM usi c ", return "PlayThatFunkyMusic".
-function removeBlanks(str) {
-    return str.split(" ").join("");
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.next = null
+    }
 }
 
-
-// Get Digits
-// Create a JavaScript function that given a string, returns the integer made 
-// from the string’s digits. Given "0s1a3y5w7h9a2t4?6!8?0", the function should 
-// return the number 1357924680.
-function getDigits(str) {
-    var stringArr = str.split("");
-    var intStr = "";
-    for (var ind = 0; ind < stringArr.length; ind++) {
-        if (stringArr[ind]%1 == 0) {
-            intStr += stringArr[ind];
-        }
+ class SLL {
+    constructor() {
+        this.head = null;
     }
-    return intStr/1;
-}
+    //Add Front
+    //Write a method that accepts a value and create a new node, 
+    //assign it to the list head, and return a pointer to the new head node.
+    addFront(value) {
+        // Write a method that accepts a value and create a new node, 
+        // assign it to the list head, and return a pointer to the new head node.
 
+        // create a new node
+        var newNode = new Node(value);
 
-// Acronyms
-// Create a function that, given a string, returns the string’s acronym 
-// (first letters only, capitalized). 
-// ---
-// Given " there's no free lunch - gotta pay yer way. ", return "TNFL-GPYW". 
-// ---
-// Given "Live from New York, it's Saturday Night!", return "LFNYISN".
-function acronyms(str) {
-    var strArr = str.split(" ");
-    var retStr = "";
-    for (var ind = 0; ind < strArr.length; ind++) {
-        if (strArr[ind] == false) {
-            continue;
-        } else {
-            retStr += strArr[ind][0].toUpperCase();
-        }
+        // attach new node to existing list
+        newNode.next = this.head;
+
+        // reassign list's head
+        this.head = newNode;
+
+        // return the head
+        return this.head;
     }
-    return retStr;
-}
 
-
-// Count Non-Spaces
-// Accept a string and return the number of non-space characters found 
-// in the string. 
-// ---
-// For example, given "Honey pie, you are driving me crazy", return 29
-// (not 35).
-function countNS(str) {
-    var strArr = str.split("");
-    var count = 0;
-    for (var ind = 0; ind < strArr.length; ind++) {
-        if (strArr[ind] == false) {
-            continue;
-        } else {
-            count++;
+    // Remove Front
+    //Write a method to remove the head node and return the new list head node.
+    // If the list is empty, return null.
+    // constructor, other methods, removed for brevity
+    removeFront() {
+        //Write a method to remove the head node and return the new list head node. 
+        //If the list is empty, return null.
+        if(this.head) {
+            this.head = this.head.next;
         }
+        return this.head;
     }
-    return count;
-}
-
-
-// Remove Shorter Strings
-// Given a string array and value (length), remove any strings shorter than the 
-// length from the array.
-function removeShort(strArr, val) {
-    for (var ind = strArr.length-1; ind >= 0; ind--) {
-        if (strArr[ind].length < val) {
-            for (var i = ind; i < strArr.length-1; i++){
-                var temp = strArr[i];
-                strArr[i] = strArr[i+1];
-                strArr[i+1] = temp;
-            }
-            strArr.pop();
+    
+    //Front
+    //Write a method to return the value (not the node) at the head of the list. 
+    //If the list is empty, return null.
+    front() {
+        // Write a method to return the value (not the node) at the head of the list. 
+        // If the list is empty, return null.
+        if(this.head) {
+            return this.head.value;
         }
+        return null;
     }
-    return strArr;
 }
