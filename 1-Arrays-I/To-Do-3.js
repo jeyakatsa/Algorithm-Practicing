@@ -2,13 +2,23 @@
 // Implement removeNegatives() that accepts an array, removes negative values, 
 // and returns the same array (not a copy), preserving non-negatives’ order. 
 // As always, do not use built-in array functions.
-
+var rmvNegArray = [-1, -2, -5, 6, 8, 10];
+function removeNegatives(array) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] < 0) {
+            array[i] = null;
+        }
+    }
+    return array;
+}
+removeNegatives(rmvNegArray);
 
 
 // Second-to-Last
 // Return the second-to-last element of an array. Given [42,true,4,"Kate",7], 
 // return "Kate". If array is too short, return null.
-
+var array = [42,true,4,"Kate",7];
+function secondToLast()
 
 
 // Second-Largest
