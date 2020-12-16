@@ -27,6 +27,10 @@ var merge = function (nums1, m, nums2, n) {
     }
 };
 
+
+
+
+
 //returning running sum of Array
 var nums = [1,2,3,4]; 
 var runningSum = function(nums) {
@@ -35,6 +39,10 @@ var runningSum = function(nums) {
     }
     return nums
 };
+
+
+
+
 
 //Given an array of integers nums and an integer k,
 //return the number of unique k-diff pairs in the array.
@@ -64,6 +72,9 @@ var findPairs = function(nums, k) {
     return result
 };
 
+
+
+
 //Given an array of integers nums and an integer target, 
 //return indices of the two numbers such that they add up to target.
 var twoSum = function(nums, target) {
@@ -76,6 +87,9 @@ var twoSum = function(nums, target) {
         map[nums[i]] = i
     }
 };
+
+
+
 
 //Given an integer array nums, find the contiguous subarray 
 //(containing at least one number) which has the largest 
@@ -91,6 +105,9 @@ var maxSubArray = function(nums) {
   }
   return max;
 }
+
+
+
 
 //Given an array nums of n integers where n > 1, 
 //return an array output such that output[i] is equal to the 
@@ -109,6 +126,9 @@ var productExceptSelf = function(nums) {
     }
     return output;
 };
+
+
+
 
 //91. Decode Ways
 //Given a non-empty string containing only digits, determine 
@@ -137,6 +157,9 @@ function numDecodings(s) {
     return dp[s.length];
   }
 
+
+
+
   //5. Longest palindrome.
   var longestPalindrome = function(s) {
     var max = '';
@@ -156,6 +179,9 @@ function numDecodings(s) {
     return max;
   };
 
+
+
+
   //121. Best time to buy stock
   var maxProfit = function(prices) {
     let min = prices[0], max = 0;
@@ -170,6 +196,9 @@ function numDecodings(s) {
     
     return max;
 };
+
+
+
 
 //221. Maximal Square
 function maximalSquare(matrix) {
@@ -215,4 +244,20 @@ function maximalSquare(matrix) {
 
   // return max squared (cuz its a square :))
   return max ** 2;
-}
+
+
+
+}//139. Word Break
+var wordBreak = function(s, wordDict) {
+    const words = new Set(wordDict);
+    const wordLens = new Set(wordDict.map((word) => word.length))
+    const starts = new Set([0])
+    for (let start of starts) {
+        for (let len of wordLens) {
+            if (words.has(s.slice(start, start + len))) {
+                starts.add(start + len)
+            }
+        }
+    }
+    return starts.has(s.length)
+};
