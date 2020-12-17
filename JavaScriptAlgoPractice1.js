@@ -274,3 +274,29 @@ var coinChange = function(coins, amount) {
     }
     return dp[amount] === Infinity ? -1 : dp[amount];
 };
+
+//199. Binary Tree Right Side View
+var rightSideView = function(root) {
+    let depth = [];
+    
+    function inner(root, d) {
+      if(!root) {
+        return;
+      }
+      depth[d] = root.val;
+      inner(root.left, d + 1);
+      inner(root.right, d + 1);
+    }
+    inner(root, 0);
+    return depth;
+  };
+
+  //236. Lowest Common Ancestor of a Binary Tree
+  const lowestCommonAncestor = (root, p, q) => {
+    if (!root || root === p || root === q) return root
+    const left = lowestCommonAncestor(root.left, p, q)
+    const right = lowestCommonAncestor(root.right, p, q)
+    if (!left) return right  // p and q are in the right subtree
+    if (!right) return left  // p and q are in the left subtree
+    return root              // p is in one side and q is in the other
+};
