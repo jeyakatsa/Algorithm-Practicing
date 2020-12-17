@@ -300,3 +300,27 @@ var rightSideView = function(root) {
     if (!right) return left  // p and q are in the left subtree
     return root              // p is in one side and q is in the other
 };
+
+//
+var buildTree = function(preorder, inorder) {
+    const map = new Map();
+    let preIdx = 0;
+    
+    for(let i = 0; i < inorder.length; i++) {
+        map.set(inorder[i], i)
+    }
+    
+    function callDFS(start, end) {
+        if(end < start) return null;
+        
+        const node = new TreeNode(preorder[preIdx]);
+        const idx = map.get(preorder[preIdx]);
+        preIdx++;
+        
+        node.left = callDFS(start, idx-1);
+        node.right = callDFS(idx+1, end);
+        
+        return node;
+    }
+    return callDFS(0, inorder.length-1);
+};
