@@ -247,7 +247,9 @@ function maximalSquare(matrix) {
 
 
 
-}//139. Word Break
+}
+
+//139. Word Break
 var wordBreak = function(s, wordDict) {
     const words = new Set(wordDict);
     const wordLens = new Set(wordDict.map((word) => word.length))
@@ -301,7 +303,7 @@ var rightSideView = function(root) {
     return root              // p is in one side and q is in the other
 };
 
-//
+//105. Construct Binary Tree from Preorder and Inorder Traversal
 var buildTree = function(preorder, inorder) {
     const map = new Map();
     let preIdx = 0;
@@ -324,3 +326,93 @@ var buildTree = function(preorder, inorder) {
     }
     return callDFS(0, inorder.length-1);
 };
+
+//987.	Vertical Order Traversal of a Binary Tree
+var verticalTraversal = function(root) {
+    const nodeInfos = []; // holds the x, y, & val information of each node traversed
+    
+    getNodeInfos(root, 0, 0);
+	
+	// sort by the following order of importance:
+	//  1. x - coordinate
+	//  2. y - coordinate precedence given to higher value
+	//  3. node val in ascending order
+	
+    nodeInfos.sort((a, b) => a[0] - b[0] || b[1] - a[1] || a[2] - b[2]);
+    
+    const map = new Map();
+    
+    for (const [x, y, val] of nodeInfos) {
+        if (!map.has(x)) map.set(x, []);
+        map.get(x).push(val);
+    }
+    
+    return [...map.values()];
+    
+    function getNodeInfos(node, x, y) {
+        if (node) {
+            getNodeInfos(node.left, x - 1, y - 1); // traverse left
+			nodeInfos.push([x, y, node.val]);
+            getNodeInfos(node.right, x + 1, y - 1); // traverse right
+        }
+    }
+};
+
+//103. Binary Tree Zigzag Level Order Traversal
+var zigzagLevelOrder = function(root) {
+    if(!root) return [];
+    let queue = [root];
+    let output = [];
+    let deep = 0;
+    while(queue.length > 0){
+      const size = queue.length;
+      const level = [];
+      
+      for(let i=0; i< size; i++){
+        const node = queue.shift();
+        if(deep % 2 == 0) level.push(node.val);
+        else level.unshift(node.val);
+        
+        if(node.left) queue.push(node.left)
+        if(node.right) queue.push(node.right)
+      }
+      output.push(level)
+      deep++;
+    }
+    
+    
+    return output
+    
+    
+  };
+
+  //863. All Nodes Distance K in Binary Tree
+  var distanceK = function(root, target, K) {
+    if(!root) return []
+    const node = findTarget(root, null, target)  
+    const res = []
+    findAllKApart(node, K, res)
+    return res
+  };
+  
+  function findTarget(root, parent, target){
+    if(!root) return null
+    root.parent = parent
+    if(root === target){    
+     return root 
+    }    
+    return findTarget(root.left, root, target) || findTarget(root.right, root, target)    
+  }
+  
+  function findAllKApart(root, k, res){
+    if(!root || root.visited) return res
+    if(k == 0){
+      res.push(root.val)
+      return res
+    }   
+    root.visited = true
+    findAllKApart(root.left, k-1, res)
+    findAllKApart(root.right, k-1, res)
+    findAllKApart(root.parent, k-1, res)
+    return res
+  }
