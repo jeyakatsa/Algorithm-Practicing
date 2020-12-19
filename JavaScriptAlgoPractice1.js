@@ -416,3 +416,27 @@ var zigzagLevelOrder = function(root) {
     findAllKApart(root.parent, k-1, res)
     return res
   }
+
+  //2. Add Two Numbers
+  var addTwoNumbers = function(l1, l2) {
+    if(l1.val == undefined) return l2;
+    else if(l2.val == undefined) return l1;
+    
+    let ret = new ListNode(0);
+    let ptr = ret;
+    let sum=0, tmp=0;
+    
+    while(l1!=null || l2!=null ||sum>0){
+    	if(l1!=null) { sum+=l1.val; l1=l1.next; }
+    	if(l2!=null) { sum+=l2.val; l2=l2.next; }
+    	if(sum>9) { tmp=1; sum-=10; }
+    	ptr.next = new ListNode(sum);
+    	ptr=ptr.next;
+    	sum=tmp;
+    	tmp=0;
+    }
+    return ret.next;
+};
+
+//21. Merge Two Sorted Lists
+
