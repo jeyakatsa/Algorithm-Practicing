@@ -652,3 +652,68 @@ var rangeSumBST = function(root, L, R) {
   } 
   return preorder(root, 0)
 };
+
+//779. K-th Symbol in Grammar
+var kthGrammar = function(N, K) {
+    
+  // Edge case
+  if(K == 1 && N == 1) {
+      return '0';
+  }
+   
+  return f('0', K-1, Math.pow(2, N-1));
+  
+  /**
+   * Helper function
+   * s - previous symbol
+   * k - adjusted index
+   * p - length of the string on the level
+   * Time: O(N) because f() will called log ( 2^(N-1) ) = N times
+   * Space: O(N) because of recursion
+   */
+  function f (s, k, p) {
+     
+     /*
+      Since initial value of p is 2^(N-1), dividing by 2 will gives a 1 in O(N) of time
+     */
+     if(p == 1) {
+       return s;
+     }
+     /*
+       Function litteraly moves to the left or to thre right based on a simple set of rules.
+       
+       Depending on the previous symbol (s), next symbol will be left or right:
+       
+         0         1
+        / \       / \
+       0   1     1   0
+     
+       In case, if k is in a right part - use rules for right, in other case - left
+     */
+     const dir = {
+       'r': { '0': '1', '1': '0' },
+       'l': { '0': '0', '1': '1'  }
+     };
+     /*
+      To determine, if k is on the left or on the right from the center of the string
+      we will just check if k >= p/2 , if true - k is in the right part. 
+      
+      For the right case, we have to adjust k by extracting p/2
+     */
+     return f(dir[k >= p/2 ? 'r': 'l' ][s], k >= p/2 ? k - p/2 : k, p/2);
+  }
+ 
+  /*
+              LEFT                                       RIGHT
+                                     0
+                                    0 1
+                                   01 10
+                                 0110 1001
+                            0110 1001 1001 0110
+                  0110 1001 1001 0110 1001 0110 0110 1001    
+0110 1001 1001 0110 1001 0110 0110 1001 1001 0110 0110 1001 0110 1001 1001 0110
+
+  */
+};
+
+
