@@ -752,3 +752,37 @@ var lengthOfLongestSubstring = function(s) {
   
   return maxLen;  
 };
+
+//953. Verifying an Alien Dictionary
+var isAlienSorted = function(words, order) {
+  for (let i=0;i<words.length-1;i++) {
+      let word1 = words[i];
+      let word2 = words[i+1];
+      let minLen = Math.min(word1.length, word2.length);
+      let flag = false;
+      for (let i=0;i<minLen;i++) {
+          if (word1[i] != word2[i]) {
+              if (order.indexOf(word1[i]) > order.indexOf(word2[i])) return false;
+              flag = true;
+              break;
+          }
+      }
+      if (!flag && word1.length > word2.length) return false;
+  }
+  return true;
+};
+
+//560. Subarray Sum Equals K
+var subarraySum = function(nums, k) {
+  let count = 0;
+  
+  for(start = 0; start<nums.length;start++){
+      let sum = 0;
+      for(end = start; end <= nums.length; end++){
+          sum+=nums[end];
+          if(sum == k)
+              count++;
+      }
+  }
+  return count;
+};
