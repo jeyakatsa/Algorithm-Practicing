@@ -155,12 +155,12 @@ function numDecodings(s) {
     }
   
     return dp[s.length];
-  }
+}
 
 
 
 
-  //5. Longest palindrome.
+//5. Longest palindrome.
   var longestPalindrome = function(s) {
     var max = '';
     for (var i = 0; i < s.length; i++) {
@@ -177,12 +177,12 @@ function numDecodings(s) {
       }
     }
     return max;
-  };
+};
 
 
 
 
-  //121. Best time to buy stock
+//121. Best time to buy stock
   var maxProfit = function(prices) {
     let min = prices[0], max = 0;
     
@@ -249,6 +249,7 @@ function maximalSquare(matrix) {
 
 }
 
+
 //139. Word Break
 var wordBreak = function(s, wordDict) {
     const words = new Set(wordDict);
@@ -264,6 +265,7 @@ var wordBreak = function(s, wordDict) {
     return starts.has(s.length)
 };
 
+
 //322. Coin Change
 var coinChange = function(coins, amount) {
     const dp = Array(amount+1).fill(Infinity);
@@ -276,6 +278,7 @@ var coinChange = function(coins, amount) {
     }
     return dp[amount] === Infinity ? -1 : dp[amount];
 };
+
 
 //199. Binary Tree Right Side View
 var rightSideView = function(root) {
@@ -291,9 +294,11 @@ var rightSideView = function(root) {
     }
     inner(root, 0);
     return depth;
-  };
+};
 
-  //236. Lowest Common Ancestor of a Binary Tree
+
+
+//236. Lowest Common Ancestor of a Binary Tree
   const lowestCommonAncestor = (root, p, q) => {
     if (!root || root === p || root === q) return root
     const left = lowestCommonAncestor(root.left, p, q)
@@ -302,6 +307,7 @@ var rightSideView = function(root) {
     if (!right) return left  // p and q are in the left subtree
     return root              // p is in one side and q is in the other
 };
+
 
 //105. Construct Binary Tree from Preorder and Inorder Traversal
 var buildTree = function(preorder, inorder) {
@@ -326,6 +332,7 @@ var buildTree = function(preorder, inorder) {
     }
     return callDFS(0, inorder.length-1);
 };
+
 
 //987.	Vertical Order Traversal of a Binary Tree
 var verticalTraversal = function(root) {
@@ -384,16 +391,16 @@ var zigzagLevelOrder = function(root) {
     return output
     
     
-  };
+};
 
-  //863. All Nodes Distance K in Binary Tree
+//863. All Nodes Distance K in Binary Tree
   var distanceK = function(root, target, K) {
     if(!root) return []
     const node = findTarget(root, null, target)  
     const res = []
     findAllKApart(node, K, res)
     return res
-  };
+ };
   
   function findTarget(root, parent, target){
     if(!root) return null
@@ -415,9 +422,11 @@ var zigzagLevelOrder = function(root) {
     findAllKApart(root.right, k-1, res)
     findAllKApart(root.parent, k-1, res)
     return res
-  }
+}
 
-  //2. Add Two Numbers
+
+
+//2. Add Two Numbers
   var addTwoNumbers = function(l1, l2) {
     if(l1.val == undefined) return l2;
     else if(l2.val == undefined) return l1;
@@ -448,9 +457,9 @@ var mergeTwoLists = function(l1, l2) {
       l2.next = mergeTwoLists(l1, l2.next);
       return l2;
     }
-  };
+};
 
-  //206. Reverse Linked List
+//206. Reverse Linked List
   var reverseList = function(head){
   
     var tmp = null;
@@ -463,9 +472,9 @@ var mergeTwoLists = function(l1, l2) {
     }
     
     return newHead;
-  }
+}
 
-  //138. Copy List with Random Pointer
+//138. Copy List with Random Pointer
   var copyRandomList = function(head) {
     if(!head) {
       return null;
@@ -558,9 +567,11 @@ const letterCombinations = (digits) => {
   
     go(0, '');
     return res;
-  };
+};
 
-  //124. Binary Tree Maximum Path Sum
+
+
+//124. Binary Tree Maximum Path Sum
   var maxPathSum = function(root) {
     var max = -Infinity // Initialize to a very small number to handle a path of negative values
     getMaxSum(root) // Call our recursive fn to start the program
@@ -577,12 +588,67 @@ const letterCombinations = (digits) => {
       max = Math.max(max, currentPath) // if the current path is greater than the previous value of `max`, update `max` to the current path sum
       return tree.val + Math.max(leftBranch, rightBranch)
     }
-  };
+};
 
-  //98. Validate Binary Search Tree
+
+
+//98. Validate Binary Search Tree
   var isValidBST = function(root, min=null, max=null) {
     if (!root) return true;
     if (min && root.val <= min.val) return false;
     if (max && root.val >= max.val) return false;
     return isValidBST(root.left, min, root) && isValidBST(root.right, root, max);
+};
+
+//698. Partition to K Equal Sum Subsets
+var canPartitionKSubsets = function(nums, k) {
+    const total = nums.reduce((sum, num) => sum + num, 0);
+    // return false right away when there's no equal sum among k subsets
+    if (total % k !== 0) {
+      return false;
+    } 
+    
+    const target = total / k;
+    const visited = new Array(nums.length).fill(false);
+    
+    const canPartition = (start, numberOfSubsets, currentSum) => {
+      // base case
+      if (numberOfSubsets === 1) {
+        return true;
+      }
+      // when a subset is found, we launch another search to find the 
+      // remaining subsets from the unvisited elements. 
+      if (currentSum === target) {
+        return canPartition(0, numberOfSubsets - 1, 0);
+      }
+      for (let i = start; i < nums.length; i++) {
+        if (!visited[i]) {
+          visited[i] = true;
+          // launch a search to find other elements that will sum up to 
+          // the target with the current element.
+          if (canPartition(i + 1, numberOfSubsets, currentSum + nums[i])) {
+            return true;
+          }
+          // reset to enable backtracking
+          visited[i] = false;
+        }
+      }
+      return false;
+    };
+    
+    return canPartition(0, k, 0);
+};
+
+//938. Range Sum of BST
+var rangeSumBST = function(root, L, R) {
+  // check if value is in the given range
+  const isInBetween = val => val >= L && val <= R;
+  // sum the value if it's in the range
+  const add = (val, sum) => isInBetween(val) ? sum += val : sum;
+// traverse through the nodes and sum the values in range
+  const preorder =(root, sum) => {
+      if (!root) return sum;
+      return add(root.val, sum) + preorder(root.left, sum) + preorder(root.right, sum);
+  } 
+  return preorder(root, 0)
 };
