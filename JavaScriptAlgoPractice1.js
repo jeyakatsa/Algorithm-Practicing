@@ -832,3 +832,23 @@ class RandomizedSet {
       return Math.floor(Math.random() * (this.highest + 1));
   }
 }
+
+//981. Time Based Key-Value Store
+var TimeMap = function() {
+  this.map = new Map();
+};
+
+TimeMap.prototype.set = function(key, value, timestamp) {
+  if (!this.map.has(key)) this.map.set(key, []);
+  this.map.get(key)[timestamp] = value;
+};
+
+TimeMap.prototype.get = function(key, timestamp) {
+  if (!this.map.has(key)) return '';
+  const item = this.map.get(key);
+  if (item[timestamp]) return item[timestamp];
+  while (timestamp-- > -1) {
+      if (item[timestamp]) return item[timestamp];
+  }
+  return '';
+};
