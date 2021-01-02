@@ -1,43 +1,97 @@
 public class LinkedList {
+    private class Node {
+        private int value;
+        private Node next;
+
+        public Node(int value){
+            this.value = value;
+        }
+    }
+
     private Node first;
     private Node last;
 
-    //addFirst
-    public void addFirst(int item){
-        if (item == null) {
-             throw new NullPointerException("The first argument for addFirst() is null.");
-            }
-        if (!isEmpty()) {
-            Node prev = first;
-            first = new Node(item, null);
-            prev.next = last;
-        }
-        else {
-            
-        } 
-    }
-
     //addLast
     public void addLast(int item){
-        var node = new Node();
+        var node = new Node(item);
+
+        if (isEmpty())
+            first = last = node;
+        else {
+            last.next = node;
+            last = node;
+        }    
+
     }
 
+    //addFirst
+    public void addFirst(int item){
+        var node = new Node(item);
+
+        if (isEmpty())
+            first = last = node;
+        else {
+            node.next = first;
+            first = node;
+        }
+    }   
+    
+    private boolean isEmpty() {
+        return first == null;
+    } 
+
     //deleteFirst
-    public void deleteFirst(){
+    public void removeFirst(){
+
+        if(first == last){
+            first = last = null;
+            return;
+        }
+        var second = first.next;
+        first.next = null;
+        first = second;
 
     }
 
     //deleteLast
-    public void deleteLast(){
+    public void removeLast(){
+        if (isEmpty())
+            throw new NoSuchElementException();
 
+        if (first == last) {
+            first = last = null;
+            return;
+        }    
+
+        var previous = getPrevious(last);
+        last = previous;
+        last.next = null;
+    }
+
+    private Node getPrevious(Node node){
+        var current = first;
+        while (current != null) {
+            if (current.next == last) return current;
+            current = current.next;
+        }
+        return null;
     }
 
     //contains
-    public void contains(){
-
+    public boolean contains(int item){
+        return indexOf(item) != -1;
     }
 
     //indexOf
-    public voi
-
+    public int indexOf(int item) {
+        int index = 0;
+        var current = first;
+        while (current != null){
+            if (current.value == item)
+            return index;
+            current = current.next;
+            index++;
+        }
+        return -1;
+    }
 }
