@@ -9,7 +9,8 @@ public class One {
         numbers.insert(30);
         numbers.insert(40);
         numbers.removeAt(0);
-        numbers.print();
+        System.out.println(numbers);
+        numbers.print();        
     }
     
 }

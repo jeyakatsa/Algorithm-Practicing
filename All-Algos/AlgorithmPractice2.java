@@ -1,11 +1,6 @@
 //1. Hash-Map & Binary Search
 
 public class AlgorithmPractice2 {
-    
-    public static void main (String[] args){
-        TimeMap numbers = new TimeMap(3);
-        System.out.println(numbers);
-    }
 
 
     Map<String, List<Pair<Integer, String>>> M;
