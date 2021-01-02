@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class LinkedList {
     private class Node {
         private int value;
@@ -10,6 +12,7 @@ public class LinkedList {
 
     private Node first;
     private Node last;
+    private int size;
 
     //addLast
     public void addLast(int item){
@@ -20,7 +23,9 @@ public class LinkedList {
         else {
             last.next = node;
             last = node;
-        }    
+        } 
+        
+        size++;
 
     }
 
@@ -34,6 +39,7 @@ public class LinkedList {
             node.next = first;
             first = node;
         }
+        size++;
     }   
     
     private boolean isEmpty() {
@@ -42,6 +48,8 @@ public class LinkedList {
 
     //deleteFirst
     public void removeFirst(){
+        if (isEmpty())
+            throw new NoSuchElementException();
 
         if(first == last){
             first = last = null;
@@ -50,6 +58,8 @@ public class LinkedList {
         var second = first.next;
         first.next = null;
         first = second;
+
+        size--;
 
     }
 
@@ -60,12 +70,15 @@ public class LinkedList {
 
         if (first == last) {
             first = last = null;
+            size = 0;
             return;
         }    
 
         var previous = getPrevious(last);
         last = previous;
         last.next = null;
+
+        size--;
     }
 
     private Node getPrevious(Node node){
@@ -94,4 +107,20 @@ public class LinkedList {
         }
         return -1;
     }
+
+    public int size() {
+        return size;
+    }
+
+    public int[] toArray(){
+        int[] array = new int[size];
+        var current = first;
+        var index = 0;
+        while (current != null) {
+            array[index++] = current.value;
+            current = current.next;
+        }
+        return array;
+    }
+
 }
