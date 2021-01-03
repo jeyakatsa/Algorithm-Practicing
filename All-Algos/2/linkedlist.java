@@ -4,6 +4,7 @@ public class LinkedList {
     private class Node {
         private int value;
         private Node next;
+        private Node prev;
 
         public Node(int value){
             this.value = value;
@@ -123,18 +124,15 @@ public class LinkedList {
         return array;
     }
 
-    public Node reverse(Node node) {
-        Node prev = node;
-        Node current = node;
-        Node next;
+    public int[] reverse() {
+        int[] array = new int[size];
+        var current = last;
+        int index = 0;
         while (current != null) {
-            next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;
+            array[index++] = current.value;
+            current = current.prev;
         }
-        node = prev;
-        return node;
+        return array;
     }
 
 }
