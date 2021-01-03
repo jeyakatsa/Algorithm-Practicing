@@ -1,10 +1,11 @@
 import java.util.NoSuchElementException;
 
 public class LinkedList {
+    Node head;
+
     private class Node {
         private int value;
         private Node next;
-        private Node prev;
 
         public Node(int value){
             this.value = value;
@@ -13,6 +14,7 @@ public class LinkedList {
 
     private Node first;
     private Node last;
+    private Node prev;
     private int size;
 
     //addLast
@@ -124,15 +126,15 @@ public class LinkedList {
         return array;
     }
 
-    public int[] reverse() {
-        int[] array = new int[size];
-        var current = last;
-        int index = 0;
-        while (current != null) {
-            array[index++] = current.value;
-            current = current.prev;
+    public Node reverse(Node head) {
+        Node curr = head;
+        while (curr != null) {
+            Node nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
         }
-        return array;
+        return prev;
     }
 
 }
