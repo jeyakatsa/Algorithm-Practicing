@@ -14,7 +14,6 @@ public class LinkedList {
 
     private Node first;
     private Node last;
-    private Node prev;
     private int size;
 
     //addLast
@@ -126,15 +125,15 @@ public class LinkedList {
         return array;
     }
 
-    public Node reverse(Node head) {
-        Node curr = head;
-        while (curr != null) {
-            Node nextTemp = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = nextTemp;
+    public int reverse(int head) {
+        var current = first;
+        while (current != null) {
+            int nextTemp = current.next;
+            current.next = current.value;
+            current.value = current;
+            current = nextTemp;
         }
-        return prev;
+        return current.value;
     }
 
 }
