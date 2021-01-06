@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Stacks {
     public String reverse (String input) {
         Stack<Character> stack = new Stack<>();
