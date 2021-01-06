@@ -125,11 +125,13 @@ public class LinkedList {
     }
 
     public void reverse() {
+
         // [10 <--- 20 <---- 30]
         // prev    curr     next
         // n = c.next
         // c.next = p
-        if (isEmpty()) return
+        //below needs debugging...
+        if (isEmpty()) return;
         var previous = first;
         var current = first.next;
         while (current != null) {
@@ -140,6 +142,24 @@ public class LinkedList {
         last = first;
         last.next = null;
         first = previous;
+    }
+
+    public int getKthFromTheEnd(int k) {
+        // getKthFromTheEnd(k)
+        if (isEmpty())
+            throw new IllegalStateException();
+        var a = first;
+        var b = first;
+        //Find the Kth node from the end
+        for (int i = 0; i < k-1; i++)
+            b = b.next;
+            if (b == null)
+                throw new IllegalArgumentException();
+        while (b != last) {
+            a = a.next;
+            b = b.next;
+        }
+        return a.value; 
     }
 
 }
