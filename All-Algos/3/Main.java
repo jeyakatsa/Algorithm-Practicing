@@ -7,5 +7,6 @@ public class Main {
         var result = reverser.reverse(str);
 
         System.out.println(result);
+
     }
 }

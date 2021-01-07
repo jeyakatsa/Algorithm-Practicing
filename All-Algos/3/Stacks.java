@@ -2,8 +2,6 @@ import java.util.*;
 
 public class Stacks {
     public String reverse (String input) {
-        if (input == null)
-            throw new IllegalArgumentException();
         Stack<Character> stack = new Stack<>();
 
         for (char ch : input.toCharArray())
