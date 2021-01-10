@@ -1,3 +1,5 @@
+import javax.lang.model.util.ElementScanner14;
+
 public class BuildBinaryTree {
 
     //left < parent < right
@@ -25,7 +27,7 @@ public class BuildBinaryTree {
         tree.insert(6);
         tree.insert(8);
         tree.insert(10);
-        System.out.println("Done");
+        System.out.println(tree.find(10));
     }
 
     class Node {
@@ -67,6 +69,19 @@ public class BuildBinaryTree {
                 current = current.rightChild;
             }
         }
+    }
+
+    public boolean find(int value) {
+        var current = root;
+        while (current != null) {
+            if (value < current.value)
+                current = current.leftChild;
+            else if (value > current.value)
+                current = current.rightChild;
+            else 
+                return true;
+        }
+        return false;
     }
 
 }
