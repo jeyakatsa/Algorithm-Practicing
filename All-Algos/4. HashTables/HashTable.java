@@ -1,42 +1,61 @@
-import java.util.Hashtable;
+import java.util.LinkedList;
 
 public class HashTable {
-    public static void main(String[] args) {
-        // HashTable
-        Hashtable<Integer, String> ht = new Hashtable<>();
-        // put(k, v)
-        ht.put(1, "one");
-        ht.put(2, "two");
-        h1.put(3, "three");
-        // get(k) : v
-        // remove(k)
-        // k: int
-        // v: string
-        // Collisions: chaining
-        // LinkedList<Entry>[]
-        // [ LL, LL, LL ]
 
-    }
-
-    //Node of chains
-    public class HashNode<K, V> {
-        K key;
-        V value;
-
-        // Reference to next node
-        HashNode<K, V> next;
+    public class Entry {
+        private int key;
+        private String value;
 
         // Constructor
-        public HashNode (K key, V value){
+        public Entry(int key, String value) {
             this.key = key;
             this.value = value; 
         }
-    
     }
 
+    private LinkedList<Entry>[] entries = new LinkedList[5];
 
+    // put(k, v)
+    public void put (int key, String value) {
+        var index = hash(key);
+        if (entries[index] == null)
+            entries[index] = new LinkedList<>();
+        
+        var bucket = entries[index];
+        for (var entry : bucket)
+            if (entry.key == key) {
+                entry.value = value;
+                return;
+            }
+        
+        bucket.addLast(new Entry(key, value));    
+    }
 
+    // get(k) : v
+    public String get(int key) {
+        var index = hash(key);
+        var bucket = entries[index];
+        if (bucket != null) {
+            for (var entry : bucket)
+                if (entry.key == key)
+                return entry.value;
+        }
+        return null;
+    }
 
+    // remove(k)
 
-    
+    private int hash(int key) {
+        return key % entries.length;
+    }
+
+    public static void main(String[] args) {
+        // HashTable
+        HashTable table = new HashTable();
+        table.put(6, "A"); 
+        table.put(8, "B");
+        table.put(11, "C");
+
+        System.out.println(table.get(6));
+    }
 }
