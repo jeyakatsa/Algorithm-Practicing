@@ -1,6 +1,16 @@
 import java.util.LinkedList;
 
 public class HashTable {
+    
+    public static void main(String[] args) {
+        // HashTable
+        HashTable table = new HashTable();
+        table.put(6, "A"); 
+        table.put(8, "B");
+        table.put(11, "C");
+        table.remove(60);
+        System.out.println(table.get(6));
+    }
 
     public class Entry {
         private int key;
@@ -60,15 +70,5 @@ public class HashTable {
 
     private int hash(int key) {
         return key % entries.length;
-    }
-
-    public static void main(String[] args) {
-        // HashTable
-        HashTable table = new HashTable();
-        table.put(6, "A"); 
-        table.put(8, "B");
-        table.put(11, "C");
-        table.remove(60);
-        System.out.println(table.get(6));
     }
 }
