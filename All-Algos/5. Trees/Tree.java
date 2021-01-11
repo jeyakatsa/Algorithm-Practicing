@@ -17,6 +17,7 @@ public class Tree {
     // 18 = right of 17 = right of 15
 
     public static void main (String[] args){
+        // equals(Tree) : boolean
         Tree tree = new Tree();
         tree.insert(7);
         tree.insert(4);
@@ -25,7 +26,16 @@ public class Tree {
         tree.insert(6);
         tree.insert(8);
         tree.insert(10);
-        System.out.println(tree.min());
+
+        Tree tree2 = new Tree();
+        tree2.insert(7);
+        tree2.insert(4);
+        tree2.insert(9);
+        tree2.insert(1);
+        tree2.insert(6);
+        tree2.insert(8);
+        tree2.insert(10);
+        System.out.println(tree.equals(tree2));
     }
 
     class Node {
@@ -156,7 +166,6 @@ public class Tree {
         // }
         // return last.value;
     }
-
     //0(n)
     private int min (Node root) {
         if (isLeaf(root))
@@ -167,9 +176,28 @@ public class Tree {
 
         return Math.min(Math.min(left, right), root.value);
     }
-
+ 
     private boolean isLeaf(Node node) {
         return node.leftChild == null && node.rightChild == null;
     }
 
+    //Equality checking
+    public boolean equals(Tree other){
+        if (other == null)
+        return false;
+
+        return equals(root, other.root);
+    }
+
+    private boolean equals(Node first, Node second){
+        if (first == null && second == null)
+            return true;
+
+        if(first != null && second != null)
+            return first.value == second.value
+                && equals(first.leftChild, second.leftChild)
+                && equals(first.rightChild, second.rightChild);
+
+        return false;
+    }
 }
