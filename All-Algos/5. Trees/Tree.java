@@ -1,3 +1,5 @@
+import javax.crypto.IllegalBlockSizeException;
+
 public class Tree {
 
     //left < parent < right
@@ -17,7 +19,6 @@ public class Tree {
     // 18 = right of 17 = right of 15
 
     public static void main (String[] args){
-        // equals(Tree) : boolean
         Tree tree = new Tree();
         tree.insert(7);
         tree.insert(4);
@@ -26,16 +27,19 @@ public class Tree {
         tree.insert(6);
         tree.insert(8);
         tree.insert(10);
+        tree.swapRoot();
+        System.out.println(tree.valid());
 
-        Tree tree2 = new Tree();
-        tree2.insert(7);
-        tree2.insert(4);
-        tree2.insert(9);
-        tree2.insert(1);
-        tree2.insert(6);
-        tree2.insert(8);
-        tree2.insert(10);
-        System.out.println(tree.equals(tree2));
+        // // equals(Tree) : boolean
+        // Tree tree2 = new Tree();
+        // tree2.insert(7);
+        // tree2.insert(4);
+        // tree2.insert(9);
+        // tree2.insert(1);
+        // tree2.insert(6);
+        // tree2.insert(8);
+        // tree2.insert(10);
+        // System.out.println(tree.equals(tree2));
     }
 
     class Node {
@@ -132,6 +136,29 @@ public class Tree {
         System.out.println(root.value);
         traversePreOrder(root.leftChild);
         traversePreOrder(root.rightChild);    
+    }
+
+    //mess with Binary Search Tree
+    public void swapRoot(){
+        var temp = root.leftChild;
+        root.leftChild = root.rightChild;
+        root.rightChild = temp;
+    }
+    //validate binary search tree
+    public boolean valid(){
+        return valid(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private boolean valid(Node root, int min, int max) {
+        if (root == null)
+            return true;  
+
+        if (root.value < min || root.value > max)
+            return false;    
+        
+        return 
+            valid(root.leftChild, min, root.value - 1)
+            && valid(root.rightChild, root.value + 1, max);
     }
 
     //height of tree
