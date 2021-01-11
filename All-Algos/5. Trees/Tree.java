@@ -162,11 +162,11 @@ public class Tree {
     }
 
     //height of tree
-    public int height (){
+    public int height(){
         return height(root);
     }
 
-    private int height (Node root) {
+    private int height(Node root) {
         if (isLeaf(root))
             return 0;
 
@@ -194,7 +194,7 @@ public class Tree {
         // return last.value;
     }
     //0(n)
-    private int min (Node root) {
+    private int min(Node root) {
         if (isLeaf(root))
             return root.value;
 
@@ -227,4 +227,24 @@ public class Tree {
 
         return false;
     }
+
+    //Nodes at K Distance
+    //Come back and see about storing in ArrayList...
+    public void nodeK(int distance) {
+        nodeK(root, distance);
+    }
+
+    private void nodeK(Node root, int distance) {
+        if (root == null)
+            return;
+        
+        if (distance == 0) {
+            System.out.println(root.value);
+            return;
+        }
+        
+        nodeK(root.leftChild, distance -1);
+        nodeK(root.rightChild, distance -1);
+    }
+
 }
