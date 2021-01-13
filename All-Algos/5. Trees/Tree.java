@@ -56,6 +56,7 @@ public class Tree {
 
     Node root;
 
+    //Iteratively
     private void insert(int value) {
         var node = new Node(value);
 
