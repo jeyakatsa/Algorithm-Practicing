@@ -40,11 +40,19 @@ public class AVLTree {
         else
             root.rightChild = insert(root.rightChild, value);
         
+        //Height Test
         root.height = Math.max(
             height(root.leftChild),
             height(root.rightChild)) + 1;
 
-        return root;            
+        //Check Balance of tree
+        var balanceFactor = height(root.leftChild) - height(root.rightChild);
+        if (balanceFactor > 1)
+            System.out.println(root.value + " is left heavy");
+        else if (balanceFactor < -1)
+            System.out.println(root.value + " is right heavy");
+        return root;  
+
     }
 
     //Height
