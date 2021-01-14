@@ -51,13 +51,26 @@ public class AVLTree {
 
     }
 
+    // private AVLNode rotateLeft(AVLNode root) {
+    //     var newRoot = root.rightChild;
+
+    //     root.rightChild = newRoot.leftChild;
+    //     newRoot.leftChild = root;
+
+    //     root.height = Math.mac
+    // }
+
     private void balance(AVLNode root) {
         //Check Balance of tree
-        if (isLeftHeavy(root))
-            System.out.println(root.value + " is left heavy");
+        if (isLeftHeavy(root)){
+            if(balanceFactor(root.leftChild) < 0)
+                System.out.println("Left Rotate " + root.leftChild.value);
+            System.out.println("Right Rotate " + root.value);
+        }
         else if (isRightHeavy(root)) {
             if (balanceFactor(root.rightChild) > 0)
-            System.out.println(root.value + " is right heavy");
+                System.out.println("Right Rotate " + root.rightChild.value);
+            System.out.println("Left Rotate " + root.value);    
         }
 
     }
