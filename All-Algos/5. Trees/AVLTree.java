@@ -51,20 +51,11 @@ public class AVLTree {
 
     }
 
-    // private AVLNode rotateLeft(AVLNode root) {
-    //     var newRoot = root.rightChild;
-
-    //     root.rightChild = newRoot.leftChild;
-    //     newRoot.leftChild = root;
-
-    //     root.height = Math.mac
-    // }
-
+    //Check Balance of Tree
     private void balance(AVLNode root) {
-        //Check Balance of tree
         if (isLeftHeavy(root)){
             if(balanceFactor(root.leftChild) < 0)
-                System.out.println("Left Rotate " + root.leftChild.value);
+                ;
             System.out.println("Right Rotate " + root.value);
         }
         else if (isRightHeavy(root)) {
@@ -85,6 +76,37 @@ public class AVLTree {
 
     private int balanceFactor(AVLNode node) {
         return (node == null) ? 0 : height(node.leftChild) - height(node.rightChild);
+    }
+
+    //Rotate Nodes Right or Left to Balance Tree
+    private AVLNode rotateLeft(AVLNode root) {
+        var newRoot = root.rightChild;
+
+        root.rightChild = newRoot.leftChild;
+        newRoot.leftChild = root;
+
+        setHeight(root);
+        setHeight(newRoot);
+
+        return newRoot;
+    }
+
+    private AVLNode rotateRight(AVLNode root) {
+        var newRoot = root.leftChild;
+
+        root.leftChild = newRoot.rightChild;
+        newRoot.rightChild = root;
+
+        setHeight(root);
+        setHeight(newRoot);
+
+        return newRoot;
+    }
+
+    private void setHeight(AVLNode node) {
+        node.height = Math.max(
+            height(root.leftChild),
+            height(root.rightChild)) + 1;        
     }
 
     //Height
