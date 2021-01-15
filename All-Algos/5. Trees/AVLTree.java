@@ -41,28 +41,24 @@ public class AVLTree {
             root.rightChild = insert(root.rightChild, value);
         
         //Height Test
-        root.height = Math.max(
-            height(root.leftChild),
-            height(root.rightChild)) + 1;
+        setHeight(root);
 
-        balance(root);    
-
-        return root;  
-
+        return balance(root);
     }
 
     //Check Balance of Tree
-    private void balance(AVLNode root) {
+    private AVLNode balance(AVLNode root) {
         if (isLeftHeavy(root)){
             if(balanceFactor(root.leftChild) < 0)
-                ;
-            System.out.println("Right Rotate " + root.value);
+                root.leftChild = rotateLeft(root.leftChild);
+            return rotateRight(root);
         }
         else if (isRightHeavy(root)) {
             if (balanceFactor(root.rightChild) > 0)
-                System.out.println("Right Rotate " + root.rightChild.value);
-            System.out.println("Left Rotate " + root.value);    
+                root.rightChild = rotateRight(root.rightChild);
+            return rotateLeft(root);    
         }
+        return root;
 
     }
 
