@@ -31,6 +31,7 @@ public class AVLTree {
         root = insert(root, value);
     }
 
+    
     private AVLNode insert(AVLNode root, int value){
         if (root == null)
             return new AVLNode(value);
