@@ -5,6 +5,7 @@ public class HeapTree {
         heap.insert(5);
         heap.insert(1);
         heap.insert(17);
+        heap.insert(20);
         System.out.println("Done");
         // Heap
         // int[]
