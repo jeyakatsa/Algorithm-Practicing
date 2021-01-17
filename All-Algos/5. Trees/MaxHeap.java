@@ -37,6 +37,6 @@ public class MaxHeap {
     private static void swap(int[] array, int first, int second) {
         var temp = array[first];
         array[first] = array[second];
-        array[first] = temp;
+        array[second] = temp;
     }
 }
