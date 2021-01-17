@@ -92,7 +92,7 @@ public class HeapTree {
     }
 
     private int rightChild(int index) {
-        return items[rightChild(index)];
+        return items[rightChildIndex(index)];
     }
 
     private int leftChildIndex(int index) {
@@ -119,5 +119,12 @@ public class HeapTree {
         var temp = items[first];
         items[first] = items[second];
         items[second] = temp;
+    }
+
+    public int max() {
+        if (isEmpty())
+            throw new IllegalStateException();
+
+        return items[0];    
     }
 }
