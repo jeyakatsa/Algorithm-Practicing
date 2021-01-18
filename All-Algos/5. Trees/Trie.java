@@ -89,7 +89,7 @@ public class Trie {
     }
 
     public void remove(String letter) {
-        if (word == null)
+        if (letter == null)
             return;
         remove(root, letter, 0);
     }
