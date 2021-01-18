@@ -3,9 +3,8 @@ import java.util.HashMap;
 public class Trie {
     public static void main(String[] args) {
         var trie = new Trie();
-        trie.insert("cat");
-        trie.insert("can");
-        System.out.println("Done");
+        trie.insert("canada");
+        System.out.println(trie.contains("can"));
     }
 
     public static int ALPHABET_SIZE = 26;
@@ -48,4 +47,18 @@ public class Trie {
         }
         current.isEndOfWord = true;
     }
+
+    public boolean contains(String word) {
+        if (word == null)
+            return false;
+
+        var current = root;
+        for (var ch : word.toCharArray()) {
+            if (!current.hasChild(ch))
+                return false;
+            current = current.getChild(ch);    
+        }
+        return current.isEndOfWord;
+    }
+
 }
