@@ -1,13 +1,17 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Trie {
     public static void main(String[] args) {
         var trie = new Trie();
         trie.insert("car");
         trie.insert("care");
-        trie.remove("car");
-        System.out.println(trie.contains("car"));
-        System.out.println(trie.contains("care"));
+        trie.insert("card");
+        trie.insert("careful");
+        trie.insert("egg");
+        var words = trie.findWords("car");
+        System.out.println(words);
     }
 
     public static int ALPHABET_SIZE = 26;
@@ -108,5 +112,38 @@ public class Trie {
 
         if(!child.hasChildren() && !child.isEndOfWord)
             root.removeChild(ch);
+    }
+
+    public List<String> findWords(String prefix) {
+        List<String> words = new ArrayList<>();
+        var lastNode = findLastNodeOf(prefix);
+        findWords(lastNode, prefix, words);
+
+        return words;
+    }
+
+    private void findWords(Node root, String prefix, List<String> words){
+        if (root == null)
+            return;
+
+        if(root.isEndOfWord)
+            words.add(prefix);
+        
+        for (var child : root.getChildren())
+            findWords(child, prefix + child.value, words);
+    }
+
+    private Node findLastNodeOf(String prefix) {
+        if (root == null)
+            return null;
+
+        var current = root;
+        for (var ch : prefix.toCharArray()) {
+            var child = current.getChild(ch);
+            if (child == null)
+                return null;
+            current = child;    
+        }
+        return current;
     }
 }
