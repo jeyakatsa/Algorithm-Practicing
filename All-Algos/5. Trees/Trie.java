@@ -4,7 +4,7 @@ public class Trie {
     public static void main(String[] args) {
         var trie = new Trie();
         trie.insert("canada");
-        System.out.println(trie.contains("can"));
+        trie.traverse();
     }
 
     public static int ALPHABET_SIZE = 26;
@@ -34,6 +34,10 @@ public class Trie {
         public Node getChild(char ch) {
             return children.get(ch);
         }
+
+        public Node[] getChildren() {
+            return children.values().toArray(new Node[0]);
+        }
     }
 
     private Node root = new Node(' ');
@@ -59,6 +63,18 @@ public class Trie {
             current = current.getChild(ch);    
         }
         return current.isEndOfWord;
+    }
+
+    public void traverse() {
+        traverse(root);
+    }
+
+    private void traverse(Node root) {
+        //Pre-order: visit the root first
+        System.out.println(root.value);
+
+        for (var child : root.getChildren())
+            traverse(child);
     }
 
 }
