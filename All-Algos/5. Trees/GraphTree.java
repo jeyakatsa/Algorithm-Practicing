@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 public class GraphTree {
     public static void main (String[] args) {
@@ -88,16 +89,38 @@ public class GraphTree {
         if (node == null)
             return;
 
-        traverseDepthFirst(node, new HashSet<>());
+        Set<Node> visited = new HashSet<>();   
+        Stack<Node> stack = new Stack<>();
+        stack.push(node);
+
+        // push(root)
+        // while (stack is not empty)
+        // current = pop()
+        // visit(current)
+        // push each unvisited neighbour onto the stack
+
+        while (!stack.isEmpty()) {
+            var current = stack.pop();
+
+            if(visited.contains(current))
+                continue;
+
+            System.out.println(current);
+            visited.add(current);   
+            
+            for (var neighbour : adjacencyList.get(current))
+                if (!visited.contains(neighbour))
+                    stack.push(neighbour);
+        }
     }
 
-    public void traverseDepthFirst(Node root, Set<Node> visited) {
+    private void traverseDepthFirstRec(Node root, Set<Node> visited) {
         System.out.println(root);
         visited.add(root);
 
         for (var node : adjacencyList.get(root))
             if (!visited.contains(node))
-                traverseDepthFirst(node, visited);
+                traverseDepthFirstRec(node, visited);
     }
 
 
