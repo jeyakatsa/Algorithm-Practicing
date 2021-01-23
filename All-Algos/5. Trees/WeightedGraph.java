@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.Stack;
 
 public class WeightedGraph {
     public static void main(String[] args) {
@@ -13,9 +14,11 @@ public class WeightedGraph {
         graph.addNode("A");
         graph.addNode("B");
         graph.addNode("C");
-        graph.addEdge("A", "B", 2);
-        graph.addEdge("A", "C", 3);
-        graph.print();
+        graph.addEdge("A", "B", 1);
+        graph.addEdge("B", "C", 2);
+        graph.addEdge("A", "C", 10);
+        var path = graph.getShortestPath("A", "C");
+        System.out.println(path);
     }
     
     private class Node {
@@ -93,14 +96,40 @@ public class WeightedGraph {
             this.priority = priority;
         }
     }
+
+
+
+
+    //shortest Path________________________________________________________________
+    public class Path {
+        private List<String> nodes = new ArrayList<>();
+
+        public void add(String node) {
+            nodes.add(node);
+        }
+
+        @Override
+        public String toString() {
+            return nodes.toString();
+        }
+    }
+
     //Breadth first
-    private int getShortestDistance(String from, String to) {
+    private Path getShortestPath(String from, String to) {
         var fromNode = nodes.get(from);
+        if (fromNode == null)
+            throw new IllegalArgumentException();
+
+        var toNode = nodes.get(to);
+        if (toNode == null)
+            throw new IllegalArgumentException();
 
         Map<Node, Integer> distances = new HashMap<>();
         for(var node : nodes.values())
             distances.put(node, Integer.MAX_VALUE);
         distances.replace(nodes.get(from), 0);
+
+        Map<Node, Node> previousNodes = new HashMap<>();
         
         Set<Node> visited = new HashSet<>();
 
@@ -120,11 +149,30 @@ public class WeightedGraph {
                 var newDistance = distances.get(current) + edge.weight;  
                 if (newDistance < distances.get(edge.to)) {
                     distances.replace(edge.to, newDistance);
+                    previousNodes.put(edge.to, current);
                     queue.add(new NodeEntry(edge.to, newDistance));
                 } 
             }
         }
-        return distances.get(nodes.get(to));
+
+        return buildPath(previousNodes, toNode);
+    }
+
+    private Path buildPath(Map<Node, Node> previousNodes, Node toNode) {
+
+        Stack<Node> stack = new Stack<>();
+        stack.push(toNode);
+        var previous = previousNodes.get(toNode);
+        while (previous != null) {
+            stack.push(previous);
+            previous = previousNodes.get(previous);
+        }
+
+        var path = new Path();
+        while (!stack.isEmpty())
+            path.add(stack.pop().label);
+
+        return path;    
     }
 
 }
