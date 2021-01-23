@@ -8,7 +8,10 @@ public class WeightedGraph {
         var graph = new WeightedGraph();
         graph.addNode("A");
         graph.addNode("B");
+        graph.addNode("C");
         graph.addEdge("A", "B", 2);
+        graph.addEdge("A", "C", 3);
+        graph.print();
     }
     
     private class Node {
@@ -24,8 +27,25 @@ public class WeightedGraph {
         }
     }
 
+    private class Edge {
+        private Node from;
+        private Node to;
+        private int weight;
+
+        public Edge(Node from, Node to, int weight){
+            this.from = from;
+            this.to = to;
+            this.weight = weight;
+        }
+
+        @Override
+        public String toString(){
+            return from + " -> " + to;
+        }
+    }
+
     private Map<String, Node> nodes = new HashMap<>();
-    private Map<Node, List<Node>> adjacencyList = new HashMap<>();
+    private Map<Node, List<Edge>> adjacencyList = new HashMap<>();
 
     public void addNode(String label) {
         var node = new Node(label);
@@ -42,6 +62,19 @@ public class WeightedGraph {
         if (toNode == null)
             throw new IllegalArgumentException();
 
-        adjacencyList.get(fromNode).add(toNode);    
+        adjacencyList.get(fromNode).add(
+            new Edge(fromNode, toNode, weight)); 
+            
+        adjacencyList.get(toNode).add(
+            new Edge(fromNode, toNode, weight));    
     }
+
+    public void print(){
+        for(var source : adjacencyList.keySet()) {
+            var targets = adjacencyList.get(source);
+            if (!targets.isEmpty())
+                System.out.println(source + " is connected to " + targets);
+        }
+    }    
+
 }
