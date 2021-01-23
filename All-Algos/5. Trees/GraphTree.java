@@ -1,8 +1,10 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
@@ -17,7 +19,7 @@ public class GraphTree {
         graph.addEdge("B", "D");
         graph.addEdge("D", "C");
         graph.addEdge("A", "C");
-        graph.traverseDepthFirst("A");
+        graph.traverseBreadthFirst("C");
     }
 
     private class Node {
@@ -114,6 +116,7 @@ public class GraphTree {
         }
     }
 
+    //recursion
     private void traverseDepthFirstRec(Node root, Set<Node> visited) {
         System.out.println(root);
         visited.add(root);
@@ -123,6 +126,31 @@ public class GraphTree {
                 traverseDepthFirstRec(node, visited);
     }
 
+    public void traverseBreadthFirst(String root) {
+        var node= nodes.get(root);
+        if (node == null)
+            return;
+        
+        Set<Node> visited = new HashSet<>();
+        
+        Queue<Node> queue = new ArrayDeque<>();
+        queue.add(node);
+
+        while (!queue.isEmpty()) {
+            var current = queue.remove();
+
+            if(visited.contains(current))
+                continue;
+
+            System.out.println(current);
+            visited.add(current);
+            
+            for(var neighbour : adjacencyList.get(current))
+                if (!visited.contains(neighbour))
+                    queue.add(neighbour);
+
+        }
+    }
 
     
 }
