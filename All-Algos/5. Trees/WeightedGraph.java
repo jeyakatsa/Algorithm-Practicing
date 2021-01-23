@@ -16,11 +16,9 @@ public class WeightedGraph {
         graph.addNode("A");
         graph.addNode("B");
         graph.addNode("C");
-        graph.addEdge("A", "B", 1);
-        graph.addEdge("B", "C", 2);
-        graph.addEdge("A", "C", 10);
-        var path = graph.getShortestPath("A", "C");
-        System.out.println(path);
+        graph.addEdge("A", "B", 0);
+        graph.addEdge("B", "A", 0);
+        System.out.println(graph.hasCycle());
     }
     
     private class Node {
@@ -138,6 +136,7 @@ public class WeightedGraph {
         PriorityQueue<NodeEntry> queue = new PriorityQueue<>(
             Comparator.comparingInt(ne -> ne.priority)
         );
+
         queue.add(new NodeEntry(fromNode, 0));
 
         while (!queue.isEmpty()) {
@@ -175,6 +174,34 @@ public class WeightedGraph {
             path.add(stack.pop().label);
 
         return path;    
+    }
+
+    //hasCycle
+    public boolean hasCycle() {
+        Set<Node> visited = new HashSet<>();
+
+        for(var node : nodes.values()) {
+            if (!visited.contains(node) &&
+                hasCycle(node, null, visited))
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasCycle(Node node, Node parent,
+    Set<Node> visited) {
+        visited.add(node);
+
+        for(var edge : node.getEdges()) {
+            if(edge.to == parent)
+                continue;
+
+            if(visited.contains(edge.to) || 
+                hasCycle(edge.to, node, visited))
+                return true;
+        }
+
+        return false;
     }
 
 }
