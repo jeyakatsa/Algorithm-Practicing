@@ -117,14 +117,14 @@ public class GraphTree {
     }
 
     //recursion
-    private void traverseDepthFirstRec(Node root, Set<Node> visited) {
-        System.out.println(root);
-        visited.add(root);
+    // private void traverseDepthFirstRec(Node root, Set<Node> visited) {
+    //     System.out.println(root);
+    //     visited.add(root);
 
-        for (var node : adjacencyList.get(root))
-            if (!visited.contains(node))
-                traverseDepthFirstRec(node, visited);
-    }
+    //     for (var node : adjacencyList.get(root))
+    //         if (!visited.contains(node))
+    //             traverseDepthFirstRec(node, visited);
+    // }
 
     public void traverseBreadthFirst(String root) {
         var node = nodes.get(root);
