@@ -1,12 +1,16 @@
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class StringManipulation {
     public static void main(String[] args) {
         int count = StringManipulation.vowels("Hello World");
         String reversed = StringManipulation.reverse("blue");
         String reversedWords = StringManipulation.reverseWords("I did it!");
-        System.out.println("'" + reversedWords + "'");
+        var rotations = StringManipulation.areRotations("ABCD", "ACDB");
+        String duplicates = StringManipulation.removeDuplicates("Trees are nice");
+        System.out.println(duplicates);
     }
 
     //Find number of Vowels in a String
@@ -44,5 +48,32 @@ public class StringManipulation {
         String[] words = sentence.trim().split(" ");
         Collections.reverse(Arrays.asList(words));
         return String.join(" ", words);
+    }
+
+    //Check if Letters/Characters are rotations of each other.
+    public static boolean areRotations(String str1, String str2) {
+        if (str1 == null || str2 == null)
+            return false;
+
+        return(str1.length() == str2.length() &&
+        (str1 + str1).contains(str2));
+    }
+
+    //Remove duplicate characters
+    public static String removeDuplicates(String str) {
+        StringBuilder output = new StringBuilder();
+        Set<Character> seen = new HashSet<>();
+
+        if (str == null)
+            return "";
+
+        for (var ch : str.toCharArray()) {
+            if(!seen.contains(ch)) {
+                seen.add(ch);
+                output.append(ch);
+            }
+        }
+
+        return output.toString();
     }
 }
