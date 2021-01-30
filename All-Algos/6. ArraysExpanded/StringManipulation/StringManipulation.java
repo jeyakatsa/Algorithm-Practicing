@@ -1,8 +1,12 @@
+import java.util.Arrays;
+import java.util.Collections;
+
 public class StringManipulation {
     public static void main(String[] args) {
         int count = StringManipulation.vowels("Hello World");
         String reversed = StringManipulation.reverse("blue");
-        System.out.println(reversed);
+        String reversedWords = StringManipulation.reverseWords("I did it!");
+        System.out.println("'" + reversedWords + "'");
     }
 
     //Find number of Vowels in a String
@@ -33,10 +37,12 @@ public class StringManipulation {
     }
 
     //Reverse Words
-    public static String reverseWords(String wrds) {
-        if (wrds == null)
+    public static String reverseWords(String sentence) {
+        if (sentence == null)
             return "";
 
-        return "";    
+        String[] words = sentence.trim().split(" ");
+        Collections.reverse(Arrays.asList(words));
+        return String.join(" ", words);
     }
 }
