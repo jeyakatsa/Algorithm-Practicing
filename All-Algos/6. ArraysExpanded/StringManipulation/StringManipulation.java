@@ -1,6 +1,8 @@
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class StringManipulation {
@@ -10,7 +12,8 @@ public class StringManipulation {
         String reversedWords = StringManipulation.reverseWords("I did it!");
         var rotations = StringManipulation.areRotations("ABCD", "ACDB");
         String duplicates = StringManipulation.removeDuplicates("Trees are nice");
-        System.out.println(duplicates);
+        char repeatedChar = StringManipulation.getMaxOcurringChar("Trees are nice");
+        System.out.println(repeatedChar);
     }
 
     //Find number of Vowels in a String
@@ -75,5 +78,34 @@ public class StringManipulation {
         }
 
         return output.toString();
+    }
+
+    //Most Repeated Character
+    public static char getMaxOcurringChar(String str) {
+        if (str == null || str.isEmpty())
+            throw new IllegalArgumentException("No Character");
+
+        final int ASCII_SIZE = 256;
+        int[] frequencies = new int[ASCII_SIZE];
+        for (var ch : str.toCharArray())
+            frequencies[ch]++;
+
+        int max = 0;    
+        char result = ' ';
+        for (var i = 0; i < frequencies.length; i++)
+            if(frequencies[i] > max){
+                max = frequencies[i];
+                result = (char) i;
+            }
+        return result;    
+
+
+        // Map<Character, Integer> frequencies = new HashMap<>();
+        // for (var ch : str.toCharArray()){
+        //     if (frequencies.containsKey(ch))
+        //         frequencies.replace(ch, frequencies.get(ch) + 1);
+        //     else
+        //         frequencies.put(ch, 1);    
+        // }
     }
 }
