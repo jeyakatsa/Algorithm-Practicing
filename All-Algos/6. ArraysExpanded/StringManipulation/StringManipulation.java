@@ -1,12 +1,11 @@
 public class StringManipulation {
     public static void main(String[] args) {
         int count = StringManipulation.vowels("Hello World");
-        System.out.println(count);
+        String reversed = StringManipulation.reverse("blue");
+        System.out.println(reversed);
     }
 
-    //1- Find the number of vowels in a string. Vowels in English are A, E, O, U and I. 
-    //Input: “hello”
-    //Output: 2 
+    //Find number of Vowels in a String
     public static int vowels(String str) {
         if (str == null)
             return 0;
@@ -19,5 +18,17 @@ public class StringManipulation {
                 count++;
 
         return count;        
+    }
+
+    //Reverse A String
+    public static String reverse(String str) {
+        StringBuilder reversed = new StringBuilder();
+        if (str == null)
+            return "";
+
+        for (var i = str. length() - 1; i >= 0; i--) 
+            reversed.append(str.charAt(i));
+
+        return reversed.toString();
     }
 }
