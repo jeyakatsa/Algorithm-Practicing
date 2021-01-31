@@ -78,3 +78,9 @@ Convert i into Character... Lol...
 //Anagrams Histogramming
 
 final int <-- no magic numbers
+
+// for Palindrome
+.reverse() 
+.equals()
+
+only iterate half of strings (for long string...)

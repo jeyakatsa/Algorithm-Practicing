@@ -16,7 +16,8 @@ public class StringManipulation {
         String capitalize = StringManipulation.capitalize("This is a great day");
         var anagram = StringManipulation.anagram("ABCd", "ABCD");
         var anagram2 = StringManipulation.anagram2("ABCD", "DiBa");
-        System.out.println(anagram2);
+        var palindrome = StringManipulation.isPalindrome("ABBa");
+        System.out.println(palindrome);
     }
 
     //Find number of Vowels in a String
@@ -164,5 +165,27 @@ public class StringManipulation {
         
         return true;
 
+    }
+
+    //Palindromic Strings
+    public static boolean isPalindrome(String word) {
+        if(word == null)
+            return false;
+
+        word = word.toLowerCase();    
+
+        // //for Long Strings (Bugs in this code...)
+        // int left = 0;
+        // int right = word.length() - 1;
+        // while (left < right)
+        //     if(word.charAt(left) != word.charAt(right--))
+        //         return false;
+
+        // return true;        
+
+        //for short strings    
+        var input = new StringBuilder(word);
+        input.reverse();
+        return input.toString().equals(word);
     }
 }
