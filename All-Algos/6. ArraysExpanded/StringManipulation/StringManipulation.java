@@ -15,7 +15,8 @@ public class StringManipulation {
         char repeatedChar = StringManipulation.getMaxOcurringChar("Trees are nice");
         String capitalize = StringManipulation.capitalize("This is a great day");
         var anagram = StringManipulation.anagram("ABCd", "ABCD");
-        System.out.println(anagram);
+        var anagram2 = StringManipulation.anagram2("ABCD", "DiBa");
+        System.out.println(anagram2);
     }
 
     //Find number of Vowels in a String
@@ -130,12 +131,38 @@ public class StringManipulation {
         if (first == null || second == null)
             return false;
        
+        // 0(n)    
         var array1 = first.toLowerCase().toCharArray();
+        // 0(n log n)
         Arrays.sort(array1);
 
         var array2 = second.toLowerCase().toCharArray();
         Arrays.sort(array2);
 
         return Arrays.equals(array1, array2);
+    }
+
+    //Anagram Historgramming...
+    public static boolean anagram2(String first, String second) {
+        if (first == null || second == null)
+            return false;
+
+        final int ENGLISH_ALPHABET = 26;
+        int[] frequencies = new int[ENGLISH_ALPHABET];
+
+        first = first.toLowerCase();
+        //0()
+        for (var i = 0; i < first.length(); i++)
+            frequencies[first.charAt(i) - 'a']++;
+
+        second = second.toLowerCase();
+        for(var i = 0; i < second.length(); i++) {
+            var index = second.charAt(i) - 'a';
+            if(frequencies[index] == 0)
+                return false; 
+        }
+        
+        return true;
+
     }
 }
