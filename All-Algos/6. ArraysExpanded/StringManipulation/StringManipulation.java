@@ -13,7 +13,8 @@ public class StringManipulation {
         var rotations = StringManipulation.areRotations("ABCD", "ACDB");
         String duplicates = StringManipulation.removeDuplicates("Trees are nice");
         char repeatedChar = StringManipulation.getMaxOcurringChar("Trees are nice");
-        System.out.println(repeatedChar);
+        String capitalize = StringManipulation.capitalize("This is a great day");
+        System.out.println(capitalize);
     }
 
     //Find number of Vowels in a String
@@ -107,5 +108,18 @@ public class StringManipulation {
         //     else
         //         frequencies.put(ch, 1);    
         // }
+    }
+
+    public static String capitalize(String sentence) {
+        if (sentence == null || sentence.trim().isEmpty())
+            return "";
+
+        String[] words = sentence.trim().replaceAll(" +", " ").split(" ");
+        for (var i = 0; i < words.length; i++) {
+            words[i] = words[i].substring(0, 1).toUpperCase()
+             + words[i].substring(1).toLowerCase();            
+        }
+
+        return String.join(" ", words);
     }
 }
