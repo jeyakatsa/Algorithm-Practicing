@@ -14,7 +14,8 @@ public class StringManipulation {
         String duplicates = StringManipulation.removeDuplicates("Trees are nice");
         char repeatedChar = StringManipulation.getMaxOcurringChar("Trees are nice");
         String capitalize = StringManipulation.capitalize("This is a great day");
-        System.out.println(capitalize);
+        var anagram = StringManipulation.anagram("ABCd", "ABCD");
+        System.out.println(anagram);
     }
 
     //Find number of Vowels in a String
@@ -110,6 +111,7 @@ public class StringManipulation {
         // }
     }
 
+    //Capitalize Beginning of Words
     public static String capitalize(String sentence) {
         if (sentence == null || sentence.trim().isEmpty())
             return "";
@@ -121,5 +123,19 @@ public class StringManipulation {
         }
 
         return String.join(" ", words);
+    }
+
+    //Anagram = Words that have same letters
+    public static boolean anagram(String first, String second) {
+        if (first == null || second == null)
+            return false;
+       
+        var array1 = first.toLowerCase().toCharArray();
+        Arrays.sort(array1);
+
+        var array2 = second.toLowerCase().toCharArray();
+        Arrays.sort(array2);
+
+        return Arrays.equals(array1, array2);
     }
 }
