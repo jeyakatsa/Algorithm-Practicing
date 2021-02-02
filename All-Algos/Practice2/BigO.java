@@ -53,24 +53,37 @@ public class BigO {
 
         //O(nlogn)
         for (int var = 1; var < n; var += 3) {   // O(n/3)
-          System.out.println("Pie: " + pie);    // O(n/3)
-          j = 1;  // O(n/3)
-          while (j < n) { // O((n/3) * (log3 n))
-            sum += 1;      // O((n/3) * (log3 n))
-            j *= 3;        // O((n/3) * (log3 n))
-          }
+            System.out.println("Pie: " + pie);    // O(n/3)
+            j = 1;  // O(n/3)
+            while (j < n) { // O((n/3) * (log3 n))
+                sum += 1;      // O((n/3) * (log3 n))
+                j *= 3;        // O((n/3) * (log3 n))
+            }
         }
         System.out.println("Sum: " + sum); //O(1)
+
 
         //O(log(n!))
         for (int var = 0; var < n; var++) {    //O(n)
             int j = 1;  //O(n)
-                  System.out.println("Pie: " + pie); //O(n)
-                  while(j < var) { // O((n) * (log2 var))
+            System.out.println("Pie: " + pie); //O(n)
+            while(j < var) { // O((n) * (log2 var))
               sum += 1; // O((n) * (log2 var))  
               j *= 2;  // O((n) * (log2 var))
             }
           } //end of for loop
-          System.out.println("Sum: " + sum); //O(1)
+        System.out.println("Sum: " + sum); //O(1)
+
+        
+        //O(n)
+        for (int var = 0; var < n; var++) {  // 0(n)
+      
+			System.out.println("Pie: " + pie); // 0(n)
+			while(j < var) { // 0(n)
+                sum += 1;  // 0(n)
+                j *= 2;  // 0(n)
+            }
+        } //end of for loop
+        System.out.println("Sum: " + sum); // O(1)
     }
 }
