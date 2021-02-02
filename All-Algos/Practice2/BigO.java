@@ -31,8 +31,7 @@ public class BigO {
         //O(n)
 		int var = 1;
 		while(var < n) {  // O(log n)
-			System.out.println("Pie: " + pie); // O(log n)
-			
+			System.out.println("Pie: " + pie); // O(log n)	
 			for (int j = 0; j < var; j++) {  // 2n
 				sum++;  //  (2n-1)
 			}
