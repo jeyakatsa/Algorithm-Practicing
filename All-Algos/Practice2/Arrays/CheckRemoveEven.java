@@ -25,6 +25,26 @@ public class CheckRemoveEven {
         } //end of loop
 
 		// Write - Your - Code- Here
-		return result; // change this anpackage Arrays;
-	}
+        return result; // change this anpackage Arrays;
+        
+    }
+    
+    public static void main(String[] args) {
+        int size = 10;
+        int[] arr = new int[size]; //declaration and instantiation
+
+        System.out.println("Before removing Even Numbers: ");
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = i; // assigning values
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+
+        int[] newArr = removeEven(arr); // calling removeEven
+
+        System.out.println("After removing Even numbers: ");
+        for(int i = 0; i < newArr.length; i++) {
+            System.out.println(newArr[i] + " "); // printing array
+        }
+    }
 }
