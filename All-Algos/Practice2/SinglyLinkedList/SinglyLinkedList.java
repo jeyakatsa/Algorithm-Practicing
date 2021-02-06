@@ -4,20 +4,23 @@ public class SinglyLinkedList<T> {
         for (int i = 1; i <= 10; i++) {
 			sll.insertAtHead(i);
         }
-        System.out.println("Originial :");
+        // System.out.println("Originial :");
+        // sll.printList();
+        // System.out.println("After deleting 10 from List: ");
+        // sll.deleteByValue(10);
+        // sll.printList();
+        // System.out.println("After deleting 9 from List: ");
+        // sll.deleteByValue(9);
+        // sll.printList();
+        // System.out.println("After deleting 1 from List: ");
+        // sll.deleteByValue(1);
+        // sll.printList();
+        // System.out.println("After deleting 21 from List: ");
+        // sll.deleteByValue(21);
+        // sll.printList();
+
+        reverse(sll);
         sll.printList();
-        System.out.println("After deleting 10 from List: ");
-        sll.deleteByValue(10);
-        sll.printList();
-        System.out.println("After deleting 9 from List: ");
-        sll.deleteByValue(9);
-        sll.printList();
-        System.out.println("After deleting 1 from List: ");
-        sll.deleteByValue(1);
-        sll.printList();
-        System.out.println("After deleting 21 from List: ");
-        sll.deleteByValue(21);
-        sll.printList(); // list remains unchanged as there is no element 21 in the list
     }
 
 
@@ -171,5 +174,24 @@ public class SinglyLinkedList<T> {
             prevNode = currentNode;
             currentNode = currentNode.nextNode;
         }
+    }
+
+    //Reverse Linked List
+    public static <T> void reverse(SinglyLinkedList<T> list) {
+        //Traverse linked list,
+        //create new list from old linkedlist nodes
+        SinglyLinkedList<T>.Node prev = null; //To keep track of the previous element, will be used in swapping links
+            SinglyLinkedList<T>.Node current = list.headNode; // firstElement
+            SinglyLinkedList<T>.Node next = null;
+
+            //While Traversing the list, swap links
+            while (current != null) {
+                next = current.nextNode;
+                current.nextNode = prev;
+                prev = current;
+                current = next;
+            }
+            //Linking Head Node with the new First Element
+            list.headNode = prev;
     }
 }
