@@ -18,8 +18,6 @@ public class SearchLinkedList<T> {
     }
 
 
-
-
     //Search linked list for data if true
     public boolean searchNode(T data) {
         //start from first element
@@ -37,6 +35,15 @@ public class SearchLinkedList<T> {
     }
 
 
+    //Deletes data from the head of list
+    public void deleteAtHead() {
+        //if list is empty then simply return
+        if(isEmpty())
+            return;
+        //make the nextNode of the headNode equal to new headNode
+        headNode = headNode.nextNode;
+        size--;    
+    }
 
 
     //........................................................
