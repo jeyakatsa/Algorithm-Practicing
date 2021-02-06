@@ -20,11 +20,22 @@ public class InsertAtEnd<T> {
         return false;
     }
 
+    //Inserts new data at the start of linked list
+    public void insertAtHead(T data) {
+        //Creating a new node and assigning it the new data value
+        Node newNode = new Node();
+        newNode.data = data;
+        //Linking head to the newNode's nextNode
+        newNode.nextNode = headNode;
+        headNode = newNode;
+        size++;
+    }
+
     //Inserts new data at End
-    public void InsertAtEnd(T data) {
+    public void insertAtEnd(T data) {
         //if list is empty then call insertAtHead()
         if(isEmpty()) {
-            InsertAtEnd(data);
+            insertAtHead(data);
             return;
         }
         //Creating a new Node with value data
@@ -39,8 +50,27 @@ public class InsertAtEnd<T> {
         }
         //make newNode the next element of the last node
         last.nextNode = newNode;
-        size++;
-        
+        size++;   
+    }
+
+    //Inserts data after given prev data node
+    public void insertAfter(T data, T previous) {
+        //Creating a new Node with value data
+        Node newNode = new Node();
+        newNode.data = data;
+        //Start from head node
+        Node currentNode = this.headNode;
+        //traverse the list until node having data equal to previous is found
+        while(currentNode != null && !currentNode.data.equals(previous)) {
+            currentNode = currentNode.nextNode;
+        }
+        //If such a node was found
+        //then point our newNode to currentNode's nextElement
+        if (currentNode != null) {
+            newNode.nextNode = currentNode;
+            currentNode.nextNode = newNode;
+            size++;
+        }
     }
 
     //Helper function to printList
@@ -58,4 +88,5 @@ public class InsertAtEnd<T> {
         }
         System.out.println(temp.data.toString() + " -> null");
     }
+    
 }
