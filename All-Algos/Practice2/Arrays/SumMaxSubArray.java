@@ -22,7 +22,7 @@ public class SumMaxSubArray {
     }
 
     public static void main (String[] args) {
-        int[] arr = {1,2,3,4,-1,-9,5,10};
+        int[] arr = {1};
         int result = findMaxSumSubArray(arr);
         System.out.println(result);
     }
