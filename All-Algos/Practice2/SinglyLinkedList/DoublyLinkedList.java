@@ -4,17 +4,19 @@ public class DoublyLinkedList<T> {
         for(int i = 1; i <= 10; i++) {
             dll.insertAtHead(i);
         }
-        System.out.print("Original ");
-        dll.printList();
-        System.out.print("After deleting 10 ");
-        dll.deleteByValue(10);
-        dll.printList();
-        System.out.print("After deleting 1 ");
-        dll.deleteByValue(1);
-        dll.printList();
-        System.out.print("After deleting 5 ");
-        dll.deleteByValue(5);
-        dll.printList();
+
+        System.out.println(dll.length());
+        // System.out.print("Original ");
+        // dll.printList();
+        // System.out.print("After deleting 10 ");
+        // dll.deleteByValue(10);
+        // dll.printList();
+        // System.out.print("After deleting 1 ");
+        // dll.deleteByValue(1);
+        // dll.printList();
+        // System.out.print("After deleting 5 ");
+        // dll.deleteByValue(5);
+        // dll.printList();
     }
 
 
@@ -104,6 +106,22 @@ public class DoublyLinkedList<T> {
             }
             currentNode = currentNode.nextNode;
         }
+    }
+
+    //Calculate length
+    public int length() {
+        int count = 0;
+
+        Node currentNode = this.headNode;
+
+        //traverse linkedlist
+        while(currentNode != null) {
+            //increment count by number of nodes in list
+            count++;
+            currentNode = currentNode.nextNode;
+        }
+
+        return count;
     }
     
 }
