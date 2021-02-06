@@ -194,4 +194,8 @@ public class SinglyLinkedList<T> {
             //Linking Head Node with the new First Element
             list.headNode = prev;
     }
+
+    public static <T> boolean detectLoop(SinglyLinkedList<T> list) {
+        return false;
+    }
 }
