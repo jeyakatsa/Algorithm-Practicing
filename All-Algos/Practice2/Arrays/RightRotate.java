@@ -1,4 +1,5 @@
 public class RightRotate {
+    //O(n) approach
     public static void rotateArray(int[] arr) {
         //Store last element of Array.
         //Start from second last and right shift array by one
