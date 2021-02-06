@@ -1,5 +1,3 @@
-package Arrays;
-
 public class CheckRemoveEven {
 
 	public static int[] removeEven(int[] arr) {
