@@ -233,4 +233,14 @@ public class SinglyLinkedList<T> {
             current = current.nextNode;
         }
     }
+
+    //Union & Intersection of Lists
+    public static <T> SinglyLinkedList<T> union(SinglyLinkedList<T> list1,
+    SinglyLinkedList<T> list2) {
+
+    }
+    public static <T> SinglyLinkedList<T> intersection(SinglyLinkedList<T> list1,
+    SinglyLinkedList<T> list2) {
+        
+    }
 }
