@@ -4,7 +4,12 @@ public class SinglyLinkedList<T> {
         for (int i = 1; i <= 10; i++) {
 			sll.insertAtHead(i);
         }
-        System.out.println("Middle of LL: " + findMiddle(sll));
+        sll.insertAtEnd(4);
+        sll.insertAtEnd(4);
+        sll.printList();
+        System.out.println("After duplicates removed: ");
+        removeDuplicates(sll);
+        sll.printList();
     }
 
 
@@ -210,5 +215,22 @@ public class SinglyLinkedList<T> {
             }
         }
         return mid.data;
+    }
+
+    public static <T> void removeDuplicates (SinglyLinkedList<T> list) {
+        SinglyLinkedList<T>.Node current = list.headNode; //outer loop
+        SinglyLinkedList<T>.Node compare = null; //inner loop
+
+        while(current != null && current.nextNode != null) {
+            compare = current;
+            while (compare.nextNode != null) {
+                if(current.data.equals(compare.nextNode.data)) {
+                    compare.nextNode = compare.nextNode.nextNode;
+                } else {
+                    compare = compare.nextNode;
+                }
+            }
+            current = current.nextNode;
+        }
     }
 }
