@@ -4,23 +4,15 @@ public class SinglyLinkedList<T> {
         for (int i = 1; i <= 10; i++) {
 			sll.insertAtHead(i);
         }
-        // System.out.println("Originial :");
-        // sll.printList();
-        // System.out.println("After deleting 10 from List: ");
-        // sll.deleteByValue(10);
-        // sll.printList();
-        // System.out.println("After deleting 9 from List: ");
-        // sll.deleteByValue(9);
-        // sll.printList();
-        // System.out.println("After deleting 1 from List: ");
-        // sll.deleteByValue(1);
-        // sll.printList();
-        // System.out.println("After deleting 21 from List: ");
-        // sll.deleteByValue(21);
-        // sll.printList();
+        sll.insertAtHead(1);
+        sll.insertAtHead(2);
+        sll.insertAtHead(3);
+        System.out.println("Before adding loop: " + detectLoop(sll));
+        sll.headNode.nextNode.nextNode = sll.headNode;
+        System.out.println("After adding loop: " + detectLoop(sll));
 
-        reverse(sll);
-        sll.printList();
+
+
     }
 
 
@@ -196,6 +188,18 @@ public class SinglyLinkedList<T> {
     }
 
     public static <T> boolean detectLoop(SinglyLinkedList<T> list) {
+        SinglyLinkedList<T>.Node slow = list.headNode;
+        SinglyLinkedList<T>.Node fast = list.headNode;
+
+        while(slow != null && fast != null && fast.nextNode != null) {
+            slow = slow.nextNode; //slow pointer will jump 1 step
+            fast = fast.nextNode.nextNode; //fast pointer will jump 2 steps
+            //when pointers become equal then there must be a loop
+            if(slow == fast) {
+                return true;
+            }
+        }
         return false;
+
     }
 }
