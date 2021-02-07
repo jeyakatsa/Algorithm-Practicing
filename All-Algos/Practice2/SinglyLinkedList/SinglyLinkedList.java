@@ -4,15 +4,7 @@ public class SinglyLinkedList<T> {
         for (int i = 1; i <= 10; i++) {
 			sll.insertAtHead(i);
         }
-        sll.insertAtHead(1);
-        sll.insertAtHead(2);
-        sll.insertAtHead(3);
-        System.out.println("Before adding loop: " + detectLoop(sll));
-        sll.headNode.nextNode.nextNode = sll.headNode;
-        System.out.println("After adding loop: " + detectLoop(sll));
-
-
-
+        System.out.println("Middle of LL: " + findMiddle(sll));
     }
 
 
@@ -201,5 +193,22 @@ public class SinglyLinkedList<T> {
         }
         return false;
 
+    }
+
+    public static <T> Object findMiddle(SinglyLinkedList<T> list){
+        //Don't forget base/test case!
+        if(list.isEmpty())
+            return null;
+
+        SinglyLinkedList<T>.Node mid = list.headNode;
+        SinglyLinkedList<T>.Node current = list.headNode;
+
+        while(mid != null && current != null && current.nextNode != null){
+            current = current.nextNode.nextNode;
+            if(current != null) {
+                mid = mid.nextNode;
+            }
+        }
+        return mid.data;
     }
 }
