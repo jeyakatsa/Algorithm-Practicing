@@ -1,3 +1,5 @@
+import java.util.HashSet;
+
 public class SinglyLinkedList<T> {
     public static void main( String args[] ) {
         SinglyLinkedList<Integer> sll = new SinglyLinkedList<Integer>(); 
@@ -28,6 +30,22 @@ public class SinglyLinkedList<T> {
     //head node of the linked list
     public Node headNode;
     public int size;
+
+    public Node getHeadNode() {
+        return headNode;
+    }
+
+    public void setHeadNode(Node headNode) {
+        this.headNode = headNode;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
 
     //constructor
     public SinglyLinkedList() {
@@ -234,13 +252,82 @@ public class SinglyLinkedList<T> {
         }
     }
 
+    public void removeDuplicatesWithHashing() {
+        Node current = this.headNode;
+        Node prevNode = this.headNode;
+        //will store all the elements that we observe once
+        HashSet<T> visitedNodes = new HashSet<T>();
+
+        if (!isEmpty() && current.nextNode != null) {
+            while (current != null) {
+                //check if already visited then delete this node
+                if (visitedNodes.contains(current.data)) {
+                    //deleting the node by undating the pointer of previous node
+                    prevNode.nextNode = current.nextNode;
+                    current = current.nextNode;
+                } else {
+                    //if node was not already visited then add it to the visited set
+                    visitedNodes.add(current.data);
+                    //moving on to next element in the list
+                    prevNode = current;
+                    current = current.nextNode;
+                }
+            }
+        }
+    }
+
     //Union & Intersection of Lists
     public static <T> SinglyLinkedList<T> union(SinglyLinkedList<T> list1,
     SinglyLinkedList<T> list2) {
-
+        //if one of the list is empty then return other list
+        if(list1.isEmpty())
+            return list2;
+        if(list2.isEmpty())
+            return list1;
+        //take the head of the first list        
+        SinglyLinkedList<T>.Node last = list1.getHeadNode();
+        //traverse it to the last element
+        while (last.nextNode != null) {
+            last = last.nextNode;
+        }
+        //attach the last element of list1 to head of list2
+        last.nextNode = list2.getHeadNode();
+        //remove duplicates that might have been added now
+        list1.removeDuplicatesWithHashing();//Complexity of this is O(n)
+        return list1;
     }
+
+
+    //Helper function which checks if the element is present in the list
+    public static <T> boolean contains(SinglyLinkedList<T> list, T data) {
+        SinglyLinkedList<T>.Node current = list.getHeadNode();
+        //traverses the whole list
+        while (current != null) {
+            //returns true if found
+            if(current.data.equals(data))
+                return true;
+            current = current.nextNode;    
+        }
+        //returns false if not found
+        return false;
+    }
+
     public static <T> SinglyLinkedList<T> intersection(SinglyLinkedList<T> list1,
     SinglyLinkedList<T> list2) {
-        
+        SinglyLinkedList<T> result = new SinglyLinkedList<T>();
+        //returns empty list if either list is empty
+        if(list1.isEmpty() || list2.isEmpty())
+            return result;
+
+        SinglyLinkedList<T>.Node current = list1.getHeadNode();
+        //traverses list1 and checks if each element is present in list2
+        while (current != null) {
+            if(contains(list2, current.data)) {
+                //inserts in result if it is present in both
+                result.insertAtHead(current.data);
+            }
+            current = current.nextNode;
+        }    
+        return result;
     }
 }
