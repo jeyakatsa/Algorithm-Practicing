@@ -2,16 +2,32 @@ import java.util.HashSet;
 
 public class SinglyLinkedList<T> {
     public static void main( String args[] ) {
-        SinglyLinkedList<Integer> sll = new SinglyLinkedList<Integer>(); 
-        for (int i = 1; i <= 10; i++) {
-			sll.insertAtHead(i);
+        // SinglyLinkedList<Integer> sll = new SinglyLinkedList<Integer>(); 
+        // for (int i = 1; i <= 10; i++) {
+		// 	sll.insertAtHead(i);
+        // }
+        // sll.insertAtEnd(4);
+        // sll.insertAtEnd(4);
+        // sll.printList();
+        // System.out.println("After duplicates removed: ");
+        // removeDuplicates(sll);
+        // sll.printList();
+        SinglyLinkedList<Integer> list1 = new SinglyLinkedList<Integer>();
+        for(int i=7; i>3; i--){
+            list1.insertAtHead(i);
         }
-        sll.insertAtEnd(4);
-        sll.insertAtEnd(4);
-        sll.printList();
-        System.out.println("After duplicates removed: ");
-        removeDuplicates(sll);
-        sll.printList();
+        System.out.print("1st ");
+        list1.printList();
+        SinglyLinkedList<Integer> list2 = new SinglyLinkedList<Integer>();
+        for(int i=0; i<5; i++){
+            list2.insertAtHead(i);
+        }
+        System.out.print("2nd ");
+        list2.printList();
+        System.out.print("After Intersection ");
+        intersection(list1, list2).printList();
+        System.out.print("After Union ");
+        union(list1, list2).printList();
     }
 
 
