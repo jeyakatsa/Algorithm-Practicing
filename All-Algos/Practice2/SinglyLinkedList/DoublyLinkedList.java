@@ -56,7 +56,7 @@ public class DoublyLinkedList<T> {
 
     //Checks if the list is empty
     public boolean isEmpty() {
-        if(headNode == null) return true;
+        if(headNode == null && tailNode == null) return true;
             return false;
     }
 
