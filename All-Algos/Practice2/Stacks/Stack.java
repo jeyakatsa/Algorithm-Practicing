@@ -1,7 +1,18 @@
 public class Stack<V> {
     public static void main(String[] args) {
         Stack<Integer> stack = new Stack<Integer>(10);
-        System.out.println("Created Stack!");
+        System.out.print("Elements pushed in the stack: ");
+        for(int i = 0; i < 10; i++) {
+            stack.push(i); //pushes 10 elements (0-10 inclusive) to the stack
+            System.out.print(i + " ");
+        }
+        System.out.println("\nIs Stack full? \n" + stack.isFull());
+        System.out.print("Elements popped from the Stack: ");
+        for (int i = 0; i < 5; i++) {
+            System.out.print(stack.pop() + " "); //pops all 10 elements from stack
+        }
+
+        System.out.println("\nIs Stack empty? \n" + stack.isEmpty());
     }
 
 
@@ -44,6 +55,22 @@ public class Stack<V> {
         if(isEmpty())
             return null;
         return arr[top];    
+    }
+
+    //inserts a value to the top of Stack
+    public void push(V value) {
+        if(isFull()) {
+            System.err.println("Stack is full");
+            return;
+        }
+        arr[++top] = value; //increments the top and adds value to updated top
+    }
+
+    //removed a value from top of Stack and returns
+    public V pop() {
+        if(isEmpty())
+            return null;
+        return arr[top--]; //returns value and top and decrements top    
     }
 
 }
