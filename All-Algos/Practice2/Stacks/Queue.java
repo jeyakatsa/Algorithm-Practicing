@@ -1,23 +1,27 @@
 public class Queue<V> {
     public static void main (String[] args) {
         Queue<Integer> queue = new Queue<Integer>(5);
-        //enqueue numbers ascending at end
-        queue.enqueue(2);
-        queue.enqueue(4);
-        queue.enqueue(6);
-        queue.enqueue(8);
-        queue.enqueue(10);
-        //dequeue 2 elements from start
-        queue.dequeue();
-        queue.dequeue();
-        //enqueue 12 and 14 t the end
-        queue.enqueue(12);
-        queue.enqueue(14);
+        // //enqueue numbers ascending at end
+        // queue.enqueue(2);
+        // queue.enqueue(4);
+        // queue.enqueue(6);
+        // queue.enqueue(8);
+        // queue.enqueue(10);
+        // //dequeue 2 elements from start
+        // queue.dequeue();
+        // queue.dequeue();
+        // //enqueue 12 and 14 t the end
+        // queue.enqueue(12);
+        // queue.enqueue(14);
 
-        System.out.println("Queue:");
-        while(!queue.isEmpty()) {
-            System.out.print(queue.dequeue() + " ");
-        }
+        // System.out.println("Queue:");
+        // while(!queue.isEmpty()) {
+        //     System.out.print(queue.dequeue() + " ");
+        // }
+
+        String[] output = findBin(8);
+        for(int i = 0; i < 8; i++)
+            System.out.print(output[i] + " ");
 
     }
 
@@ -79,6 +83,22 @@ public class Queue<V> {
         currentSize--;
 
         return temp;
+    }
+
+    public static String[] findBin(int number) {
+        String[] result = new String[number];
+        Queue<String> queue = new Queue<String>(number + 1);
+
+        queue.enqueue("1");
+
+        for (int i = 0; i < number; i++) {
+            result[i] = queue.dequeue();
+            String s1 = result[i] + "0";
+            String s2 = result[i] + "1";
+            queue.enqueue(s1);
+            queue.enqueue(s2);
+        }
+        return result;
     }
 
 }
