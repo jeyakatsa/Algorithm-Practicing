@@ -1,27 +1,23 @@
 public class Queue<V> {
     public static void main (String[] args) {
         Queue<Integer> queue = new Queue<Integer>(5);
-        // //enqueue numbers ascending at end
-        // queue.enqueue(2);
-        // queue.enqueue(4);
-        // queue.enqueue(6);
-        // queue.enqueue(8);
-        // queue.enqueue(10);
-        // //dequeue 2 elements from start
-        // queue.dequeue();
-        // queue.dequeue();
-        // //enqueue 12 and 14 t the end
-        // queue.enqueue(12);
-        // queue.enqueue(14);
+        //enqueue numbers ascending at end
+        queue.enqueue(2);
+        queue.enqueue(4);
+        queue.enqueue(6);
+        queue.enqueue(8);
+        queue.enqueue(10);
 
-        // System.out.println("Queue:");
-        // while(!queue.isEmpty()) {
-        //     System.out.print(queue.dequeue() + " ");
-        // }
+        reverseK(queue, 3);
 
-        String[] output = findBin(8);
-        for(int i = 0; i < 8; i++)
-            System.out.print(output[i] + " ");
+        System.out.println("Queue:");
+        while(!queue.isEmpty()) {
+            System.out.print(queue.dequeue() + " ");
+        }
+
+        // String[] output = findBin(8);
+        // for(int i = 0; i < 8; i++)
+        //     System.out.print(output[i] + " ");
 
     }
 
@@ -99,6 +95,26 @@ public class Queue<V> {
             queue.enqueue(s2);
         }
         return result;
+    }
+
+    public static <V> void reverseK(Queue<V> queue, int k) {
+        //1. push first k elements in queue in a stack.
+        //2. pop stack elements and enqueue to end of queue
+        //3. Dequeue queue elements till "k" and append at end
+        //4. Dequeue remaining elements and enqueue them again to append to end of queue
+        if (queue.isEmpty() || k <= 0)
+            return;
+        Stack<V> stack = new Stack<>(k);  
+        
+        while(!stack.isFull())
+            stack.push(queue.dequeue());
+
+        while(!stack.isEmpty())
+            queue.enqueue(stack.pop()); 
+            
+        int size = queue.getCurrentSize();
+        for(int i = 0; i < size - k; i++)
+            queue.enqueue(queue.dequeue());    
     }
 
 }
