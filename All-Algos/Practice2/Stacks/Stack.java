@@ -1,18 +1,29 @@
 public class Stack<V> {
     public static void main(String[] args) {
         Stack<Integer> stack = new Stack<Integer>(10);
-        System.out.print("Elements pushed in the stack: ");
-        for(int i = 0; i < 10; i++) {
-            stack.push(i); //pushes 10 elements (0-10 inclusive) to the stack
-            System.out.print(i + " ");
-        }
-        System.out.println("\nIs Stack full? \n" + stack.isFull());
-        System.out.print("Elements popped from the Stack: ");
-        for (int i = 0; i < 5; i++) {
-            System.out.print(stack.pop() + " "); //pops all 10 elements from stack
-        }
+        // System.out.print("Elements pushed in the stack: ");
+        // for(int i = 0; i < 10; i++) {
+        //     stack.push(i); //pushes 10 elements (0-10 inclusive) to the stack
+        //     System.out.print(i + " ");
+        // }
+        // System.out.println("\nIs Stack full? \n" + stack.isFull());
+        // System.out.print("Elements popped from the Stack: ");
+        // for (int i = 0; i < 5; i++) {
+        //     System.out.print(stack.pop() + " "); //pops all 10 elements from stack
+        // }
 
-        System.out.println("\nIs Stack empty? \n" + stack.isEmpty());
+        // System.out.println("\nIs Stack empty? \n" + stack.isEmpty());
+        stack.push(2);
+        stack.push(97);
+        stack.push(4);
+        stack.push(42);
+        stack.push(12);
+        stack.push(60);
+        stack.push(23);
+        sortStack(stack);
+        while(!stack.isEmpty()){
+            System.out.println(stack.pop());
+        }
     }
 
 
@@ -83,8 +94,17 @@ public class Stack<V> {
         //5. Now transfer values from tempStack to mainStack to make values sorted in ascending order.
         Stack<Integer> newStack = new Stack<>(stack.getMaxSize());
         while (!stack.isEmpty()) {
-            Integer value = stack.pop()
+            Integer value = stack.pop();
+            if(!newStack.isEmpty() && value >= newStack.top()) {
+                newStack.push(value);
+            } else {
+                while (!newStack.isEmpty() && newStack.top() > value)
+                    stack.push(newStack.pop());
+                newStack.push(value);    
+            }
         }
+        while (!newStack.isEmpty())
+            stack.push(newStack.pop());
     }
 
 }
