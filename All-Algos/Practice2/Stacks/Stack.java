@@ -73,4 +73,18 @@ public class Stack<V> {
         return arr[top--]; //returns value and top and decrements top    
     }
 
+    public static void sortStack(Stack<Integer> stack) {
+        //1. use a second tempStack.
+        //2. pop value from mainStack.
+        //3. If the value is greater or equal to the top of tempStack, then push value in tempStack
+        //else pop all values from tempStack and push them in mainStack and in the end push value in tempStack and repeat from step 2.
+        //till mainStack is not empty.
+        //4. When mainStack will be empty, tempStack will have sorted values in descending order.
+        //5. Now transfer values from tempStack to mainStack to make values sorted in ascending order.
+        Stack<Integer> newStack = new Stack<>(stack.getMaxSize());
+        while (!stack.isEmpty()) {
+            Integer value = stack.pop()
+        }
+    }
+
 }
