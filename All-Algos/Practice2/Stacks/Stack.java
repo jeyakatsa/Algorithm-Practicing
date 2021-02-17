@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class Stack<V> {
     public static void main(String[] args) {
@@ -28,7 +29,12 @@ public class Stack<V> {
         //     System.out.println(stack.pop());
         // }
 
-        System.out.println(evaluatePostFix("921*-8-4+"));
+        // System.out.println(evaluatePostFix("921*-8-4+"));
+
+        int arr[] = {4,6,3,2,8,1,11};
+        System.out.println(Arrays.toString(arr));
+        int result[] = nextGreaterElement(arr);
+        System.out.println(Arrays.toString(result));
     }
 
 
@@ -145,5 +151,34 @@ public class Stack<V> {
         }
         return stack.pop();
     }
+
+    //iterate through stack.
+    //create new array
+    //create two empty integers, x and y+1
+    //in old array,
+    // if x is < y+1, push y+1 into new array then increment x
+    //else if x is > y+1 increment y
+    //else push -1 into new array
+    //^my solution for below...    
+    public static int[] nextGreaterElement(int[] arr) {
+        int[] result = new int[arr.length];
+        int resultIndex = 0;
+        Stack<Integer> stack = new Stack<>(arr.length);
+        for(int i = arr.length - 1; i >= 0; i--) {
+            if(!stack.isEmpty()) {
+                while (!stack.isEmpty() && stack.top() <= arr[i]) {
+                    stack.pop();
+                }
+            }
+            if(stack.isEmpty()){
+                result[i] = -1;
+            }
+            else
+                result[i] = stack.top();
+            stack.push(arr[i]);    
+        }
+        return result;
+    }
+
 
 }
