@@ -36,30 +36,33 @@ public class Stack<V> {
         // int result[] = nextGreaterElement(arr);
         // System.out.println(Arrays.toString(result));
 
-        int [][] party1 = {
-            {0,1,1,0},
-            {1,0,1,1},
-            {0,0,0,0},
-            {0,1,1,0},   
-          };
+        // int [][] party1 = {
+        //     {0,1,1,0},
+        //     {1,0,1,1},
+        //     {0,0,0,0},
+        //     {0,1,1,0},   
+        //   };
   
-          int [][] party2 = {
-            {0,1,1,0},
-            {1,0,1,1},
-            {0,0,0,1},
-            {0,1,1,0},   
-          };
+        //   int [][] party2 = {
+        //     {0,1,1,0},
+        //     {1,0,1,1},
+        //     {0,0,0,1},
+        //     {0,1,1,0},   
+        //   };
   
-          int [][] party3 = {
-            {0,0,0,0},
-            {1,0,0,1},
-            {1,0,0,1},
-            {1,1,1,0},   
-          };
+        //   int [][] party3 = {
+        //     {0,0,0,0},
+        //     {1,0,0,1},
+        //     {1,0,0,1},
+        //     {1,1,1,0},   
+        //   };
           
-          System.out.println(findCelebrity(party1,4));
-          System.out.println(findCelebrity(party2,4));
-          System.out.println(findCelebrity(party3,4));
+        //   System.out.println(findCelebrity(party1,4));
+        //   System.out.println(findCelebrity(party2,4));
+        //   System.out.println(findCelebrity(party3,4));
+
+        System.out.println(isBalanced("{[()]}"));
+        System.out.println(isBalanced("}["));
     }
 
 
@@ -248,6 +251,41 @@ public class Stack<V> {
             return -1;
         }
         return celebrity;
+    }
+
+    public static boolean isBalanced(String exp) {
+        //iterate through string"array"
+        //if string[i]"opposite" is == to string[string.length]]
+        //increment i and decrement string.length
+        //continue irerating then once reached end of string, return true
+        //else return false
+        //^My solution
+
+        //Their solution...v
+        //Iterate through the string exp.
+        //For each opening parentheses, push it into stack.
+        //For every clothing patanthesis, check for its opening parentheses in stack
+        //If you can't find the opening parentheses for any closing one then returns false.
+        //and after complete traversal of string exp, if there's any opening parentheses left
+        //in stack then also return false.
+        //At the end return true if you haven't encountered any of the above false conditions.
+        Stack<Character> stack = new Stack<>(exp.length());
+
+        for(int i = 0; i < exp.length(); i++) {
+            char character = exp.charAt(i);
+            if(character == '}' || character == ')' || character == ']') {
+                if(stack.isEmpty())
+                    return false;
+                if((character == '}' && stack.pop() != '{') || (character == ')' && stack.pop() != '(')
+                || (character == ']' && stack.pop() != '['))
+                    return false;    
+            }
+            else stack.push(character);
+        }
+        if(!stack.isEmpty()) 
+            return false;
+
+        return true;
     }
 
 
