@@ -31,10 +31,35 @@ public class Stack<V> {
 
         // System.out.println(evaluatePostFix("921*-8-4+"));
 
-        int arr[] = {4,6,3,2,8,1,11};
-        System.out.println(Arrays.toString(arr));
-        int result[] = nextGreaterElement(arr);
-        System.out.println(Arrays.toString(result));
+        // int arr[] = {4,6,3,2,8,1,11};
+        // System.out.println(Arrays.toString(arr));
+        // int result[] = nextGreaterElement(arr);
+        // System.out.println(Arrays.toString(result));
+
+        int [][] party1 = {
+            {0,1,1,0},
+            {1,0,1,1},
+            {0,0,0,0},
+            {0,1,1,0},   
+          };
+  
+          int [][] party2 = {
+            {0,1,1,0},
+            {1,0,1,1},
+            {0,0,0,1},
+            {0,1,1,0},   
+          };
+  
+          int [][] party3 = {
+            {0,0,0,0},
+            {1,0,0,1},
+            {1,0,0,1},
+            {1,1,1,0},   
+          };
+          
+          System.out.println(findCelebrity(party1,4));
+          System.out.println(findCelebrity(party2,4));
+          System.out.println(findCelebrity(party3,4));
     }
 
 
@@ -178,6 +203,51 @@ public class Stack<V> {
             stack.push(arr[i]);    
         }
         return result;
+    }
+
+    //returns true if x know y else returns false
+    private static boolean aqStatus(int[][] party, int x, int y) {
+        if(party[x][y] == 1) return true;
+        return false;
+    }
+
+    public static int findCelebrity(int[][] party, int numPeople) {
+        Stack<Integer> stack = new Stack<>(numPeople);
+        int celebrity = -1;
+
+        //Push all people in stack
+        for(int i = 0; i < numPeople; i++) {
+            stack.push(i);
+        }
+
+        while(!stack.isEmpty()) {
+
+            //Take two people out of stack and check if they know each other
+            //One who doesn't know the other, push it back in stack.
+            int x = stack.pop();
+
+            if(stack.isEmpty()) {
+                celebrity = x;
+                break;
+            }
+
+            int y = stack.pop();
+
+            if(aqStatus(party, x, y)) {
+                //x knows y, discard and push y in stack
+                stack.push(y);
+            } else stack.push(x);
+        }
+
+        //At this point, we will have last element of Stack as celebrity
+        //Check it to make sure it's the right celebrity
+        for(int j = 0; j < numPeople; j++) {
+
+            //Celebrity knows no one while everyone knows celebrity
+            if(celebrity != j && (aqStatus(party, celebrity, j) || !(aqStatus(party, j, celebrity))))
+            return -1;
+        }
+        return celebrity;
     }
 
 
