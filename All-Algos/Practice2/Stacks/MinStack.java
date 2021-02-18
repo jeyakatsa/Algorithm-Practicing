@@ -9,7 +9,7 @@ public class MinStack {
         stack.push(3);
         stack.push(9);
 
-        System.out.print(stack.min());
+        System.out.println(stack.min());
 
         stack.pop();
         stack.pop();
@@ -49,7 +49,7 @@ public class MinStack {
         if(!minStack.isEmpty() && minStack.top() < value)
             minStack.push(minStack.top());
         else
-            minStack.push(minStack.top());    
+            minStack.push(value);    
 
     }
 

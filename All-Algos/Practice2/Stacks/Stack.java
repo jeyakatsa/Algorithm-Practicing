@@ -61,8 +61,10 @@ public class Stack<V> {
         //   System.out.println(findCelebrity(party2,4));
         //   System.out.println(findCelebrity(party3,4));
 
-        System.out.println(isBalanced("{[()]}"));
-        System.out.println(isBalanced("}["));
+        // System.out.println(isBalanced("{[()]}"));
+        // System.out.println(isBalanced("}["));
+
+        
     }
 
 
@@ -121,12 +123,14 @@ public class Stack<V> {
             return;
         }
         arr[++top] = value; //increments the top and adds value to updated top
+        currentSize++;
     }
 
     //removed a value from top of Stack and returns
     public V pop() {
         if(isEmpty())
             return null;
+        currentSize--;    
         return arr[top--]; //returns value and top and decrements top    
     }
 
