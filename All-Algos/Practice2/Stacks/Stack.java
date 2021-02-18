@@ -69,6 +69,7 @@ public class Stack<V> {
     private int maxSize;
     private int top;
     private V arr[];
+    private int currentSize;
     /*
     Java does not allow generic type arrays. So we have used an 
     array of Object type and type-casted it to the generic type V.
@@ -80,7 +81,13 @@ public class Stack<V> {
         this.maxSize = max_size;
         this.top = -1; //initially when stack is empty
         arr = (V[]) new Object[max_size]; //type casting Object[] to V[]
+        this.currentSize = 0;
     }
+
+    public int getCurrentSize(){
+        return currentSize;
+    }
+
     public int getCapacity() {
         return maxSize;
     }
