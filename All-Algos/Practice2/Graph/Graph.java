@@ -1,6 +1,8 @@
+import org.graalvm.compiler.serviceprovider.SpeculationReasonGroup.SpeculationContextObject;
+
 public class Graph {
     public static void main(String[] args) {
-        Graph g = new Graph(5);
+        Graph g = new Graph(4);
         g.addEdge(0, 1);
         g.addEdge(0, 2);
         g.addEdge(1, 3);
@@ -10,14 +12,13 @@ public class Graph {
         System.out.println("DFS traversal of Graph1 : " + bfs(g));
         System.out.println();
 
-        Graph g2 = new Graph(5);
+        Graph g2 = new Graph(4);
         g2.addEdge(0, 1);
-        g2.addEdge(0, 4);
         g2.addEdge(1, 2);
-        g2.addEdge(3, 4);
-        System.out.println("Graph1: ");
+        g2.addEdge(2, 3);
+        g2.addEdge(3, 0);
         g2.printGraph();
-        System.out.println("DFS traversal of Graph1 : " + bfs(g2));
+        System.out.println(detectCycle(g2));
     }
 
 
@@ -167,5 +168,51 @@ public class Graph {
             visited[current_node] = true;  
         }
         return result;
+    }
+
+    public static boolean detectCycle(Graph g){
+        int num_of_vertices = g.vertices;
+
+        //Boolean Array to hold the history of visited nodes (by default-false)
+        boolean[] visited = new boolean [num_of_vertices];
+        //Holds a flag if the node is currently in the Stack or not (by default-false)
+        boolean[] stackFlag = new boolean[num_of_vertices];
+
+        for (int i = 0; i < num_of_vertices; i++) {
+            //Check cyclic on each node
+            if (cyclic(g, i, visited, stackFlag)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean cyclic(Graph g, int v, boolean[] visited, boolean[] stackFlag) {
+        //if node is currently in stack that means we have found a cycle
+        if(stackFlag[v])
+            return true;
+
+        //if it is already visited (and not in stack) then there is no cycle
+        if (visited[v])
+            return false;
+            
+        visited[v] = true;
+        stackFlag[v] = true;
+        
+        //check adjacency list of the node
+        DoublyLinkedList<Integer>.Node temp = null;
+        if (g.adjacencyList[v] != null)
+            temp = g.adjacencyList[v].headNode;
+
+        while (temp != null) {
+            //run cyclic function recursively on each outgoing path
+            if(cyclic(g, temp.data, visited, stackFlag)) {
+                return true;
+            }
+            temp = temp.nextNode;
+        }
+        stackFlag[v] = false;
+
+        return false;
     }
 }
