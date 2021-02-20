@@ -3,29 +3,29 @@ import java.util.Arrays;
 public class Graph {
     public static void main(String[] args) {
 
-        Graph g1 = new Graph(9);
-        g1.addEdge(0,2);
-        g1.addEdge(0,5);
-        g1.addEdge(2,3);
-        g1.addEdge(2,4);
-        g1.addEdge(5,3);
-        g1.addEdge(5,6);
-        g1.addEdge(3,6);
-        g1.addEdge(6,7);
-        g1.addEdge(6,8);
-        g1.addEdge(6,4);
-        g1.addEdge(7,8);
-        g1.printGraph();
-        System.out.println("Path exists: " + checkPath(g1, 0, 7));
-        System.out.println();
+        Graph g = new Graph(5);
+        g.addEdge(0,1);
+        g.addEdge(0,2);
+        g.addEdge(0,3);
+        g.addEdge(3,4);
+        g.printGraph();
+        System.out.println("isTree : " + isTree(g));
+
         Graph g2 = new Graph(4);
         g2.addEdge(0,1);
-        g2.addEdge(1,2);
-        g2.addEdge(1,3);
-        g2.addEdge(2,3);
-
+        g2.addEdge(0,2);
+        g2.addEdge(0,3);
+        g2.addEdge(3,2);
         g2.printGraph();
-        System.out.println("Path exists: " + checkPath(g2, 3, 0));
+        System.out.println("isTree : " + isTree(g2));
+
+        Graph g3 = new Graph(6);
+        g3.addEdge(0,1);
+        g3.addEdge(0,2);
+        g3.addEdge(0,3);
+        g3.addEdge(4,5);
+        g3.printGraph();
+        System.out.println("isTree : " + isTree(g3));
     }
 
 
@@ -348,6 +348,51 @@ public class Graph {
                 temp = temp.nextNode;
             }    
         }
+        return false;
+    }
+
+    public static boolean isTree(Graph g){
+        int root = 0;
+        //Boolean Array to hold the history of visited nodes (by default-false)
+        //Make a node visited whenever you enqueue it into queue
+        boolean[] visited = new boolean[g.vertices];
+
+        //Create Queue for Breadth First Traversal and enqueue root in it
+        Queue<Integer> queue = new Queue<>(g.vertices);
+
+        queue.enqueue(root);
+        visited[root] = true;
+
+        //Store the number of visited nodes to check at end if all are visited
+        int numberOfVisited = 1;
+
+        //traverse while queue is not empty
+        while (!queue.isEmpty()) {
+
+            //Dequeue a vertex/node from queue and add it to result
+            int current_node = queue.dequeue();
+
+            //Get adjacent vertices to the current_node from the array,
+            //and if they are not already visited then enqueue them in the Queue
+            DoublyLinkedList<Integer>.Node temp = null;
+            if(g.adjacencyList[current_node] != null)
+                temp = g.adjacencyList[current_node].headNode;
+
+            while (temp != null) {
+                if(!visited[temp.data]) {
+                    queue.enqueue(temp.data);
+                    visited[temp.data] = true;
+                    numberOfVisited++;
+                }
+                else
+                    return false;
+                temp = temp.nextNode;
+            }    
+        }
+        //If all vertices are visited then return true
+        if (numberOfVisited == g.vertices)
+            return true;
+
         return false;
     }
 
