@@ -7,7 +7,7 @@ public class Graph {
         g.addEdge(2, 3);
         System.out.println("Graph1:");
         g.printGraph();
-        System.out.println("BFS traversal of Graph1 : " + bfs(g));
+        System.out.println("DFS traversal of Graph1 : " + bfs(g));
         System.out.println();
 
         Graph g2 = new Graph(5);
@@ -17,7 +17,7 @@ public class Graph {
         g2.addEdge(3, 4);
         System.out.println("Graph1: ");
         g2.printGraph();
-        System.out.println("BFS traversal of Graph1 : " + bfs(g2));
+        System.out.println("DFS traversal of Graph1 : " + bfs(g2));
     }
 
 
@@ -135,8 +135,37 @@ public class Graph {
         return result;
     }
 
-    public static String bfsVisit(Graph g, int source, boolean[] visited) {
+    public static String dfsVisit(Graph g, int source, boolean[] visited) {
         String result = "";
          
+        //Create Stack
+        Stack<Integer> stack = new Stack<Integer>(g.vertices);
+
+        stack.push(source);
+
+        //Traverse while stack is not empty
+        while(!stack.isEmpty()) {
+
+            //Pop a vertex/node from stack and add it to the result
+            int current_node = stack.pop();
+            result += String.valueOf(current_node);
+
+            //Get adjacent vertices to the current_node from the array,
+            //and if they are not already visited then push them in the stack
+            DoublyLinkedList<Integer>.Node temp = null;
+            if(g.adjacencyList[current_node] !=null)
+                temp = g.adjacencyList[current_node].headNode;
+
+            while(temp != null) {
+
+                if(!visited[temp.data]) {
+                    stack.push(temp.data);
+                }
+                temp = temp.nextNode;
+            }
+            //Visit the node
+            visited[current_node] = true;  
+        }
+        return result;
     }
 }
