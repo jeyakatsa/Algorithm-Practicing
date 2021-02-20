@@ -115,4 +115,28 @@ public class Graph {
         }
         return result;
     }
+
+    //Depth First Search of Graph g
+    public static String dfs(Graph g) {
+        String result = "";
+        //Typical "base case" if null then return...
+        if(g.vertices < 1) {
+            return result;
+        }
+        
+        boolean[] visited = new boolean[g.vertices];
+
+        for(int i = 0; i < g.vertices; i++) {
+            //Checking whether the node is visited or not
+            if(!visited[i]) {
+                result = result + dfsVisit(g, i, visited);
+            }
+        }
+        return result;
+    }
+
+    public static String bfsVisit(Graph g, int source, boolean[] visited) {
+        String result = "";
+         
+    }
 }
