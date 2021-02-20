@@ -2,63 +2,30 @@ import java.util.Arrays;
 
 public class Graph {
     public static void main(String[] args) {
-        // Graph g = new Graph(4);
-        // g.addEdge(0, 1);
-        // g.addEdge(0, 2);
-        // g.addEdge(1, 3);
-        // g.addEdge(2, 3);
-        // System.out.println("Graph1:");
-        // g.printGraph();
-        // System.out.println("DFS traversal of Graph1 : " + bfs(g));
-        // System.out.println();
 
-        // Graph g2 = new Graph(4);
-        // g2.addEdge(0, 1);
-        // g2.addEdge(1, 2);
-        // g2.addEdge(2, 3);
-        // g2.addEdge(3, 0);
-        // g2.printGraph();
-        // System.out.println(detectCycle(g2));
-
-        // g.addEdge(0, 1);
-        // g.addEdge(1, 2);
-        // g.addEdge(3, 0);
-        // g.addEdge(3, 1);
-        // g.printGraph();
-        // System.out.println("Mother Vertex is: " + findMotherVertex(g));
-
-        Graph g = new Graph(9);
-        g.addEdge(0,2);
-        g.addEdge(0,5);
-        g.addEdge(2,3);
-        g.addEdge(2,4);
-        g.addEdge(5,3);
-        g.addEdge(5,6);
-        g.addEdge(3,6);
-        g.addEdge(6,7);
-        g.addEdge(6,8);
-        g.addEdge(6,4);
-        g.addEdge(7,8);
-        
-         
-        g.printGraph();
-        System.out.println("Number of edges: " + numEdges(g));
+        Graph g1 = new Graph(9);
+        g1.addEdge(0,2);
+        g1.addEdge(0,5);
+        g1.addEdge(2,3);
+        g1.addEdge(2,4);
+        g1.addEdge(5,3);
+        g1.addEdge(5,6);
+        g1.addEdge(3,6);
+        g1.addEdge(6,7);
+        g1.addEdge(6,8);
+        g1.addEdge(6,4);
+        g1.addEdge(7,8);
+        g1.printGraph();
+        System.out.println("Path exists: " + checkPath(g1, 0, 7));
         System.out.println();
-    
-        Graph g2 = new Graph(7);
+        Graph g2 = new Graph(4);
+        g2.addEdge(0,1);
         g2.addEdge(1,2);
         g2.addEdge(1,3);
-        g2.addEdge(3,4);
-        g2.addEdge(3,5);
-        g2.addEdge(2,5);
-        g2.addEdge(2,4);
-        g2.addEdge(4,6);
-        g2.addEdge(4,5);
-        g2.addEdge(6,5);
-    
-    
+        g2.addEdge(2,3);
+
         g2.printGraph();
-        System.out.println("Number of edges: " + numEdges(g2));
+        System.out.println("Path exists: " + checkPath(g2, 3, 0));
     }
 
 
@@ -92,7 +59,7 @@ public class Graph {
 
                 DoublyLinkedList<Integer>.Node temp = adjacencyList[i].getHeadNode();
                 while (temp != null){
-                    System.out.print("[" + temp.data + "] ->");
+                    System.out.print("[" + temp.data + "] -> ");
                     temp = temp.nextNode;
                 }
                 System.out.println("null");
@@ -335,6 +302,53 @@ public class Graph {
             }    
         }
         return sum/2;
+    }
+
+    //Check if a path ecists between two vertices
+    //Perfrom DFS Traversal starting from source and if you reach destination
+    //then it means that there exist a path between source and destination
+    //so return true and if you traverse the graph but can't reach destination
+    //then simply return false.
+    public static boolean checkPath(Graph g, int source, int destination) {
+        if (source == destination) {
+            return true;
+        }
+
+        //Boolean Array to hold the history of visited nodes (by default-false)
+        //Make a node visited whenever you push it into stack
+        boolean[] visited = new boolean[g.vertices];
+
+        //Create Stack
+        Stack<Integer> stack = new Stack<>(g.vertices);
+
+        stack.push(source);
+        visited[source] = true;
+
+        //traverse while stack is not empty
+        while (!stack.isEmpty()) {
+
+            //Pop a vertex/node from stack
+            int current_node = stack.pop();
+
+            //Get adjacent vertices to the current_node from the array,
+            //and if only push unvisited adjacent vertices into stack
+            //Before pushing into stack, check if it's the destination.
+            DoublyLinkedList<Integer>.Node temp = null;
+            if(g.adjacencyList[current_node] != null)
+                temp = g.adjacencyList[current_node].headNode;
+            
+            while (temp != null) {
+                if(!visited[temp.data]) {
+                    if(temp.data == destination) {
+                        return true;
+                    }
+                    stack.push(temp.data);
+                    visited[temp.data] = true;
+                }
+                temp = temp.nextNode;
+            }    
+        }
+        return false;
     }
 
 
