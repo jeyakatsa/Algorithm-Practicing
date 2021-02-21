@@ -9,7 +9,13 @@ public class Graph {
         g.addEdge(1,3); 
         g.addEdge(3,4); 
         g.addEdge(1,4);
-        System.out.println(findMin(g, 0, 2));
+
+        System.out.println("Before:");
+        g.printGraph();
+
+        removeEdge(g, 1, 3);
+        System.out.println("After:");
+        g.printGraph();
     }
 
 
@@ -428,5 +434,10 @@ public class Graph {
             }    
         }   
         return -1;
+    }
+
+    //Remove Edge from a directed graph
+    public static void removeEdge(Graph g, int source, int destination){
+        g.adjacencyList[source].deleteByValue(destination);
     }
 }
