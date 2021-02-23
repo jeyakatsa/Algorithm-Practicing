@@ -8,7 +8,6 @@ public class BinarySearchTree {
 		bsT.add(1);
 		bsT.add(15);
         System.out.println(">> Tree <<");
-		bsT.printTree(bsT.getRoot());
 
         // Node temp = bsT.search(5);
         // if(temp != null) {
@@ -24,17 +23,20 @@ public class BinarySearchTree {
         // else
         //     System.out.println("\n Not found in Tree!"); 
 
-        System.out.print("\nDeleting Node 6: ");
-        bsT.delete(6, bsT.getRoot());
-        bsT.printTree(bsT.getRoot());
+        ////Tree Traversal
+        // System.out.print("\nDeleting Node 6: ");
+        // bsT.delete(6, bsT.getRoot());
+        // bsT.printTree(bsT.getRoot());
 
-        System.out.print("\nDeleting Node 15: ");
-        bsT.delete(15, bsT.getRoot());
-        bsT.printTree(bsT.getRoot());
+        // System.out.print("\nDeleting Node 15: ");
+        // bsT.delete(15, bsT.getRoot());
+        // bsT.printTree(bsT.getRoot());
 
-        System.out.print("\nDeleting Node 1: ");
-        bsT.delete(1, bsT.getRoot());
-        bsT.printTree(bsT.getRoot());
+        // System.out.print("\nDeleting Node 1: ");
+        // bsT.delete(1, bsT.getRoot());
+        // bsT.printTree(bsT.getRoot());
+
+        bsT.preTraverse(bsT.getRoot());
     }
 
     public class Node {
@@ -278,6 +280,15 @@ public class BinarySearchTree {
         System.out.print(current.getData() + ",");
         printTree(current.getLeftChild());
         printTree(current.getRightChild());
+    }
+
+    //Pre-order traversal
+    public void preTraverse(Node root) {
+        if (root == null) return;
+
+        System.out.print(root.getData() + ",");
+    preTraverse(root.getLeftChild());
+    preTraverse(root.getRightChild());    
     }
 
 }
