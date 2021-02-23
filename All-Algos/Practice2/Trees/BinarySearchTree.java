@@ -2,30 +2,39 @@ public class BinarySearchTree {
     public static void main (String[] args){
         BinarySearchTree bsT = new BinarySearchTree();
 		bsT.add(6);
-		bsT.add(4);
-		bsT.add(9);
-		bsT.add(5);
-		bsT.add(2);
+		bsT.add(7);
 		bsT.add(8);
 		bsT.add(12);
-		bsT.add(10);
-		bsT.add(14);
+		bsT.add(1);
+		bsT.add(15);
         System.out.println(">> Tree <<");
 		bsT.printTree(bsT.getRoot());
 
-        Node temp = bsT.search(5);
-        if(temp != null) {
-            System.out.println("\n" + temp.getData() + " found in Tree!");
-        }
-        else
-            System.out.println("\n Not found in Tree!");
+        // Node temp = bsT.search(5);
+        // if(temp != null) {
+        //     System.out.println("\n" + temp.getData() + " found in Tree!");
+        // }
+        // else
+        //     System.out.println("\n Not found in Tree!");
 
-        temp = bsT.search(51);
-        if (temp != null) {
-            System.out.println("\n" + temp.getData() + " found in Tree!");
-        }   
-        else
-            System.out.println("\n Not found in Tree!"); 
+        // temp = bsT.search(51);
+        // if (temp != null) {
+        //     System.out.println("\n" + temp.getData() + " found in Tree!");
+        // }   
+        // else
+        //     System.out.println("\n Not found in Tree!"); 
+
+        System.out.print("\nDeleting Node 6: ");
+        bsT.delete(6, bsT.getRoot());
+        bsT.printTree(bsT.getRoot());
+
+        System.out.print("\nDeleting Node 15: ");
+        bsT.delete(15, bsT.getRoot());
+        bsT.printTree(bsT.getRoot());
+
+        System.out.print("\nDeleting Node 1: ");
+        bsT.delete(1, bsT.getRoot());
+        bsT.printTree(bsT.getRoot());
     }
 
     public class Node {
@@ -60,7 +69,7 @@ public class BinarySearchTree {
             this.leftChild = left;
         }
 
-        public void setRightCHild(Node right) {
+        public void setRightChild(Node right) {
             this.rightChild = right;
         }
 
@@ -115,7 +124,7 @@ public class BinarySearchTree {
             );
         }
         else if (value > currentNode.getData()) {
-            currentNode.setRightCHild(
+            currentNode.setRightChild(
                 recursive_insert(currentNode.getRightChild(), value)
             );
         }
@@ -126,10 +135,48 @@ public class BinarySearchTree {
         return currentNode;
     }
 
-    //function to call recursive insert
     public boolean add(int value){
-        root = recursive_insert(this.root, value);
-        return true;
+        // //function to call recursive insert
+        // root = recursive_insert(this.root, value);
+        // return true;
+
+        //If tree is empty then insert Root with the given value inside Tree
+        if(isEmpty()) {
+            root = new Node(value);
+            return true;
+        }
+
+        //Starting from root
+        Node currentNode = root;
+
+        //Traversing the tree until valid position to insert the value
+        while(currentNode != null) {
+
+            Node leftChild = currentNode.getLeftChild();
+            Node rightChild = currentNode.getRightChild();
+
+            //If the value to insert is less than root value
+            //then move to left subtree else move to right subtree of root
+            //and before moving check if subtree is null, if it is then insert value
+
+            if(currentNode.getData() > value) {
+                if(leftChild == null) {
+                    leftChild = new Node(value);
+                    currentNode.setLeftChild(leftChild);
+                    return true;
+                }
+                currentNode = leftChild;
+            }
+            else {
+                if (rightChild == null) {
+                    rightChild = new Node(value);
+                    currentNode.setRightChild(rightChild);
+                    return true;
+                }
+                currentNode = rightChild;
+            }
+        }
+        return false;
     }
 
     boolean delete (int value, Node currentNode) {
@@ -161,7 +208,62 @@ public class BinarySearchTree {
                 parent.setLeftChild(null);
                 return true;
             }
+            else {
+                parent.setLeftChild(null);
+                return true;
+            }
         }
+        else if (currentNode.getRightChild() == null) {
+
+            if(root.getData() == currentNode.getData()) {
+                setRoot(currentNode.getLeftChild());
+                return true;
+            }
+            else if (currentNode.getData() < currentNode.getData()) {
+                parent.setLeftChild(currentNode.getLeftChild());
+                return true;
+            }
+            else {
+                parent.setRightChild(currentNode.getLeftChild());
+                return true;
+            }
+        }
+        else if (currentNode.getLeftChild() == null) {
+
+            if(root.getData() == currentNode.getData()){
+                setRoot(currentNode.getRightChild());
+                return true;
+            }
+            else if (currentNode.getData() < parent.getData()) {
+                parent.setLeftChild(currentNode.getRightChild());
+                return true;
+            }
+            else {
+                parent.setRightChild(currentNode.getRightChild());
+                return true;
+            }
+        }
+        else {
+            //Find Least Value Node in right-subtree of current Node
+            Node leastNode = findLeastNode(currentNode.getRightChild());
+            //Set currentNode's Data to the least value in its right-subtree
+            int temp = leastNode.getData();
+            delete(temp, root);
+            currentNode.setData(temp);
+            //Delete the leafNode which had the least value
+            return true;
+        }
+    }
+
+    //Helper function to find least value node in right-subtree of currentNode
+    private Node findLeastNode(Node currentNode) {
+
+        Node temp = currentNode;
+
+        while (temp.getLeftChild() != null) {
+            temp = temp.getLeftChild();
+        }
+        return temp;
     }
 
     //function to check if tree is empty
