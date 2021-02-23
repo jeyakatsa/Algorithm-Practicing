@@ -1,6 +1,6 @@
-public class BinaryTree {
+public class BinarySearchTree {
     public static void main (String[] args){
-        BinaryTree bsT = new BinaryTree();
+        BinarySearchTree bsT = new BinarySearchTree();
 		bsT.add(6);
 		bsT.add(4);
 		bsT.add(9);
@@ -130,6 +130,38 @@ public class BinaryTree {
     public boolean add(int value){
         root = recursive_insert(this.root, value);
         return true;
+    }
+
+    boolean delete (int value, Node currentNode) {
+        //base case
+        if (root == null) {
+            return false;
+        }
+
+        Node parent = null; //To Store parent of currentNode
+        while(currentNode != null && (currentNode.getData() != value)) {
+            parent = currentNode;
+            if(currentNode.getData() > value)
+                currentNode = currentNode.getLeftChild();
+            else
+                currentNode = currentNode.getRightChild();  
+        }
+
+        if(currentNode == null) {
+            return false;
+        }
+        else if(currentNode.getLeftChild() == null && currentNode.getRightChild() == null) {
+            //1. Node is Leaf Node
+            //if that leaf node is the root (a tree with just root)
+            if(root.getData() == currentNode.getData()) {
+                setRoot(null);
+                return true;
+            }
+            else if (currentNode.getData() < parent.getData()) {
+                parent.setLeftChild(null);
+                return true;
+            }
+        }
     }
 
     //function to check if tree is empty
