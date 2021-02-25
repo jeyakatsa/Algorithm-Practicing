@@ -36,7 +36,7 @@ public class BinarySearchTree {
         // bsT.delete(1, bsT.getRoot());
         // bsT.printTree(bsT.getRoot());
 
-        bsT.preTraverse(bsT.getRoot());
+        bsT.postTraverse(bsT.getRoot());
     }
 
     public class Node {
@@ -300,6 +300,16 @@ public class BinarySearchTree {
         inTraverse(root.getLeftChild());
         System.out.print(root.getData() + ",");
         inTraverse(root.getRightChild());
+    }
+
+    //Post-order Traversal
+    public void postTraverse(Node root) {
+        if(root == null)
+        return;
+
+        postTraverse(root.getLeftChild());
+        postTraverse(root.getRightChild());
+        System.out.print(root.getData() + ",");
     }
 
 }
