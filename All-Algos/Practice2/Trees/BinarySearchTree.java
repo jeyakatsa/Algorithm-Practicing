@@ -284,11 +284,22 @@ public class BinarySearchTree {
 
     //Pre-order traversal
     public void preTraverse(Node root) {
-        if (root == null) return;
+        if (root == null) 
+        return;
 
         System.out.print(root.getData() + ",");
-    preTraverse(root.getLeftChild());
-    preTraverse(root.getRightChild());    
+        preTraverse(root.getLeftChild());
+        preTraverse(root.getRightChild());    
+    }
+
+    //In-order Traversal
+    public void inTraverse(Node root) {
+        if(root == null)
+        return;
+
+        inTraverse(root.getLeftChild());
+        System.out.print(root.getData() + ",");
+        inTraverse(root.getRightChild());
     }
 
 }
