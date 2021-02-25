@@ -36,13 +36,14 @@ public class BinarySearchTree {
         // bsT.delete(1, bsT.getRoot());
         // bsT.printTree(bsT.getRoot());
 
-        bsT.postTraverse(bsT.getRoot());
+        bsT.findMin(bsT.getRoot());
     }
 
     public class Node {
         private int data;
         private Node leftChild;
         private Node rightChild;
+        boolean isRed;
     
 
         Node(int value) {
@@ -310,6 +311,23 @@ public class BinarySearchTree {
         postTraverse(root.getLeftChild());
         postTraverse(root.getRightChild());
         System.out.print(root.getData() + ",");
+    }
+
+    public static int findMin(Node root) {
+        //Traverse Breadth First Search
+        //Compare all values
+        //return min
+        if (root == null) {
+            return -1;
+        }
+
+        while(root.leftChild != null) {
+
+            root = root.leftChild;
+        }
+
+        return root.data;
+
     }
 
 }
