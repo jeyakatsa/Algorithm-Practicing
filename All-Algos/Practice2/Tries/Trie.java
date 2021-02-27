@@ -16,10 +16,35 @@ public class Trie {
             t.insert(keys[i]);
         }
 
-        //Search for different keys
+        // Search for different keys and delete if found
         if(t.search("the") == true)
-            System.out.println("the -- " + output[1]);
-        else System.out.println("the -- " + output[0]);    
+        {
+        System.out.println("the --- " + output[1]);
+        t.delete("the");
+        System.out.println("Deleted key \"the\"");
+        }
+        else System.out.println("the --- " + output[0]);
+            
+        if(t.search("these") == true)
+        {
+        System.out.println("these --- " + output[1]);
+        t.delete("these");
+        System.out.println("Deleted key \"these\"");
+        }
+        else System.out.println("these --- " + output[0]);
+            
+        if(t.search("abc") == true)
+        {
+        System.out.println("abc --- " + output[1]);
+        t.delete("abc");
+        System.out.println("Deleted key \"abc\""); 
+        }
+        else System.out.println("abc --- " + output[0]);
+            
+        // check if the string has deleted correctly or still present
+        if(t.search("abc") == true)
+        System.out.println("abc --- " + output[1]);
+        else System.out.println("abc --- " + output[0]);  
 
     }
 
@@ -105,6 +130,14 @@ public class Trie {
             return true;
 
         return false;    
+    }
+
+    public void delete (String key) {
+        if ((root == null) || (key == null)) {
+            System.out.println("Null key or Empty trie error");
+            return;
+        }
+        deleteHelper(key, root, key.length(), 0);
     }
 
 }
