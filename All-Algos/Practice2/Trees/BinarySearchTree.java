@@ -35,11 +35,7 @@ public class BinarySearchTree {
         // bsT.delete(1, bsT.getRoot());
         // bsT.printTree(bsT.getRoot());
 
-        // int key = 12;
-        // System.out.print(key + " --> ");
-        // System.out.print(findAncestors(bsT.getRoot(), key));
-
-        System.out.println(findHeight(bsT.getRoot()));
+        System.out.print(findKNodes(bsT.getRoot(), 1));
     }
 
     public class Node {
@@ -387,6 +383,33 @@ public class BinarySearchTree {
             //find Height of left subtree right subtree
             //return greater height value of left or right subtree (plus 1)    
         }        
+    }
+
+    //Find Nodes from distance of root
+
+    public static String findKNodes(Node root, int k) {
+        StringBuilder result = new StringBuilder();
+        result = findK(root, k, result);
+
+        return result.toString();
+    }
+
+    //Helper recursive function to traverse tree and append all the nodes
+    //at k distance into result StringBuilder
+    public static StringBuilder findK(Node root, int k, StringBuilder result) {
+        if (root == null)
+            return null;
+
+        if (k == 0) {
+            result.append(root.getData() + ",");
+        }
+        else {
+            //Decrement k at each step till you reach at the leaf node
+            //or when k == 0 then append the Node's data into result string
+            findK(root.getLeftChild(), k - 1, result);
+            findK(root.getRightChild(), k - 1, result);
+        }
+        return result;
     }
 
 }
