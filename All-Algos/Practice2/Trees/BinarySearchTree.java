@@ -35,7 +35,11 @@ public class BinarySearchTree {
         // bsT.delete(1, bsT.getRoot());
         // bsT.printTree(bsT.getRoot());
 
-        System.out.println(findKthMax(bsT.getRoot(),3));
+        int key = 12;
+        System.out.print(key + " --> ");
+        System.out.print(findAncestors(bsT.getRoot(), key));
+
+        System.out.println();
     }
 
     public class Node {
@@ -353,6 +357,24 @@ public class BinarySearchTree {
             inOrderTraversal(root.getRightChild(), result);
 
         return result;    
+    }
+
+    public static String findAncestors(Node root, int k) {
+
+        String result = "";
+        Node tempNode = root;
+        while(tempNode != null && tempNode.getData() != k) {
+            result = result + tempNode.getData() + ",";
+            if(k <= tempNode.getData()) {
+                tempNode = tempNode.getLeftChild();
+            } else {
+                tempNode = tempNode.getRightChild();
+            }
+        }
+        if (tempNode == null) {
+            return "";
+        }
+        return "";
     }
 
 }
