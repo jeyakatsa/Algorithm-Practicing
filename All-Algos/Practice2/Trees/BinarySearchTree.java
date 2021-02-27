@@ -35,11 +35,11 @@ public class BinarySearchTree {
         // bsT.delete(1, bsT.getRoot());
         // bsT.printTree(bsT.getRoot());
 
-        int key = 12;
-        System.out.print(key + " --> ");
-        System.out.print(findAncestors(bsT.getRoot(), key));
+        // int key = 12;
+        // System.out.print(key + " --> ");
+        // System.out.print(findAncestors(bsT.getRoot(), key));
 
-        System.out.println();
+        System.out.println(findHeight(bsT.getRoot()));
     }
 
     public class Node {
@@ -375,6 +375,18 @@ public class BinarySearchTree {
             return "";
         }
         return "";
+    }
+
+    public static int findHeight(Node root) {
+        if (root == null) 
+            return -1;
+        else {
+            return 1 + Math.max(
+                findHeight(root.getLeftChild()),
+                findHeight(root.getRightChild()));
+            //find Height of left subtree right subtree
+            //return greater height value of left or right subtree (plus 1)    
+        }        
     }
 
 }
