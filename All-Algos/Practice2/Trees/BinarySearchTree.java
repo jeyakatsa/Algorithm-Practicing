@@ -7,7 +7,6 @@ public class BinarySearchTree {
 		bsT.add(12);
 		bsT.add(1);
 		bsT.add(15);
-        System.out.println(">> Tree <<");
 
         // Node temp = bsT.search(5);
         // if(temp != null) {
@@ -36,7 +35,7 @@ public class BinarySearchTree {
         // bsT.delete(1, bsT.getRoot());
         // bsT.printTree(bsT.getRoot());
 
-        System.out.println(findMin(bsT.getRoot()));
+        System.out.println(findKthMax(bsT.getRoot(),3));
     }
 
     public class Node {
@@ -322,12 +321,38 @@ public class BinarySearchTree {
         }
 
         while(root.getLeftChild() != null) {
-
             root = root.getLeftChild();
         }
 
         return root.getData();
 
+    }
+
+    public static int findKthMax(Node root, int k) {
+        //Perform In-Order Traversal to get sorted array. (ascending order)
+        //Return value at index [length - k]
+        StringBuilder result = new StringBuilder(); // StringBuilder is mutable
+        result = inOrderTraversal(root, result);
+
+        String[] array = result.toString().split(","); // Spliting String into array of strings
+        if((array.length - k) >= 0) 
+            return Integer.parseInt(array[array.length -k]);
+
+        return -1;
+    }
+
+    //Helper recursive function to traverse tree using inorder traversal
+    //and return result in StringBuilder
+    public static StringBuilder inOrderTraversal(Node root, StringBuilder result) {
+        if(root.getLeftChild() != null)
+            inOrderTraversal(root.getLeftChild(), result);
+
+        result.append(root.getData() + ",");
+        
+        if(root.getRightChild() != null) 
+            inOrderTraversal(root.getRightChild(), result);
+
+        return result;    
     }
 
 }
