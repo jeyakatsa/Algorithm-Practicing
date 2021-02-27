@@ -49,7 +49,7 @@ public class Trie {
 
         // System.out.println(totalWords(t.getRoot()));
 
-        ArrayList<String> list = findWords(t.getRoot());
+        ArrayList<String> list = sortArray(keys);
         for (i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
@@ -260,6 +260,21 @@ public class Trie {
 
         return result;
     }
+
+    public static ArrayList<String> sortArray(String[] arr) {
+        ArrayList<String> result = new ArrayList<String>();
+
+        //Creating Trie and Inserting words from array
+        Trie trie = new Trie();
+        for (int x = 0; x < arr.length; x++)
+            trie.insert(arr[x]);
+
+        char[] char_arr = new char[20];
+        getWords(trie.getRoot(), result,0,char_arr);
+        return result;
+    }
+
+
 
 
 }
