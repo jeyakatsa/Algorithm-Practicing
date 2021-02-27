@@ -2,11 +2,14 @@ import java.util.Arrays;
 
 public class Heap {
     public static void main (String[] args){
+        Heap heap = new Heap();
         int[] heapArray = {1, 4, 7, 12, 15, 14, 9, 2, 3, 16 };
 
-        System.out.println("Before Heapify: " + Arrays.toString(heapArray));
-        new Heap().buildMinHeap(heapArray, heapArray.length);
-        System.out.println("After Heapify: " + Arrays.toString(heapArray));
+        new Heap().buildMaxHeap(heapArray, heapArray.length);
+        System.out.println("Max Heap: " + Arrays.toString(heapArray));
+        // new Heap().buildMinHeap(heapArray, heapArray.length);
+        heap.convertMax(heapArray);
+        System.out.println("Min Heap: " + Arrays.toString(heapArray));
 
     }
 
@@ -49,7 +52,12 @@ public class Heap {
             if (left < heapSize && heapArray[left] < heapArray[index]) {
                 smallest = left;
             }
+
             if (right < heapSize && heapArray[right] < heapArray[smallest]) {
+                smallest = right;
+            }
+
+            if (smallest != index) { // swap parent with smallest child
                 int temp = heapArray[index];
                 heapArray[index] = heapArray[smallest];
                 heapArray[smallest] = temp;
@@ -65,6 +73,14 @@ public class Heap {
         for(int i = (heapSize - 1)/ 2; i >= 0; i--) {
             minHeapify(heapArray, i, heapSize);
         }
+    }
+
+    public void convertMax(int[] maxHeap) {
+        //Consider maxHeap just an ordinary unsorted array 
+		//Build minHeap of the given array. (We already covered that in previous lesson)
+		//Return converted array in String format
+        buildMinHeap(maxHeap, maxHeap.length);
+
     }
 
 }
