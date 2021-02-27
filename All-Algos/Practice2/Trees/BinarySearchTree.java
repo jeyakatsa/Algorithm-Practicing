@@ -36,7 +36,7 @@ public class BinarySearchTree {
         // bsT.delete(1, bsT.getRoot());
         // bsT.printTree(bsT.getRoot());
 
-        bsT.findMin(bsT.getRoot());
+        System.out.println(findMin(bsT.getRoot()));
     }
 
     public class Node {
@@ -314,19 +314,19 @@ public class BinarySearchTree {
     }
 
     public static int findMin(Node root) {
-        //Traverse Breadth First Search
-        //Compare all values
-        //return min
+        // In Binary Search Tree, all values in current node's left subtree are smaller 
+        // than the current node's value.
+        // So keep traversing (in order) towards left till you reach leaf node, and then return leaf node's value
         if (root == null) {
             return -1;
         }
 
-        while(root.leftChild != null) {
+        while(root.getLeftChild() != null) {
 
-            root = root.leftChild;
+            root = root.getLeftChild();
         }
 
-        return root.data;
+        return root.getData();
 
     }
 
