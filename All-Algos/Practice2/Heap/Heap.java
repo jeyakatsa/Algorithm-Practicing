@@ -5,7 +5,7 @@ public class Heap {
         int[] heapArray = {1, 4, 7, 12, 15, 14, 9, 2, 3, 16 };
 
         System.out.println("Before Heapify: " + Arrays.toString(heapArray));
-        new Heap().buildMaxHeap(heapArray, heapArray.length);
+        new Heap().buildMinHeap(heapArray, heapArray.length);
         System.out.println("After Heapify: " + Arrays.toString(heapArray));
 
     }
@@ -37,6 +37,33 @@ public class Heap {
         //swap largest child to parent node
         for(int i = (heapSize -1)/ 2; i >= 0; i--) {
             maxHeap(heapArray, i, heapSize);
+        }
+    }
+
+    private void minHeapify(int[] heapArray, int index, int heapSize) {
+        int smallest = index;
+
+        while(smallest < heapSize / 2) { //check parent nodes only
+            int left = (2 * index) + 1; //left child
+            int right = (2 * index) + 2; //right child
+            if (left < heapSize && heapArray[left] < heapArray[index]) {
+                smallest = left;
+            }
+            if (right < heapSize && heapArray[right] < heapArray[smallest]) {
+                int temp = heapArray[index];
+                heapArray[index] = heapArray[smallest];
+                heapArray[smallest] = temp;
+                index = smallest;
+            } else {
+                break;
+            }
+        }
+    }
+
+    public void buildMinHeap(int[] heapArray, int heapSize) {
+        //Swap smallest child to parent node
+        for(int i = (heapSize - 1)/ 2; i >= 0; i--) {
+            minHeapify(heapArray, i, heapSize);
         }
     }
 
