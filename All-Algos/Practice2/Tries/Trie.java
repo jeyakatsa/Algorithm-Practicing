@@ -8,7 +8,7 @@ public class Trie {
         String output[] = {"Not present in trie", "Present in trie"}; 
         Trie t = new Trie();
 
-        System.out.println("Keys to insert: " + Arrays.toString(keys) + "\n");
+        System.out.println("Keys: " + Arrays.toString(keys) + "\n");
 
         //Construct trie
         int i;
@@ -16,35 +16,37 @@ public class Trie {
             t.insert(keys[i]);
         }
 
-        // Search for different keys and delete if found
-        if(t.search("the") == true)
-        {
-        System.out.println("the --- " + output[1]);
-        t.delete("the");
-        System.out.println("Deleted key \"the\"");
-        }
-        else System.out.println("the --- " + output[0]);
+        // // Search for different keys and delete if found
+        // if(t.search("the") == true)
+        // {
+        // System.out.println("the --- " + output[1]);
+        // t.delete("the");
+        // System.out.println("Deleted key \"the\"");
+        // }
+        // else System.out.println("the --- " + output[0]);
             
-        if(t.search("these") == true)
-        {
-        System.out.println("these --- " + output[1]);
-        t.delete("these");
-        System.out.println("Deleted key \"these\"");
-        }
-        else System.out.println("these --- " + output[0]);
+        // if(t.search("these") == true)
+        // {
+        // System.out.println("these --- " + output[1]);
+        // t.delete("these");
+        // System.out.println("Deleted key \"these\"");
+        // }
+        // else System.out.println("these --- " + output[0]);
             
-        if(t.search("abc") == true)
-        {
-        System.out.println("abc --- " + output[1]);
-        t.delete("abc");
-        System.out.println("Deleted key \"abc\""); 
-        }
-        else System.out.println("abc --- " + output[0]);
+        // if(t.search("abc") == true)
+        // {
+        // System.out.println("abc --- " + output[1]);
+        // t.delete("abc");
+        // System.out.println("Deleted key \"abc\""); 
+        // }
+        // else System.out.println("abc --- " + output[0]);
             
-        // check if the string has deleted correctly or still present
-        if(t.search("abc") == true)
-        System.out.println("abc --- " + output[1]);
-        else System.out.println("abc --- " + output[0]);  
+        // // check if the string has deleted correctly or still present
+        // if(t.search("abc") == true)
+        // System.out.println("abc --- " + output[1]);
+        // else System.out.println("abc --- " + output[0]);  
+
+        System.out.println(totalWords(t.getRoot()));
 
     }
 
@@ -80,6 +82,11 @@ public class Trie {
     //Function to get the index of a character 't'
     public int getIndex(char t) {
         return t - 'a';
+    }
+
+    //function to get root
+    public TrieNode getRoot(){
+        return root;
     }
 
     //Function to insert a key, value pair in the Trie
@@ -143,7 +150,7 @@ public class Trie {
 
     //Recursive function to delete given key
     private boolean deleteHelper(String key, TrieNode currentNode, int length, int level) {
-        
+
         boolean deletedSelf = false;
 
         if(currentNode == null) {
@@ -205,5 +212,20 @@ public class Trie {
         }
         deleteHelper(key, root, key.length(), 0);
     }
+
+
+    public static int totalWords(TrieNode root) {
+        int result = 0;
+
+        //Leaf denotes end of a word
+        if(root.isEndWord)
+            result++;
+
+        for (int i = 0; i < 26; i++)
+            if(root.children[i] != null)
+                result += totalWords(root.children[i]);    
+        return result;
+    }
+
 
 }
