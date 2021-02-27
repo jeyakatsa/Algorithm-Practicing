@@ -1,6 +1,21 @@
+import java.util.Arrays;
+
 public class Trie {
     public static void main (String[] args) {
+        //Input keys (use only a through z and lower case)
+        String keys[] = {"the", "a", "there", "answer", "any", "by",
+         "bye", "their","abc"};
+        String output[] = {"Not present in trie", "Present in trie"}; 
         Trie t = new Trie();
+
+        System.out.println("Keys to insert: " + Arrays.toString(keys) + "\n");
+
+        //Construct trie
+        int i;
+        for(i = 0; i < keys.length; i++) {
+            t.insert(keys[i]);
+            System.out.println("\"" + keys[i] + "\"" + "Inserted.");
+        }
 
     }
 
@@ -39,7 +54,7 @@ public class Trie {
     }
 
     //Function to insert a key, value pair in the Trie
-    public void insert(String key, int value) {
+    public void insert(String key) {
         if(key == null) {
             System.out.println("Null Key can not be Inserted!");
             return;
@@ -49,7 +64,7 @@ public class Trie {
         int index = 0; //to store character index
 
         //Iterate the Trie with given character index,
-        //If nyll, create TrieNode go down level
+        //If null, create TrieNode go down level
         for (int level = 0; level < key.length(); level++) {
             index = getIndex(key.charAt(level));
             if(currentNode.children[index] == null) {
