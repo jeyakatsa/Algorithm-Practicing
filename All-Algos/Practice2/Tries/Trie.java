@@ -14,8 +14,12 @@ public class Trie {
         int i;
         for(i = 0; i < keys.length; i++) {
             t.insert(keys[i]);
-            System.out.println("\"" + keys[i] + "\"" + "Inserted.");
         }
+
+        //Search for different keys
+        if(t.search("the") == true)
+            System.out.println("the -- " + output[1]);
+        else System.out.println("the -- " + output[0]);    
 
     }
 
@@ -77,14 +81,30 @@ public class Trie {
 
     }
 
-    //function to search given key in Trie
+    //Function to search given key in Trie
     public boolean search(String key) {
-        return false;
-    }
+        if(key == null)
+            return false; //Null key
 
-    //function to delete
-    public boolean delete(String key) {
-        return false;
+        key = key.toLowerCase();
+        TrieNode currentNode = this.root;
+        int index = 0;
+        
+        //Iterate the Trie with given character index,
+        //If it is null at any point then we stop and return false
+        //We will return true only if we reach leadNode and have traversed the
+        //Trie based on the length of the key
+
+        for(int level = 0; level < key.length(); level++) {
+            index = getIndex(key.charAt(level));
+            if(currentNode.children[index] == null)
+                return false;
+            currentNode = currentNode.children[index];    
+        }
+        if (currentNode.isEndWord)
+            return true;
+
+        return false;    
     }
 
 }
