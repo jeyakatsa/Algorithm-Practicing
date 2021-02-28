@@ -11,7 +11,7 @@ public class Heap {
         // heap.convertMax(heapArray);
         // System.out.println("Min Heap: " + Arrays.toString(heapArray));
 
-        int[] output = findKSmallest(heapArray, 2);
+        int[] output = findKLargest(heapArray, 2);
         for(int i = 0; i < output.length; i++)
             System.out.println(output[i]);
 
@@ -107,6 +107,21 @@ public class Heap {
         int min = heapArray[0];
         heapArray[0] = heapArray[heapSize-2];
         return min;
+    }
+
+    public static int[] findKLargest(int[] arr, int k) {
+        int arraySize = arr.length;
+        if(k <= arraySize) {
+            int[] result = new int[k]; // build the result array of size = k
+            for(int i = 0; i < k; i++) {
+                buildMaxHeap(arr, arraySize);
+                result[i] = arr[0];
+                arr[0] = arr[--arraySize];
+            }
+            return result;
+        }
+        System.out.println("Valu of k = " + k + "Out of Bounds");
+        return arr;
     }
 
 
