@@ -170,7 +170,13 @@ public class HashTable {
             if(!hset.contains(arr2[i]))
                 return false;
         }
-        return false;
+        return true;
+    }
+
+    public static boolean isDisjoint(int[] arr1, int[] arr2) {
+        HashSet<Integer> hset = new HashSet<>();
+
+        return true;
     }
 
 }
