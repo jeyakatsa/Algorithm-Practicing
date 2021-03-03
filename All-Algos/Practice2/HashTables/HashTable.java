@@ -7,8 +7,8 @@ public class HashTable {
         int[] arr2 = {7, 1, -2};
         int[] arr3 = {10, 12};
     
-        System.out.println(isSubset(arr1, arr2));
-        System.out.println(isSubset(arr1, arr3));
+        System.out.println(isDisjoint(arr1, arr2));
+        System.out.println(isDisjoint(arr1, arr3));
 
     }
 
@@ -174,8 +174,20 @@ public class HashTable {
     }
 
     public static boolean isDisjoint(int[] arr1, int[] arr2) {
+
+        //Create HashSet and store all values of arr1
         HashSet<Integer> hset = new HashSet<>();
 
+        for(int i = 0; i < arr1.length; i++) {
+            if(!hset.contains(arr1[i]))
+                hset.add(arr1[i]);
+        }
+
+        //Traverse arr2 and check if arr1 contains any arr2 element
+        for (int i = 0; i < arr2.length; i++) {
+            if(hset.contains(arr2[i]))
+                return false;
+        } 
         return true;
     }
 
