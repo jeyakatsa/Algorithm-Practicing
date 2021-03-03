@@ -1,12 +1,21 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 public class HashTable {
     public static void main (String[] args){
-        int[][] arr = {{1, 2}, {3, 4}, {5, 9}, {4, 3}, {9, 5}};
-        String symmetric = findSymmetric(arr);
-        System.out.println(symmetric);
+        // int[][] arr = {{1, 2}, {3, 4}, {5, 9}, {4, 3}, {9, 5}};
+        // String symmetric = findSymmetric(arr);
+        // System.out.println(symmetric);
+
+        HashMap<String,String> hMap = new HashMap<String, String>();  
+
+        hMap.put("NewYork","Chicago");
+        hMap.put("Boston","Texas");
+        hMap.put("Missouri","NewYork");
+        hMap.put("Texas","Missouri");
+    
+        String actual_output = HashTable.tracePath(hMap);
+    
+        System.out.println(actual_output);
 
     }
 
@@ -212,6 +221,50 @@ public class HashTable {
                 hashMap.put(first, second);
         }
         return result;
+    }
+
+    public static String tracePath(Map<String, String> map) {
+        String result = "";
+
+        //Create a reverse Map of given map i.e if given map has (N,C) then reverse map will have (C,N) as key value pair
+        //Traverse original map and see if corresponding key exist in reverse Map
+        //If it doesn't exist then we found our starting point.
+        //After starting point is found, simply trace the complete path from original map.
+
+        HashMap<String, String> reverseMap = new HashMap<String, String>();
+
+        //To Fill reverse map, iterate thrugh given map
+        for (Map.Entry <String, String> entry : map.entrySet())
+            reverseMap.put(entry.getValue(), entry.getKey());
+
+        //Find the starting point of itinerary
+        String from = "";
+        
+        //Check if graph is disconnected
+        int count = 0;
+
+        for (Map.Entry <String, String> entry: map.entrySet()) {
+            if (!reverseMap.containsKey(entry.getKey())){
+                count++;
+                from = entry.getKey();
+                //break;
+            }
+        }
+
+        if(count > 1) {
+            return "null"; //Disconnected graph
+        }
+
+        //Trace complete path
+        String to = map.get(from);
+
+        while (to != null) {
+            result += from + "->" + to + ", ";
+            from = to;
+            to = map.get(to);
+        }
+        return result;
+
     }
 
 }
