@@ -6,16 +6,23 @@ public class HashTable {
         // String symmetric = findSymmetric(arr);
         // System.out.println(symmetric);
 
-        HashMap<String,String> hMap = new HashMap<String, String>();  
 
-        hMap.put("NewYork","Chicago");
-        hMap.put("Boston","Texas");
-        hMap.put("Missouri","NewYork");
-        hMap.put("Texas","Missouri");
+
+
+        // HashMap<String,String> hMap = new HashMap<String, String>();  
+
+        // hMap.put("NewYork","Chicago");
+        // hMap.put("Boston","Texas");
+        // hMap.put("Missouri","NewYork");
+        // hMap.put("Texas","Missouri");
     
-        String actual_output = HashTable.tracePath(hMap);
+        // String actual_output = HashTable.tracePath(hMap);
     
-        System.out.println(actual_output);
+        // System.out.println(actual_output);
+
+        int[] arr = {3, 4, 7, 1, 12, 9};
+        System.out.println(findPair(arr));
+
 
     }
 
@@ -265,6 +272,44 @@ public class HashTable {
         }
         return result;
 
+    }
+
+    public static String findPair(int[] arr) {
+        //Got the Brute Force solution down....
+        //loop through arr with i integer starting from beginning to end
+        //create result for arr with i result implementing it
+        //loop through arr with j integer+ starting from  beginning tp end
+        //create result for arr with j result implementing it
+        //if result1 = result 2, return them both,
+        //else return null
+
+        String result = "";
+        // Create HashMap with Key being sum and value being a pair i.e key = 3 , value = {1,2}
+        // Traverse all possible pairs in given arr and store sums in map
+        // If sum already exist then print out the two pairs.
+        HashMap <Integer, int[]> hMap = new HashMap <>();
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; ++j) {
+                int sum = arr[i] + arr[j]; //calculate sum
+
+                if(!hMap.containsKey(sum)) {
+                    //If sum is not present in Map then insert it along with pair
+                    hMap.put(sum, new int[] {arr[i],arr[j]});
+                }
+                else {
+                    //Sum already present in Map
+                    int[] prev_pair = hMap.get(sum);
+
+                    //Since array elements are distinct, we don't
+                    //need to check if any element is common among pair
+                    result += "{" + prev_pair[0] + "," + prev_pair[1] + "}{" + arr[i] + "," + arr[j] + "}";
+
+                    return result;
+                }
+            }
+        }
+        return result;
     }
 
 }
