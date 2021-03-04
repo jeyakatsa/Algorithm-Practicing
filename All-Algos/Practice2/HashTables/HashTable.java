@@ -21,7 +21,7 @@ public class HashTable {
         // System.out.println(actual_output);
 
         int[] arr = {3, 4, 7, 1, 12, 9};
-        System.out.println(findPair(arr));
+        System.out.println(findSubZero(arr));
 
 
     }
@@ -311,5 +311,32 @@ public class HashTable {
         }
         return result;
     }
+
+    public static boolean findSubZero(int[] arr) {
+
+        HashMap<Integer, Integer> hMap = new HashMap<Integer, Integer>();
+        //Brute force solution correct.
+        //traverse arr i 
+        //create temp arr and add i to temp arr,
+        //if values in tempArr = 0,
+        //return true, else return false
+        //O(n)
+
+        int sum = 0;
+
+        for (var i = 0; i < arr.length; i++) {
+            sum += arr[i];
+
+            if(arr[i] == 0 || sum == 0 || hMap.get(sum) != null)
+                return true;
+
+            hMap.put(sum, i);    
+        }
+
+        return false;
+
+    }
+
+
 
 }
