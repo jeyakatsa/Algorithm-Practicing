@@ -52,22 +52,40 @@ public class HashTable {
 
 
 
-        SinglyLinkedList<Integer> list1 = new SinglyLinkedList<Integer>();
-        for(int i=7; i>3; i--){
-            list1.insertAtHead(i);
+        // SinglyLinkedList<Integer> list1 = new SinglyLinkedList<Integer>();
+        // for(int i=7; i>3; i--){
+        //     list1.insertAtHead(i);
+        // }
+        // System.out.print("1st ");
+        // list1.printList();
+        // SinglyLinkedList<Integer> list2 = new SinglyLinkedList<Integer>();
+        // for(int i=0; i<5; i++){
+        //     list2.insertAtHead(i);
+        // }
+        // System.out.print("2nd ");
+        // list2.printList();
+        // System.out.print("After Intersection ");
+        // intersectionWithHashing(list1, list2).printList();
+        // System.out.print("After Union ");
+        // unionWithHashing(list1, list2).printList();
+
+        int n = 0;
+        int[] arr1 = {};
+        if(arr1.length > 0) {
+            int[] arr2 = findSum(arr1, n);
+            int num1 = arr2[0];
+            int num2 = arr2[1];
+
+            if ((num1 + num2) != n)
+                System.out.println("Not Found");
+            else {
+                System.out.println("Number 1 = " + num1);
+                System.out.println("Number 2 = " + num2);
+                System.out.println("Sum = " + (n));
+            }    
+        } else {
+            System.out.println("Input Array is Empty!");
         }
-        System.out.print("1st ");
-        list1.printList();
-        SinglyLinkedList<Integer> list2 = new SinglyLinkedList<Integer>();
-        for(int i=0; i<5; i++){
-            list2.insertAtHead(i);
-        }
-        System.out.print("2nd ");
-        list2.printList();
-        System.out.print("After Intersection ");
-        intersectionWithHashing(list1, list2).printList();
-        System.out.print("After Union ");
-        unionWithHashing(list1, list2).printList();
 
 
 
@@ -434,6 +452,28 @@ public class HashTable {
         }
     }
 
+    //Find two numbers that Add up to "n"
+    public static int[] findSum(int[] arr, int n) {
+
+        //Iterate arr
+        //if i + i++ == n, return i + i++ into new result arr
+        //else return null
+
+        int[] result = new int[2];
+        Set<Integer> set = new HashSet<Integer>();
+        for (int i: arr) {
+            if(set.contains(n - i)) {
+                result[0] = i;
+                result[1] = n - i;
+                break;
+            }
+            set.add(i);
+        }
+
+
+        return result;
+    }
+
     //Performs union of two lists
     public static <T> SinglyLinkedList<T> unionWithHashing(
         SinglyLinkedList<T> list1, SinglyLinkedList<T> list2) {
@@ -523,7 +563,7 @@ public class HashTable {
 
 
 
-    
+
 
     public static class SinglyLinkedList<T> {
         //Node inner class for SLL
