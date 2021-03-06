@@ -15,35 +15,49 @@ public class Arrays {
         //     System.out.println(arr[i]);
         // }
 
-        //Print Index
-        int index = -1;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == 7) {
-                index = i;
-                break;
-            }
-        }
+        // //Print Index
+        // int index = -1;
+        // for (int i = 0; i < arr.length; i++) {
+        //     if (arr[i] == 7) {
+        //         index = i;
+        //         break;
+        //     }
+        // }
 
-        System.out.println("index: " + index);
+        // System.out.println("index: " + index);
 
-        //Bubble Sort O(n^2)
+        // //Bubble Sort O(n^2)
+        // for (int lastUnsortedIndex = arr.length - 1; lastUnsortedIndex > 0; 
+        //     lastUnsortedIndex--) {
+        //     for(int i = 0; i < lastUnsortedIndex; i++) {
+        //         if(arr[i] > arr[i + 1]) {
+        //             swap(arr, i, i + 1);
+        //         }
+        //     }
+        // }
+        // for (int i = 0; i < arr.length; i++){
+        //     System.out.println(arr[i]);
+        // }
+
+        //Selection Sort O(n^2)
         for (int lastUnsortedIndex = arr.length - 1; lastUnsortedIndex > 0; 
             lastUnsortedIndex--) {
-            for(int i = 0; i < lastUnsortedIndex; i++) {
-                if(arr[i] > arr[i + 1]) {
-                    swap(arr, i, i + 1);
+            int largest = 0;
+            for (int i = 0; i <= lastUnsortedIndex; i++) {
+                if(arr[i] > arr[largest]) {
+                    largest = i;
                 }
             }
+            swap(arr, largest, lastUnsortedIndex);
         }
         for (int i = 0; i < arr.length; i++){
             System.out.println(arr[i]);
-
         }
 
 
     }
 
-    //Bubble sort swap method
+    //swap method
     public static void swap(int[] arr, int i, int j) {
         if (i == j) {
             return;
