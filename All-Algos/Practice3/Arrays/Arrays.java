@@ -71,20 +71,23 @@ public class Arrays {
         //     System.out.println(arr[i]);
         // }
 
-        //Shell Sort O(n^2), worst case, but can be better...
-        for (int gap = arr.length / 2; gap > 0; gap /=2) {
-            for(int i = gap; i < arr.length; i++) {
-                int newElement = arr[i];
+        // //Shell Sort O(n^2), worst case, but can be better...
+        // for (int gap = arr.length / 2; gap > 0; gap /=2) {
+        //     for(int i = gap; i < arr.length; i++) {
+        //         int newElement = arr[i];
 
-                int j = i;
+        //         int j = i;
 
-                while(j >= gap && arr[j - gap] > newElement) {
-                    arr[j] = arr[j - gap];
-                    j -= gap;
-                }
-                arr[j] = newElement;
-            }
-        }
+        //         while(j >= gap && arr[j - gap] > newElement) {
+        //             arr[j] = arr[j - gap];
+        //             j -= gap;
+        //         }
+        //         arr[j] = newElement;
+        //     }
+        // }
+
+        mergeSort(arr, 0, arr.length);
+
         for (int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);
         }
@@ -125,5 +128,33 @@ public class Arrays {
         }
 
         return factorial;
+    }
+
+    //Merge Sort O(nlogn)
+    public static void mergeSort(int[] input, int start, int end) {
+        if(end - start < 2) {
+            return;
+        }
+
+        int mid = (start + end) / 2;
+        mergeSort(input, start, mid);
+        mergeSort(input, mid, end);
+        merge(input, start, mid, end);
+    }
+    public static void merge(int[] input, int start, int mid, int end) {
+        if(input[mid-1] <= input[mid]) {
+            return;
+        }
+
+        int i = start;
+        int j = mid;
+        int tempIndex = 0;
+
+        int[] temp = new int[end - start];
+        while(i < mid && j < end) {
+            temp[tempIndex++] = input[i] <= input[j] ? input[i++] : input[j++];
+        }
+        System.arraycopy(input, i, input, start + tempIndex, mid - i);
+        System.arraycopy(temp, 0, input, start, tempIndex);
     }
 }
