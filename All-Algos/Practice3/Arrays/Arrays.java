@@ -2,13 +2,13 @@ public class Arrays {
     public static void main (String[] args) {
         int[] arr = new int[7];
 
-        arr[0] = 7;
-        arr[1] = 6;
+        arr[0] = 4;
+        arr[1] = 2;
         arr[2] = 5;
-        arr[3] = 4;
+        arr[3] = 1;
         arr[4] = 3;
-        arr[5] = 2;
-        arr[6] = 1;
+        arr[5] = 8;
+        arr[6] = 7;
 
         // // Run array
         // for(int i = 0; i <arr.length; i++) {
@@ -90,14 +90,18 @@ public class Arrays {
 
         // quickSort(arr, 0, arr.length);
 
-        // countingSort(arr, 1, 10);
+        countingSort(arr, 1, 10);
 
-        int[] radixArray = { 4246, 8875, 3252, 2746, 5059 };
+        // int[] radixArray = { 4246, 8875, 3252, 2746, 5059 };
+        // radixSort(radixArray, 10, 4);
+        // for (int i = 0; i < radixArray.length; i++) {
+        //     System.out.println(radixArray[i]);
+        // }
 
-        radixSort(radixArray, 10, 4);
+        // countingSortDescending(arr, 1, 10);
 
-        for (int i = 0; i < radixArray.length; i++) {
-            System.out.println(radixArray[i]);
+        for(int i = arr.length - 1; i > 0; i--) {
+            System.out.println(arr[i]);
         }
 
 
@@ -198,7 +202,7 @@ public class Arrays {
 
     }
 
-    //Counting Sort O(n)
+    //Counting Sort O(n) Ascending Order
     public static void countingSort(int[] input, int min, int max) {
         int[] countArray = new int[(max - min) + 1];
 
@@ -214,6 +218,25 @@ public class Arrays {
             }
         }
     }
+
+    //Counting Sort O(n) Descending Order
+    public static void countingSortDescending(int[] input, int min, int max) {
+        int[] countArray = new int[(max - min) + 1];
+
+        for (int i = input.length - 1; i > 0; i--) {
+            countArray[input[i] - min]++;
+        }
+
+        int j = 0;
+        for (int i = min; i <= max; i++){
+            while (countArray[i - min] > 0) {
+                input[j++] = i;
+                countArray[i - min]--;
+            }
+        }
+    }
+
+
 
     //Radix Sort
     public static void radixSort (int[] input, int radix, int width) {
