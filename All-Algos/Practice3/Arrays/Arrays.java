@@ -3,11 +3,11 @@ public class Arrays {
         int[] arr = new int[7];
 
         arr[0] = 4;
-        arr[1] = 2;
-        arr[2] = 5;
-        arr[3] = 1;
-        arr[4] = 3;
-        arr[5] = 8;
+        arr[1] = 20;
+        arr[2] = 545;
+        arr[3] = 102;
+        arr[4] = 31;
+        arr[5] = 81;
         arr[6] = 7;
 
         // // Run array
@@ -86,11 +86,11 @@ public class Arrays {
         //     }
         // }
 
-        // mergeSort(arr, 0, arr.length);
+        mergeSort(arr, 0, arr.length);
 
         // quickSort(arr, 0, arr.length);
 
-        countingSort(arr, 1, 10);
+        // countingSort(arr, 1, 10);
 
         // int[] radixArray = { 4246, 8875, 3252, 2746, 5059 };
         // radixSort(radixArray, 10, 4);
@@ -98,9 +98,8 @@ public class Arrays {
         //     System.out.println(radixArray[i]);
         // }
 
-        // countingSortDescending(arr, 1, 10);
 
-        for(int i = arr.length - 1; i > 0; i--) {
+        for(int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);
         }
 
@@ -142,7 +141,7 @@ public class Arrays {
         return factorial;
     }
 
-    //Merge Sort O(nlogn)
+    //Merge Sort O(nlogn) (Descending Order)
     public static void mergeSort(int[] input, int start, int end) {
         if(end - start < 2) {
             return;
@@ -153,8 +152,9 @@ public class Arrays {
         mergeSort(input, mid, end);
         merge(input, start, mid, end);
     }
+    //(Descending Order Sorting)
     public static void merge(int[] input, int start, int mid, int end) {
-        if(input[mid-1] <= input[mid]) {
+        if(input[mid-1] >= input[mid]) {
             return;
         }
 
@@ -164,7 +164,7 @@ public class Arrays {
 
         int[] temp = new int[end - start];
         while(i < mid && j < end) {
-            temp[tempIndex++] = input[i] <= input[j] ? input[i++] : input[j++];
+            temp[tempIndex++] = input[i] >= input[j] ? input[i++] : input[j++];
         }
         System.arraycopy(input, i, input, start + tempIndex, mid - i);
         System.arraycopy(temp, 0, input, start, tempIndex);
@@ -212,23 +212,6 @@ public class Arrays {
 
         int j = 0;
         for (int i = min; i <= max; i++) {
-            while (countArray[i - min] > 0) {
-                input[j++] = i;
-                countArray[i - min]--;
-            }
-        }
-    }
-
-    //Counting Sort O(n) Descending Order
-    public static void countingSortDescending(int[] input, int min, int max) {
-        int[] countArray = new int[(max - min) + 1];
-
-        for (int i = input.length - 1; i > 0; i--) {
-            countArray[input[i] - min]++;
-        }
-
-        int j = 0;
-        for (int i = min; i <= max; i++){
             while (countArray[i - min] > 0) {
                 input[j++] = i;
                 countArray[i - min]--;
