@@ -54,23 +54,6 @@ public class Arrays {
         //     System.out.println(arr[i]);
         // }
 
-        // //Insertion Sort O(n^2)
-        // for (int firstUnsortedIndex = 1; firstUnsortedIndex < arr.length;
-        //     firstUnsortedIndex++) {
-        //     int newElement = arr[firstUnsortedIndex];
-
-        //     int i;
-
-        //     for(i = firstUnsortedIndex; i > 0 && arr[i-1] > newElement; i--) {
-        //         arr[i] = arr[i -1];
-        //     }
-
-        //     arr[i] = newElement;
-        // }
-        // for (int i = 0; i < arr.length; i++) {
-        //     System.out.println(arr[i]);
-        // }
-
         // //Shell Sort O(n^2), worst case, but can be better...
         // for (int gap = arr.length / 2; gap > 0; gap /=2) {
         //     for(int i = gap; i < arr.length; i++) {
@@ -86,7 +69,7 @@ public class Arrays {
         //     }
         // }
 
-        mergeSort(arr, 0, arr.length);
+        // mergeSort(arr, 0, arr.length);
 
         // quickSort(arr, 0, arr.length);
 
@@ -98,13 +81,42 @@ public class Arrays {
         //     System.out.println(radixArray[i]);
         // }
 
+        //Insertion Sort O(n^2)
+        for (int firstUnsortedIndex = 1; firstUnsortedIndex < arr.length;
+            firstUnsortedIndex++) {
+            int newElement = arr[firstUnsortedIndex];
+
+            int i;
+
+            for(i = firstUnsortedIndex; i > 0 && arr[i-1] > newElement; i--) {
+                arr[i] = arr[i -1];
+            }
+
+            arr[i] = newElement;
+        }
 
         for(int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);
         }
 
+    }
 
+    public static void insertionSort(int[] input, int numItems) {
+        if (numItems < 2) {
+            return;
+        }
 
+        insertionSort(input, numItems - 1);
+
+        int newElement = input[numItems - 1];
+
+        int i;
+
+        for (i = numItems - 1; i > 0 && input[i - 1] > newElement; i--) {
+            input[i] = input[i - 1];
+        }
+
+        input[i] = newElement;
     }
 
     //swap method
