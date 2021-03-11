@@ -81,26 +81,37 @@ public class Arrays {
         //     System.out.println(radixArray[i]);
         // }
 
-        //Insertion Sort O(n^2)
-        for (int firstUnsortedIndex = 1; firstUnsortedIndex < arr.length;
-            firstUnsortedIndex++) {
-            int newElement = arr[firstUnsortedIndex];
+        // //Insertion Sort O(n^2)
+        // for (int firstUnsortedIndex = 1; firstUnsortedIndex < arr.length;
+        //     firstUnsortedIndex++) {
+        //     int newElement = arr[firstUnsortedIndex];
 
-            int i;
+        //     int i;
 
-            for(i = firstUnsortedIndex; i > 0 && arr[i-1] > newElement; i--) {
-                arr[i] = arr[i -1];
-            }
+        //     for(i = firstUnsortedIndex; i > 0 && arr[i-1] > newElement; i--) {
+        //         arr[i] = arr[i -1];
+        //     }
 
-            arr[i] = newElement;
+        //     arr[i] = newElement;
+        // }
+
+        // insertionSort(arr, 7);
+
+        // for(int i = 0; i < arr.length; i++) {
+        //     System.out.println(arr[i]);
+        // }
+
+        String[] radixLetterSort = { "bcdef", "dbaqc", "abcde", "omadd", "bbbbb"};
+
+        radixStringSort(radixLetterSort, 26, 5);
+
+        for(int i = 0; i < radixLetterSort.length; i++) {
+            System.out.println(radixLetterSort[i]);
         }
-
-        for(int i = 0; i < arr.length; i++) {
-            System.out.println(arr[i]);
-        }
-
     }
 
+
+    //Recursive Insertion Sort
     public static void insertionSort(int[] input, int numItems) {
         if (numItems < 2) {
             return;
@@ -236,7 +247,7 @@ public class Arrays {
     //Radix Sort
     public static void radixSort (int[] input, int radix, int width) {
         for (int i = 0; i < width; i++) {
-            radixSingleSort(input, i, radix);
+            radixSort(input, i, radix);
         }
     }
     public static void radixSingleSort(int[] input, int position, int radix) {
@@ -263,8 +274,42 @@ public class Arrays {
         }
 
     }
-
     public static int getDigit(int position, int value, int radix) {
         return value / (int) Math.pow(radix, position) % radix;
+    }
+
+
+    //Radix Sort For Strings
+    public static void radixStringSort (String[] input, int radix, int width) {
+        for (int i = width - 1; i >= 0; i--) {
+            radixStringSingleSort(input, i, radix);
+        }
+    }
+    public static void radixStringSingleSort(String[] input, int position, int radix) {
+        int numItems = input.length;
+        int[] countArray = new int[radix];
+
+        for (String value : input) {
+            countArray[getIndex(position, value)]++;
+        }
+        //Adjust count array
+        for (int j = 1; j < radix; j++) {
+            countArray[j] += countArray[j - 1];
+        }
+
+        String[] temp = new String[numItems];
+        for(int tempIndex = numItems - 1; tempIndex >= 0; tempIndex--) {
+            temp[--countArray[getIndex(position, input[tempIndex])]]
+                = input[tempIndex]; 
+
+        }
+
+        for (int tempIndex = 0; tempIndex < numItems; tempIndex++) {
+            input[tempIndex] = temp[tempIndex];
+        }
+
+    }
+    public static int getIndex(int position, String value) {
+        return value.charAt(position) - 'a';
     }
 }
