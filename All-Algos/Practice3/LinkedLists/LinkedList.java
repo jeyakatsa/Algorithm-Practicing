@@ -24,17 +24,31 @@ public class LinkedList {
 
     }
 
-    public class EmployeNode {
+    public class EmployeeNode {
 
-        Node head;
-        Node nextNode;
+        private Employee employee;
+        private EmployeeNode next;
 
-        public Node (Node head){
-            this.head = head;
+        public EmployeeNode (Employee employee){
+            this.employee = employee;
         }
 
-        this.head = null;
-        this.nextNode = null;
+        public Employee getEmployee() {return employee;}
+        public void setEmployee (Employee employee) {this.employee = employee;}
+        public EmployeeNode getNext() {return next;}
+        public void setNext(EmployeeNode next) {this.next = next;}
 
+    }
+
+    private EmployeeNode head;
+
+    public void addToFront (Employee employee) {
+        EmployeeNode node = new EmployeeNode(employee);
+        node.setNext(head);
+        head = node;
+    }
+
+    public void printList() {
+        EmployeeNode current = head;
     }
 }
