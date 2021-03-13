@@ -12,7 +12,7 @@ public class LinkedList {
 
     }
 
-    public class Employee {
+    public static class Employee {
 
         private String firstName;
         private String lastName;
