@@ -3,23 +3,15 @@ public class DoublyLinkedList {
 
         Employee janeJones = new Employee("Jane", "Jones", 123);
         Employee johnDoe = new Employee("John", "Doe", 456);
+        Employee billEnd = new Employee("Bill", "Steve", 998);
 
         DoublyLinkedList list = new DoublyLinkedList();
         list.addToFront(janeJones);
         list.addToFront(johnDoe);
 
         list.printList();
-        System.out.println(list.getSize());
-
-        Employee billEnd = new Employee("Bill", "Nye", 900);
-        list.addToEnd(billEnd);
-
+        list.addBefore(billEnd, johnDoe);
         list.printList();
-        System.out.println(list.getSize());
-
-        list.removeFromEnd();
-        list.printList();
-        System.out.println(list.getSize());
 
 
     }
@@ -117,12 +109,34 @@ public class DoublyLinkedList {
         size++;
     }
 
-    public void addBefore (Employee employee) {
-        EmployeeNode node = new EmployeeNode(employee);
-        
-        while (node.next != null) {
-            if (node.next.employee)
+    public void addBefore (Employee newEmployee, Employee existingEmployee) {
+        if (head == null) {
+            return;
         }
+
+        EmployeeNode current = head;
+        while (current != null && !current.getEmployee().equals(existingEmployee)) {
+            current = current.getNext();
+        }
+
+        if (current == null) {
+            return;
+        }
+
+        EmployeeNode newNode = new EmployeeNode(newEmployee);
+        newNode.setPrevious(current.getPrevious());
+        newNode.setNext(current);
+        current.setPrevious(newNode);
+
+        if (head == current) {
+            head = newNode;
+        }
+        else {
+            newNode.getPrevious().setNext(newNode);
+        }
+
+        size++;
+        
     }
 
     public int getSize() {
