@@ -117,6 +117,14 @@ public class DoublyLinkedList {
         size++;
     }
 
+    public void addBefore (Employee employee) {
+        EmployeeNode node = new EmployeeNode(employee);
+        
+        while (node.next != null) {
+            if (node.next.employee)
+        }
+    }
+
     public int getSize() {
         return size;
     }
@@ -183,7 +191,7 @@ public class DoublyLinkedList {
 
     public void printList() {
         EmployeeNode current = head;
-        System.out.print("Head <=> ");
+        System.out.print("Head -> ");
         while (current != null) {
             System.out.print(current);
             System.out.print(" <=> ");
