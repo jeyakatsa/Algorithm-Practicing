@@ -8,14 +8,19 @@ public class DoublyLinkedList {
         list.addToFront(janeJones);
         list.addToFront(johnDoe);
 
+        list.printList();
         System.out.println(list.getSize());
+
+        Employee billEnd = new Employee("Bill", "Nye", 900);
+        list.addToEnd(billEnd);
 
         list.printList();
-
-        list.removeFromFront();
-
         System.out.println(list.getSize());
-        list.printList(); 
+
+        list.removeFromEnd();
+        list.printList();
+        System.out.println(list.getSize());
+
 
     }
 
@@ -137,22 +142,51 @@ public class DoublyLinkedList {
     }
 
     public EmployeeNode removeFromFront() {
-        if(isEmpty())
+        if(isEmpty()) {
             return null;
+        }
 
         EmployeeNode removedNode = head;
+
+        if (head.getNext() == null) {
+            tail = null;
+        }
+        else {
+            head.getNext().setPrevious(null);
+        }
+
         head = head.getNext();
         size--;
         removedNode.setNext(null);
         return removedNode;    
     }
 
+    public EmployeeNode removeFromEnd() {
+        if(isEmpty()) {
+            return null;
+        }
+
+        EmployeeNode removedNode = tail;
+
+        if(tail.getPrevious() == null) {
+            head = null;
+        }
+        else {
+            tail.getPrevious().setNext(null);
+        }
+
+        tail = tail.getPrevious();
+        size--;
+        removedNode.setPrevious(null);
+        return removedNode;    
+    }
+
     public void printList() {
         EmployeeNode current = head;
-        System.out.print("Head -> ");
+        System.out.print("Head <=> ");
         while (current != null) {
             System.out.print(current);
-            System.out.print(" -> ");
+            System.out.print(" <=> ");
             current = current.getNext();
         }
         System.out.println("null");
