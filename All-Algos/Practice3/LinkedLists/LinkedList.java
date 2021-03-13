@@ -8,6 +8,13 @@ public class LinkedList {
         list.addToFront(janeJones);
         list.addToFront(johnDoe);
 
+        System.out.println(list.getSize());
+
+        list.printList();
+
+        list.removeFromFront();
+
+        System.out.println(list.getSize());
         list.printList();
 
     }
@@ -78,12 +85,37 @@ public class LinkedList {
 
     }
 
+
+
+
+    //Begin Linked List Below
+
     private EmployeeNode head;
+    private int size;
 
     public void addToFront (Employee employee) {
         EmployeeNode node = new EmployeeNode(employee);
         node.setNext(head);
         head = node;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    public EmployeeNode removeFromFront() {
+        if(isEmpty())
+            return null;
+
+        EmployeeNode removedNode = head;
+        head = head.getNext();
+        size--;
+        removedNode.setNext(null);
+        return removedNode;    
     }
 
     public void printList() {
