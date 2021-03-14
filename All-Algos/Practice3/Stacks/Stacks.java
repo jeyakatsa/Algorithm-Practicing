@@ -1,20 +1,20 @@
 import java.util.EmptyStackException;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class Stacks {
 
     public static void main (String[] args){
 
-        ArrayStack stack = new ArrayStack(10);
+        LinkedStack stack = new LinkedStack();
 
         stack.push (new Employee("Jane", "Jones", 123));
         stack.push(new Employee("John", "Doe", 546));
         stack.push(new Employee("Mary", "Smith", 22));
 
-        System.out.println(stack.peek());
         stack.printStack();
 
-        System.out.println("Popped: " + stack.pop());
-        System.out.println(stack.peek());
+        
     }
 
     public static class ArrayStack {
@@ -66,6 +66,37 @@ public class Stacks {
         public void printStack() {
             for(int i = top - 1; i >= 0; i--) {
                 System.out.println(stack[i]);
+            }
+        }
+    }
+
+    public static class LinkedStack {
+        private LinkedList<Employee> stack;
+
+        public LinkedStack() {
+            stack = new LinkedList<Employee>();
+        }
+
+        public void push (Employee employee) {
+            stack.push(employee);
+        }
+
+        public Employee pop() {
+            return stack.pop();
+        }
+
+        public Employee peek() {
+            return stack.peek();
+        }
+
+        public boolean isEmpty() {
+            return stack.isEmpty();
+        }
+
+        public void printStack() {
+            ListIterator<Employee> iterator = stack.listIterator();
+            while (iterator.hasNext()) {
+                System.out.println(iterator.next());
             }
         }
     }
