@@ -6,15 +6,51 @@ public class Stacks {
 
     public static void main (String[] args){
 
-        LinkedStack stack = new LinkedStack();
+        // LinkedStack stack = new LinkedStack();
 
-        stack.push (new Employee("Jane", "Jones", 123));
-        stack.push(new Employee("John", "Doe", 546));
-        stack.push(new Employee("Mary", "Smith", 22));
+        // stack.push (new Employee("Jane", "Jones", 123));
+        // stack.push(new Employee("John", "Doe", 546));
+        // stack.push(new Employee("Mary", "Smith", 22));
 
-        stack.printStack();
+        // stack.printStack();
+
+        // should return true
+        System.out.println(checkForPalindrome("abccba"));
+        // should return true
+        System.out.println(checkForPalindrome("Was it a car or a cat I saw?"));
+        // should return true
+        System.out.println(checkForPalindrome("I did, did I?"));
+        // should return false
+        System.out.println(checkForPalindrome("hello"));
+        // should return true
+        System.out.println(checkForPalindrome("Don't nod"));
 
         
+    }
+
+    public static boolean checkForPalindrome(String string) {
+        if(string == null) {
+            return false;
+        }
+
+        LinkedList<Character> stack = new LinkedList<Character>();
+        StringBuilder stringNoPunctuation = new StringBuilder(string.length());
+        String lowerCase = string.toLowerCase();
+
+        for (int i = 0; i < lowerCase.length(); i++) {
+            char c = lowerCase.charAt(i);
+            if(c >= 'a' && c <= 'z') {
+                stringNoPunctuation.append(c);
+                stack.push(c);
+            }
+        }
+
+        StringBuilder reversedString = new StringBuilder(stack.size());
+        while (!stack.isEmpty()) {
+            reversedString.append(stack.pop());
+        }
+        
+        return reversedString.toString().equals(stringNoPunctuation.toString());
     }
 
     public static class ArrayStack {
@@ -70,8 +106,10 @@ public class Stacks {
         }
     }
 
+
     public static class LinkedStack {
         private LinkedList<Employee> stack;
+
 
         public LinkedStack() {
             stack = new LinkedList<Employee>();
