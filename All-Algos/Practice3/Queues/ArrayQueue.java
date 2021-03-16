@@ -1,25 +1,63 @@
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class ArrayQueue {
 
     public static void main (String[] args) {
 
-        Employee janeJones = new Employee("Jane", "Jones", 5540);
-        Employee samSmith = new Employee("Sam", "Smith", 4470);
-        Employee beeDee = new Employee("Bee", "Dee", 1498);
+        // Employee janeJones = new Employee("Jane", "Jones", 5540);
+        // Employee samSmith = new Employee("Sam", "Smith", 4470);
+        // Employee beeDee = new Employee("Bee", "Dee", 1498);
 
-        ArrayQueue queue = new ArrayQueue(10);
-        queue.add(janeJones);
-        queue.add(samSmith);
-        queue.add(beeDee);
+        // ArrayQueue queue = new ArrayQueue(10);
+        // queue.add(janeJones);
+        // queue.add(samSmith);
+        // queue.add(beeDee);
 
-        queue.printQueue();
+        // queue.printQueue();
 
-        queue.remove();
+        // queue.remove();
 
-        System.out.println(queue.peek());
-        queue.printQueue();
+        // System.out.println(queue.peek());
+        // queue.printQueue();
 
+        // should return true
+        System.out.println(checkForPalindrome("abccba"));
+        // should return true
+        System.out.println(checkForPalindrome("Was it a car or a cat I saw?"));
+        // should return true
+        System.out.println(checkForPalindrome("I did, did I?"));
+        // should return false
+        System.out.println(checkForPalindrome("hello"));
+        // should return true
+        System.out.println(checkForPalindrome("Don't nod"));
+
+    }
+
+    public static boolean checkForPalindrome(String string) {
+        if(string == null) {
+            return false;
+        }
+
+        LinkedList<Character> stack = new LinkedList<Character>();
+        LinkedList<Character> queue = new LinkedList<Character>();
+        String lowerCase = string.toLowerCase();
+
+        for (int i = 0; i < lowerCase.length(); i++) {
+            char c = lowerCase.charAt(i);
+            if (c >= 'a' && c <= 'z') {
+                queue.addLast(c);
+                stack.push(c);
+            }
+        }
+
+        while (!stack.isEmpty()) {
+            if (!stack.pop().equals(queue.removeFirst())) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private Employee[] queue;
