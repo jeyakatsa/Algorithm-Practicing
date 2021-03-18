@@ -18,6 +18,11 @@ public class HashTable {
 
         System.out.println("Retrieve key Smith: " + ht.get("Smith"));
 
+        ht.remove("Jones");
+        ht.remove("Mary");
+
+        ht.printHashtable();
+
     }
 
     public class StoredEmployee {
@@ -89,15 +94,17 @@ public class HashTable {
 
         while (hashedKey != stopIndex && 
             hashtable[hashedKey] != null &&
-            !hashtable[hashedKey].key.equals(key)) {
+            !hashtable[hashedKey].key.equals(key)) 
+            {
             hashedKey = (hashedKey + 1) % hashtable.length;
         }
 
-        if(stopIndex == hashedKey) {
-            return -1;
+        if(hashtable[hashedKey] != null &&
+            hashtable[hashedKey].key.equals(key)) {
+            return hashedKey;
         }
         else {
-            return hashedKey;
+            return -1;
         }
         
     }
@@ -115,5 +122,16 @@ public class HashTable {
                 System.out.println("Position " + i + ": " + hashtable[i].employee);
             }
         }
+    }
+
+    public Employee remove(String key) {
+        int hashedKey = findKey(key);
+        if (hashedKey == -1) {
+            return null;
+        }
+
+        Employee employee = hashtable[hashedKey].employee;
+        hashtable[hashedKey] = null;
+        return employee;
     }
 }
