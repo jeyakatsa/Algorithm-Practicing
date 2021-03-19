@@ -103,7 +103,7 @@ public class HashTable {
             hashtable[hashedKey].key.equals(key)) {
             return hashedKey;
         }
-        else {
+        else { 
             return -1;
         }
         
