@@ -3,26 +3,27 @@ public class HashTable {
     public static void main (String[] args) {
 
         Employee janeJones = new Employee("Jane", "Jones", 5540);
-        Employee samSmith = new Employee("Sam", "Smith", 4470);
-        Employee beeDee = new Employee("Bee", "Dee", 1498);
-        Employee marySmith = new Employee("Mary", "Smith", 983);
+        Employee samSmith = new Employee("John", "Doe", 4470);
+        Employee beeDee = new Employee("Mary", "Smith", 1498);
+        Employee marySmith = new Employee("Mike", "Wilson", 983);
         Employee billEnd = new Employee("Bill", "End", 38);
 
         HashTable ht = new HashTable();
         ht.put("Jones", janeJones);
-        ht.put("Smith", samSmith);
-        ht.put("Dee", beeDee);
-        ht.put("Mary", marySmith);
+        ht.put("Doe", samSmith);
+        ht.put("Wilson", beeDee);
+        ht.put("Smith", marySmith);
 
+        ht.printHashtable();
+
+        System.out.println("Retrieve key Wilson: " + ht.get("Wilson"));
+        System.out.println("Retrieve key Smith: " + ht.get("Smith"));
+
+        ht.remove("Wilson");
+        ht.remove("Jones");
         ht.printHashtable();
 
         System.out.println("Retrieve key Smith: " + ht.get("Smith"));
-
-        ht.remove("Jones");
-        ht.remove("Mary");
-
-        ht.printHashtable();
-
     }
 
     public class StoredEmployee {
@@ -131,7 +132,14 @@ public class HashTable {
         }
 
         Employee employee = hashtable[hashedKey].employee;
-        hashtable[hashedKey] = null;
+
+        StoredEmployee[] oldHashtable = hashtable;
+        hashtable = new StoredEmployee[oldHashtable.length];
+        for (int i = 0; i < oldHashtable.length; i++) {
+            if (oldHashtable[i] != null) {
+                put(oldHashtable[i].key, oldHashtable[i].employee);
+            }
+        }
         return employee;
     }
 }
