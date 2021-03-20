@@ -14,8 +14,7 @@ public class HashChallengeOne {
     }
 
     public static int hash(int value) {
-
-        int max = Arrays.stream(value)
+        return Math.abs(value % 10);
 
     }
 }
