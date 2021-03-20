@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 public class HashTable {
 
     public static void main (String[] args) {
@@ -33,6 +35,28 @@ public class HashTable {
         public StoredEmployee(String key, Employee employee) {
             this.key = key;
             this.employee = employee;
+        }
+    }
+
+    public class ChainedHashtable {
+        private LinkedList<StoredEmployee>[] hashtable;
+
+        public ChainedHashtable() {
+            hashtable = new LinkedList[10];
+            for(int i = 0; i < hashtable.length; i++) {
+                hashtable[i] = new LinkedList<StoredEmployee>();
+                
+            }
+        }
+
+        public void put(String key, Employee employee) {
+            int hashedKey = hashKey(key);
+            hashtable[hashedKey].add(new StoredEmployee(key, employee));
+
+        }
+
+        private int hashKey(String key) {
+            return key.length() % hashtable.length;
         }
     }
 
