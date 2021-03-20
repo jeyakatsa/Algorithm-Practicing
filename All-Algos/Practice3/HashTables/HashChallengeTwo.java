@@ -1,5 +1,8 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 public class HashChallengeTwo {
@@ -16,11 +19,30 @@ public class HashChallengeTwo {
         employees.add(new Employee("Bill", "End", 3948));
         employees.add(new Employee("Jane", "Jones", 123));
 
-        Map<String, Employee> map = new HashMap<String, Employee>();
+        employees.forEach(e -> System.out.println(e));
+
+        Map<Integer, Employee> employeeTable = new HashMap<>();
+        ListIterator<Employee> iterator = employees.listIterator();
+        List<Employee> remove = new ArrayList<>();
+
+        while(iterator.hasNext()) {
+            Employee employee = iterator.next();
+            if (employeeTable.containsKey(employee.getId())){
+                remove.add(employee);
+            }
+            else {
+                employeeTable.put(employee.getId(), employee);
+            }
+        }
+
+        for (Employee employee: remove) {
+            employees.remove(employee);
+        }
+
+        System.out.println("------------------------------");
+        employees.forEach(e -> System.out.println(e));
 
         
-
-        employees.forEach(e -> System.out.println(e));
     }
 
     public static boolean hash(int id) {
