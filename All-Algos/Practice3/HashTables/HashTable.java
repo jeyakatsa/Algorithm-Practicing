@@ -1,3 +1,8 @@
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+
 public class HashTable {
 
     public static void main (String[] args) {
@@ -7,22 +12,38 @@ public class HashTable {
         Employee marySmith = new Employee("Mary", "Smith", 1498);
         Employee mikeWilson = new Employee("Mike", "Wilson", 983);
 
-        ChainedHashtable ht = new ChainedHashtable();
-        ht.put("Jones", janeJones);
-        ht.put("Doe", johnDoe);
-        ht.put("Wilson", mikeWilson);
-        ht.put("Smith", marySmith);
+        Map<String, Employee> map = new HashMap<String, Employee>();
+        map.put("Jones", janeJones);
+        map.put("Doe", johnDoe);
+        map.put("Wilson", mikeWilson);
+        map.put("Smith", marySmith);
+
+        System.out.println(map.containsKey("Doe"));
+        System.out.println(map.containsValue(janeJones));
+
+        // Iterator<Employee> iterator = map.values().iterator();
+        // while(iterator.hasNext()) {
+        //     System.out.println(iterator.next());
+        // }
+
+        map.forEach((k,v) -> System.out.println("Key = " + k + ", Employee = " + v));
+
+        // ChainedHashtable ht = new ChainedHashtable();
+        // ht.put("Jones", janeJones);
+        // ht.put("Doe", johnDoe);
+        // ht.put("Wilson", mikeWilson);
+        // ht.put("Smith", marySmith);
 
         // ht.printHashtable();
 
         // System.out.println("Retrieve key Wilson: " + ht.get("Wilson"));
-        System.out.println("Retrieve key Smith: " + ht.get("Smith"));
+        // System.out.println("Retrieve key Smith: " + ht.get("Smith"));
 
-        ht.remove("Doe");
-        ht.remove("Jones");
-        ht.printHashtable();
+        // ht.remove("Doe");
+        // ht.remove("Jones");
+        // ht.printHashtable();
 
-        System.out.println("Retrieve key Smith: " + ht.get("Smith"));
+        // System.out.println("Retrieve key Smith: " + ht.get("Smith"));
     }
 
     private StoredEmployee[] hashtable;
