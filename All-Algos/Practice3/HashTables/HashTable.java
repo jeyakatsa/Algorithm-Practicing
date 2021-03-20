@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-
 public class HashTable {
 
     public static void main (String[] args) {
@@ -8,9 +6,8 @@ public class HashTable {
         Employee johnDoe = new Employee("John", "Doe", 4470);
         Employee marySmith = new Employee("Mary", "Smith", 1498);
         Employee mikeWilson = new Employee("Mike", "Wilson", 983);
-        Employee billEnd = new Employee("Bill", "End", 38);
 
-        HashTable ht = new HashTable();
+        ChainedHashtable ht = new ChainedHashtable();
         ht.put("Jones", janeJones);
         ht.put("Doe", johnDoe);
         ht.put("Wilson", mikeWilson);
@@ -26,38 +23,6 @@ public class HashTable {
         ht.printHashtable();
 
         System.out.println("Retrieve key Smith: " + ht.get("Smith"));
-    }
-
-    public class StoredEmployee {
-        public String key;
-        public Employee employee;
-
-        public StoredEmployee(String key, Employee employee) {
-            this.key = key;
-            this.employee = employee;
-        }
-    }
-
-    public class ChainedHashtable {
-        private LinkedList<StoredEmployee>[] hashtable;
-
-        public ChainedHashtable() {
-            hashtable = new LinkedList[10];
-            for(int i = 0; i < hashtable.length; i++) {
-                hashtable[i] = new LinkedList<StoredEmployee>();
-                
-            }
-        }
-
-        public void put(String key, Employee employee) {
-            int hashedKey = hashKey(key);
-            hashtable[hashedKey].add(new StoredEmployee(key, employee));
-
-        }
-
-        private int hashKey(String key) {
-            return key.length() % hashtable.length;
-        }
     }
 
     private StoredEmployee[] hashtable;
