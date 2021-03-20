@@ -3,15 +3,15 @@ public class HashTable {
     public static void main (String[] args) {
 
         Employee janeJones = new Employee("Jane", "Jones", 5540);
-        Employee samSmith = new Employee("John", "Doe", 4470);
-        Employee beeDee = new Employee("Mary", "Smith", 1498);
-        Employee marySmith = new Employee("Mike", "Wilson", 983);
+        Employee johnDoe = new Employee("John", "Doe", 4470);
+        Employee marySmith = new Employee("Mary", "Smith", 1498);
+        Employee mikeWilson = new Employee("Mike", "Wilson", 983);
         Employee billEnd = new Employee("Bill", "End", 38);
 
         HashTable ht = new HashTable();
         ht.put("Jones", janeJones);
-        ht.put("Doe", samSmith);
-        ht.put("Wilson", beeDee);
+        ht.put("Doe", johnDoe);
+        ht.put("Wilson", mikeWilson);
         ht.put("Smith", marySmith);
 
         ht.printHashtable();
@@ -132,6 +132,7 @@ public class HashTable {
         }
 
         Employee employee = hashtable[hashedKey].employee;
+        hashtable[hashedKey] = null;
 
         StoredEmployee[] oldHashtable = hashtable;
         hashtable = new StoredEmployee[oldHashtable.length];
