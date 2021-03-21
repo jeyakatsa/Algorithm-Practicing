@@ -11,7 +11,8 @@ public class Trees {
         inTree.insert(409);
         inTree.insert(64);
 
-        inTree.root.traverseInOrder();
+        System.out.println(inTree.min());
+        System.out.println(inTree.max());
 
     }
 
@@ -48,12 +49,46 @@ public class Trees {
             if (leftChild != null) {
                 leftChild.traverseInOrder();
             } 
-            System.out.println(data + ", ");
+            System.out.print(data + ", ");
             if (rightChild != null) {
                 rightChild.traverseInOrder();
             }
         }
-        
+
+        public TreeNode get(int value) {
+            if (value == data) {
+                return this;
+            }
+            if (value < data) {
+                if (leftChild != null) {
+                    return leftChild.get(value);
+                }
+            }
+            else {
+                if (rightChild != null) {
+                    return rightChild.get(value);
+                }
+            }
+            return null;
+        }
+
+        public int min() {
+            if (leftChild == null) {
+                return data;
+            }
+            else {
+                return leftChild.min();
+            }
+        }
+
+        public int max() {
+            if (rightChild == null) {
+                return data;
+            }
+            else {
+                return rightChild.max();
+            }
+        }        
 
         public TreeNode(int data) {
             this.data = data;
@@ -94,7 +129,30 @@ public class Trees {
         else {
             root.insert(value);
         }
+    }
 
+    public int max() {
+        if (root == null) {
+            return Integer.MAX_VALUE;
+        }
+        else {
+            return root.max();
+        }
+    }
+
+    public int min() {
+        if (root == null) {
+            return Integer.MIN_VALUE;
+        }
+        else {
+            return root.min();
+        }
+    }
+
+    public void traverseInOrder() {
+        if (root != null) {
+            root.traverseInOrder();
+        }
     }
 
 }
