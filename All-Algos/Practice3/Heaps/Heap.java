@@ -1,19 +1,38 @@
+import java.util.PriorityQueue;
+
 public class Heap {
 
     public static void main (String[] args) {
-        Heap heap = new Heap(10);
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
 
-        heap.insert(80);
-        heap.insert(75);
-        heap.insert(60);
-        heap.insert(68);
-        heap.insert(55);
-        heap.insert(40);
+        pq.add(25);
+        pq.add(-15);
+        pq.add(-555);
+        pq.add(20);
+        pq.add(0);
 
-        heap.printHeap();
+        System.out.println(pq.peek());
 
-        heap.delete(1);
-        heap.printHeap();
+        Object[] ints = pq.toArray();
+        for (Object num: ints) {
+            System.out.println(num);
+        }
+
+        pq.add(-1);
+
+        // Heap heap = new Heap(10);
+
+        // heap.insert(80);
+        // heap.insert(75);
+        // heap.insert(60);
+        // heap.insert(68);
+        // heap.insert(55);
+        // heap.insert(40);
+
+        // heap.printHeap();
+
+        // heap.delete(1);
+        // heap.printHeap();
     }
 
     private int [] heap;
