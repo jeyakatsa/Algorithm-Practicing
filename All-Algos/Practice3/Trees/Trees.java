@@ -14,14 +14,21 @@ public class Trees {
         inTree.traverseInOrder();
         System.out.println();
 
-        System.out.println(inTree.get(50));
-        System.out.println(inTree.get(25));
-        System.out.println(inTree.get(40));
+        // System.out.println(inTree.get(50));
+        // System.out.println(inTree.get(25));
+        // System.out.println(inTree.get(40));
+        // // ^Buggy
 
-        System.out.println("----------------------------");
+        // System.out.println("----------------------------");
 
-        System.out.println(inTree.min());
-        System.out.println(inTree.max());
+        // System.out.println(inTree.min());
+        // System.out.println(inTree.max());
+
+
+        inTree.delete(0);
+        inTree.delete(409);
+        inTree.traverseInOrder();
+
 
     }
 
@@ -142,6 +149,10 @@ public class Trees {
         }
     }
 
+    private void delete(int value) {
+        root = delete(root, value);
+    }
+
     private TreeNode delete(TreeNode subtreeRoot, int value) {
         if (subtreeRoot == null) {
             return subtreeRoot;
@@ -159,6 +170,15 @@ public class Trees {
             else if (subtreeRoot.getRightChild() == null) {
                 return subtreeRoot.getLeftChild();
             }
+
+            //Case 3: noe to delete has 2 children
+
+            //Replace the value in the subtreeRoot node with smallest value
+            //from right subtree
+            subtreeRoot.setData(subtreeRoot.getRightChild().min());
+
+            //Delete the node that has smallest value in right subtree
+            subtreeRoot.setRightChild(delete(subtreeRoot.getRightChild(), subtreeRoot.getData()));
         }
         return subtreeRoot;
     }
