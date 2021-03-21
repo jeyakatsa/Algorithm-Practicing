@@ -11,7 +11,7 @@ public class Trees {
         inTree.insert(409);
         inTree.insert(64);
 
-        inTree.traverseInOrder();
+        inTree.traversePreOrder();
         System.out.println();
 
         // System.out.println(inTree.get(50));
@@ -25,9 +25,9 @@ public class Trees {
         // System.out.println(inTree.max());
 
 
-        inTree.delete(0);
-        inTree.delete(409);
-        inTree.traverseInOrder();
+        // inTree.delete(0);
+        // inTree.delete(409);
+        // inTree.traverseInOrder();
 
 
     }
@@ -72,6 +72,16 @@ public class Trees {
             System.out.print(data + ", ");
             if (rightChild != null) {
                 rightChild.traverseInOrder();
+            }
+        }
+
+        public void traversePreOrder() {
+            System.out.print(data + ", ");
+            if (leftChild != null) {
+                leftChild.traversePreOrder();
+            }
+            if(rightChild != null) {
+                rightChild.traversePreOrder();
             }
         }
 
@@ -211,6 +221,12 @@ public class Trees {
     public void traverseInOrder() {
         if (root != null) {
             root.traverseInOrder();
+        }
+    }
+
+    public void traversePreOrder() {
+        if (root != null) {
+            root.traversePreOrder();
         }
     }
 
