@@ -11,6 +11,15 @@ public class Trees {
         inTree.insert(409);
         inTree.insert(64);
 
+        inTree.traverseInOrder();
+        System.out.println();
+
+        System.out.println(inTree.get(50));
+        System.out.println(inTree.get(25));
+        System.out.println(inTree.get(40));
+
+        System.out.println("----------------------------");
+
         System.out.println(inTree.min());
         System.out.println(inTree.max());
 
@@ -21,6 +30,10 @@ public class Trees {
         private int data;
         private TreeNode leftChild;
         private TreeNode rightChild;
+
+        public TreeNode(int data) {
+            this.data = data;
+        }
 
         public void insert(int value) {
             if(value == data) {
@@ -90,9 +103,7 @@ public class Trees {
             }
         }        
 
-        public TreeNode(int data) {
-            this.data = data;
-        }
+
 
         public int getData(){
             return data;
@@ -147,6 +158,13 @@ public class Trees {
         else {
             return root.min();
         }
+    }
+
+    public TreeNode get(int value) {
+        if (root != null) {
+            return root.get(value);
+        }
+        return null;
     }
 
     public void traverseInOrder() {
