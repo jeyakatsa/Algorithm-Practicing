@@ -142,6 +142,27 @@ public class Trees {
         }
     }
 
+    private TreeNode delete(TreeNode subtreeRoot, int value) {
+        if (subtreeRoot == null) {
+            return subtreeRoot;
+        }
+        if (value < subtreeRoot.getData()) {
+            subtreeRoot.setLeftChild(delete(subtreeRoot.getLeftChild(), value));
+        }
+        else if (value > subtreeRoot.getData()) {
+            subtreeRoot.setRightChild(delete(subtreeRoot.getRightChild(), value));
+        }
+        else {
+            if (subtreeRoot.getLeftChild() == null) {
+                return subtreeRoot.getRightChild();
+            }
+            else if (subtreeRoot.getRightChild() == null) {
+                return subtreeRoot.getLeftChild();
+            }
+        }
+        return subtreeRoot;
+    }
+
     public int max() {
         if (root == null) {
             return Integer.MAX_VALUE;
