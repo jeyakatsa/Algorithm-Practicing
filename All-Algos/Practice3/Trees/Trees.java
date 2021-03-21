@@ -11,6 +11,8 @@ public class Trees {
         inTree.insert(409);
         inTree.insert(64);
 
+        inTree.root.traverseInOrder();
+
     }
 
     //Binary Search Tree (left nodes less, right nodes greater)
@@ -41,6 +43,17 @@ public class Trees {
                 }
             }
         }
+
+        public void traverseInOrder() {
+            if (leftChild != null) {
+                leftChild.traverseInOrder();
+            } 
+            System.out.println(data + ", ");
+            if (rightChild != null) {
+                rightChild.traverseInOrder();
+            }
+        }
+        
 
         public TreeNode(int data) {
             this.data = data;
