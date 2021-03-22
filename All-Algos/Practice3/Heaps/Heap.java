@@ -3,36 +3,37 @@ import java.util.PriorityQueue;
 public class Heap {
 
     public static void main (String[] args) {
-        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        // PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
 
-        pq.add(25);
-        pq.add(-15);
-        pq.add(-555);
-        pq.add(20);
-        pq.add(0);
+        // pq.add(25);
+        // pq.add(-15);
+        // pq.add(-555);
+        // pq.add(20);
+        // pq.add(0);
 
-        System.out.println(pq.peek());
+        // System.out.println(pq.peek());
 
-        Object[] ints = pq.toArray();
-        for (Object num: ints) {
-            System.out.println(num);
-        }
+        // Object[] ints = pq.toArray();
+        // for (Object num: ints) {
+        //     System.out.println(num);
+        // }
 
-        pq.add(-1);
+        // pq.add(-1);
 
-        // Heap heap = new Heap(10);
+        Heap heap = new Heap(10);
 
-        // heap.insert(80);
-        // heap.insert(75);
-        // heap.insert(60);
-        // heap.insert(68);
-        // heap.insert(55);
-        // heap.insert(40);
+        heap.insert(30);
+        heap.insert(75);
+        heap.insert(60);
+        heap.insert(80);
+        heap.insert(52);
+        heap.insert(57);
 
-        // heap.printHeap();
+        heap.printHeap();
 
-        // heap.delete(1);
-        // heap.printHeap();
+        heap.sort();
+
+        heap.printHeap();
     }
 
     private int [] heap;
@@ -58,6 +59,17 @@ public class Heap {
         while (index > 0 && newValue > heap[getParent(index)]) {
             heap[index] = heap[getParent(index)];
             index = getParent(index);
+        }
+    }
+
+    public void sort() {
+        int lastHeapIndex = size - 1;
+        for (int i = 0; i < lastHeapIndex; i++) {
+            int tmp = heap[0];
+            heap[0] = heap[lastHeapIndex - i];
+            heap[lastHeapIndex - i] = tmp;
+
+            fixHeapBelow(0, lastHeapIndex - i - 1);
         }
     }
 
