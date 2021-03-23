@@ -5,7 +5,7 @@ public class Array {
         int[] arr = {1,3,2,6,-1,4,1,8,2};
         int k = 5;
         int result = Array.findMaxSumSubArray(k, arr);
-        System.out.print("Averages of subarrays of size K: " + Arrays.toString(result));
+        System.out.print("Maximum of subarrays of size K: " + result);
     }
 
     //find contiguous subarrays of size '5' O(n * k)
@@ -40,18 +40,21 @@ public class Array {
 
     //Maximum Sum Subarray of Size K (easy)
     public static int findMaxSumSubArray(int k, int[] arr) {
-        int result = 0;
+        int maxSum = 0;
         int windowSum = 0;
         int windowStart = 0;
         for (int windowEnd = 0; windowEnd < arr.length; windowEnd++) {
             windowSum += arr[windowEnd];
             if (windowEnd >= k - 1) {
-                result[windowStart] = windowSum;
+                maxSum = Math.max(maxSum, windowSum);
                 windowSum -= arr[windowStart];
                 windowStart++;
             }
         }
-        return result;
+        return maxSum;
     }
+
+    //Smallest Subarray whose Sum >= S 
+    //incoming variables int Sum, int S, int arr
 
 }
