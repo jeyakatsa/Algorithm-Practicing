@@ -1,11 +1,14 @@
-import java.util.Arrays;
+import java.util.*;
 
 public class Array {
     public static void main (String[] args){
-        int[] arr = {1,3,2,6,-1,4,1,8,2};
-        int k = 5;
-        int result = Array.smallestSubArray(k, arr);
-        System.out.print("Smallest subarrays of sum s: " + result);
+        // int[] arr = {1,3,2,6,-1,4,1,8,2};
+        // int k = 5;
+        // int result = Array.smallestSubArray(k, arr);
+        // System.out.print("Smallest subarrays of sum s: " + result);
+        String str = "aaarli";
+        int k = 2;
+        System.out.println("Length of Longest Substring: " + Array.longestSubString(str, k)); 
     }
 
     //find contiguous subarrays of size '5' O(n * k)
@@ -70,6 +73,27 @@ public class Array {
         return minLength == Integer.MAX_VALUE ? 0 : minLength;
     }
     
-    //incoming variables int Sum, int S, int arr
+    //Longest Substring with K Distinct Characters
+    public static int longestSubString(String str, int k) {
+        if (str == null || str.length() == 0 || str.length() < k)
+        throw new IllegalArgumentException();
+
+        int windowStart = 0, maxLength = 0;
+        Map<Character, Integer> charFrequencyMap = new HashMap<>();
+        for(int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
+            char rightChar = str.charAt(windowEnd);
+            charFrequencyMap.put(rightChar, charFrequencyMap.getOrDefault(rightChar, 0) + 1);
+            while (charFrequencyMap.size() > k) {
+                char leftChar = str.charAt(windowStart);
+                charFrequencyMap.put(leftChar, charFrequencyMap.get(leftChar) - 1);
+                if (charFrequencyMap.get(leftChar) == 0) {
+                    charFrequencyMap.remove(leftChar);
+                }
+                windowStart++;
+            }
+            maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
+        }
+        return maxLength; 
+    }
 
 }
