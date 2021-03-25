@@ -96,4 +96,21 @@ public class Array {
         return maxLength; 
     }
 
+    //Maximum Number of Fruits in Each Basket 1 fruit(letter), 1 basket.
+    public static int findLength(char[] arr) {
+        if (arr == null || arr.length == 0) {
+            throw new IllegalArgumentException();
+        }
+        //loop through char as a window...
+        //if arr[i] == arr[i++] || arr[i] == arr[i+2] hence if a character in the
+        //array is equal to the next succeeding characters, return
+        //the characters into a new array.
+        int windowStart = 0;
+        for (int windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+            if (arr)
+        }
+        // TODO: Write your code here
+        return -1;
+    }
+
 }
