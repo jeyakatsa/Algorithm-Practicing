@@ -6,9 +6,15 @@ public class Array {
         // int k = 5;
         // int result = Array.smallestSubArray(k, arr);
         // System.out.print("Smallest subarrays of sum s: " + result);
-        String str = "aaarli";
-        int k = 2;
-        System.out.println("Length of Longest Substring: " + Array.longestSubString(str, k)); 
+        
+        // String str = "aaarli";
+        // int k = 2;
+        // System.out.println("Length of Longest Substring: " + Array.longestSubString(str, k)); 
+
+        System.out.println("Maximum number of fruits: " + 
+        Array.findLength(new char[] { 'A', 'B', 'C', 'A', 'C' }));
+        System.out.println("Maximum number of fruits: " + 
+        Array.findLength(new char[] { 'A', 'B', 'C', 'B', 'B', 'C' }));
     }
 
     //find contiguous subarrays of size '5' O(n * k)
@@ -101,16 +107,22 @@ public class Array {
         if (arr == null || arr.length == 0) {
             throw new IllegalArgumentException();
         }
-        //loop through char as a window...
-        //if arr[i] == arr[i++] || arr[i] == arr[i+2] hence if a character in the
-        //array is equal to the next succeeding characters, return
-        //the characters into a new array.
-        int windowStart = 0;
+        int windowStart = 0, maxLength = 0;
+        Map<Character, Integer> fruitFrequencyMap = new HashMap<>();
+        // try to extend the range [windowStart, windowEnd]
         for (int windowEnd = 0; windowEnd < arr.length; windowEnd++) {
-            if (arr)
+            fruitFrequencyMap.put(arr[windowEnd], fruitFrequencyMap.getOrDefault(arr[windowEnd], 0) + 1);
+            // shrink the sliding window, until we are left with '2' fruits in the frequency map
+            while (fruitFrequencyMap.size() > 2) {
+                fruitFrequencyMap.put(arr[windowStart], fruitFrequencyMap.get(arr[windowStart]) - 1);
+                if (fruitFrequencyMap.get(arr[windowStart]) == 0) {
+                    fruitFrequencyMap.remove(arr[windowStart]);
+                }
+                windowStart++;
+            }
+            maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
         }
-        // TODO: Write your code here
-        return -1;
+        return maxLength;
     }
 
 }
