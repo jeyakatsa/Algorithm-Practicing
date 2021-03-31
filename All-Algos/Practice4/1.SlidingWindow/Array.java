@@ -2,8 +2,8 @@ import java.util.*;
 
 public class Array {
     public static void main (String[] args){
-        // int[] arr = {1,3,2,6,-1,4,1,8,2};
-        // int k = 5;
+        int[] arr = {1,3,2,6,-1,4,1,8,2};
+        int k = 7;
         // int result = Array.smallestSubArray(k, arr);
         // System.out.print("Smallest subarrays of sum s: " + result);
         
@@ -11,10 +11,14 @@ public class Array {
         // int k = 2;
         // System.out.println("Length of Longest Substring: " + Array.longestSubString(str, k)); 
 
-        System.out.println("Maximum number of fruits: " + 
-        Array.findLength(new char[] { 'A', 'B', 'C', 'A', 'C' }));
-        System.out.println("Maximum number of fruits: " + 
-        Array.findLength(new char[] { 'A', 'B', 'C', 'B', 'B', 'C' }));
+        // System.out.println("Maximum number of fruits: " + 
+        // Array.findLength(new char[] { 'A', 'B', 'C', 'A', 'C' }));
+        // System.out.println("Maximum number of fruits: " + 
+        // Array.findLength(new char[] { 'A', 'B', 'C', 'B', 'B', 'C' }));
+
+        int [] result = Array.search(arr, k);
+        System.out.print("Pair in array whose sum equals target: ["
+         + result[0] + ", " + result[1] + "]");
     }
 
     //find contiguous subarrays of size '5' O(n * k)
@@ -123,6 +127,50 @@ public class Array {
             maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
         }
         return maxLength;
+    }
+
+    //Find pair in array whose given sum is targetSum
+    public static int[] search(int[] arr, int targetSum) {
+        //Base case addition incase arr has nothing. return exception argument
+        if (arr == null || arr.length == 0) {
+            throw new IllegalArgumentException();
+        }
+
+        // //MY SOLUTION: not optimal for array pairs far away from each other.
+        // //first pointer 's' to start at beginning of array
+        // int s = 0; 
+        // //2nd pointer 'x' to start at end of array
+        // int x = arr.length - 1;
+        // //for loop to loop through entire array
+        // //1st pointer loops first, 2nd pointer doesn't loop
+        // for (s = 0; s < arr.length; s++) {
+        //     //if sum of 1st pointer and 2nd pointer equals targetSum, 
+        //     if (targetSum == arr[s] + arr[x]) {
+        //         //else if sum of 1st pointer and 2nd pointer doesn't equal targetSum,
+        //         //.. decrement 2nd pointer and repeat If statement.
+        //         if (targetSum != arr[s] + arr[x]) {
+        //             x--;
+        //         }
+        //         return new int[] {arr[s], arr[x]};
+        //          //...return new integer with 1st pointer and 2nd pointer
+        //     }
+        // }
+        // //else return -1
+        // return new int[] { -1, -1 };
+
+        //Optimal Solution:
+        int left = 0, right = arr.length - 1;
+        while (left < right) {
+          int currentSum = arr[left] + arr[right];
+          if (currentSum == targetSum)
+            return new int[] { left, right }; // found the pair
+    
+          if (targetSum > currentSum)
+            left++; // we need a pair with a bigger sum
+          else
+            right--; // we need a pair with a smaller sum
+        }
+        return new int[] { -1, -1 };
     }
 
 }
