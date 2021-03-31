@@ -3,6 +3,7 @@ import java.util.*;
 public class Array {
     public static void main (String[] args){
         int[] arr = {1,3,2,6,-1,4,1,8,2};
+        int[] sortedArr = {1 ,1 ,2 ,3, 4, 5, 9, 9};
         int k = 7;
         // int result = Array.smallestSubArray(k, arr);
         // System.out.print("Smallest subarrays of sum s: " + result);
@@ -16,9 +17,11 @@ public class Array {
         // System.out.println("Maximum number of fruits: " + 
         // Array.findLength(new char[] { 'A', 'B', 'C', 'B', 'B', 'C' }));
 
-        int [] result = Array.search(arr, k);
-        System.out.print("Pair in array whose sum equals target: ["
-         + result[0] + ", " + result[1] + "]");
+        // int [] result = Array.search(arr, k);
+        // System.out.print("Pair in array whose sum equals target: ["
+        //  + result[0] + ", " + result[1] + "]");
+
+        System.out.println(Array.remove(sortedArr));
     }
 
     //find contiguous subarrays of size '5' O(n * k)
@@ -172,5 +175,43 @@ public class Array {
         }
         return new int[] { -1, -1 };
     }
+
+    //Remove duplicates from an array of sorted numbers, return arr.length
+    public static int remove(int[] arr) {
+        //base case for if array has no numbers, return illegalargumentexception
+        //set left target (beginning of array) and right target (end of array)
+        //if left target == right target, pop(remove left target & right target)
+        //return arr.length
+        //else arr.length;
+
+        // MY SOLUTION: Wrong, no pop?
+        // if (arr == null || 0 == arr.length) {
+        //     throw new IllegalArgumentException();
+        // }
+        // int left = 0, right = arr.length - 1;
+        // for (left = 0; left < arr.length; left++) {
+        //     if (left == right) {
+        //         arr.pop(arr[left], arr[right]);
+        //         return arr.length;
+        //     }
+        //     if (left != right) {
+        //         right--;
+        //     }
+
+        // }
+        // return arr.length;
+
+        //OTHER SOLUTION: right
+        int nextNonDuplicate = 1; // index of the next non-duplicate element
+        for (int i = 1; i < arr.length; i++) {
+          if (arr[nextNonDuplicate - 1] != arr[i]) {
+            arr[nextNonDuplicate] = arr[i];
+            nextNonDuplicate++;
+          }
+        }
+    
+        return nextNonDuplicate;
+    }
+
 
 }
