@@ -216,10 +216,19 @@ public class Array {
     //Given sorted Array, create new array containing squares of all numbers 
     //in sorted order...
     public static int[] makeSquares(int[] arr) {
-        int[] squares = new int[arr.length];
         //Obviously, base case...
-        //Then loop through entire array and add all numbers
+        //Then loop through entire array and square all numbers
+        //return all numbers into for loop.
         //to temp variable that stores all numbers?
+        if (arr == null || 0 == arr.length) {
+            throw new IllegalArgumentException();
+        }
+        int squaredNum;
+        int[] squares = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            squaredNum = arr[i] * arr[i];
+            
+        }
         return squares;
     }
 
