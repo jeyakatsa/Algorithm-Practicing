@@ -166,4 +166,14 @@ public class Array {
             }
         }
     }
+
+    //Triplet Sum Close to Target
+    //Given an array of unsorted numbers and a target number, find a triplet
+    //in array hose sum is as close to target as possible
+    public static int[] searchSumTripplet (int[] arr, int target) {
+        if (arr == null || 0 == arr.length) {
+            throw new IllegalArgumentException();
+        }
+
+    }
 }
