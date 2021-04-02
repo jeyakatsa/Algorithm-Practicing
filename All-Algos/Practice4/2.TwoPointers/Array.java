@@ -103,10 +103,6 @@ public class Array {
     //Given sorted Array, create new array containing squares of all numbers 
     //in sorted order...
     public static int[] makeSquares(int[] arr) {
-        //Obviously, base case...
-        //Then loop through entire array and square all numbers
-        //return all numbers into for loop.
-        //to temp variable that stores all numbers?
         if (arr == null || 0 == arr.length) {
             throw new IllegalArgumentException();
         }
@@ -127,6 +123,21 @@ public class Array {
         }
         return squares;
     }
-    
 
+    //Triplet Sum to Zero.
+    //Given an array of unsorted numbers, find all unique triplets in
+    //that add up to zero
+    public static List<List<Integer>> searchTriplets(int[]arr){
+        //for loop to loop through array
+        //basecase first incase there are no numbers in array
+        //three pointers, left, right, middle(starting from left)
+        //if pointers all add up to 0, return them
+        //How to find unique pointers, LinkedList?
+        List<List<Integer>> triplets = new ArrayList<>();
+
+        return triplets;
+
+
+
+    }
 }
