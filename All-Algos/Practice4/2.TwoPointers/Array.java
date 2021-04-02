@@ -12,10 +12,12 @@ public class Array {
 
         // System.out.println(Array.remove(sortedArr));
 
-        int[] result = Array.makeSquares(arr);
-        for (int num : result)
-            System.out.print(num + " ");
-        System.out.println();
+        // int[] result = Array.makeSquares(arr);
+        // for (int num : result)
+        //     System.out.print(num + " ");
+        // System.out.println();
+
+        System.out.println(searchTriplets(arr));
     }
 
 
@@ -128,16 +130,40 @@ public class Array {
     //Given an array of unsorted numbers, find all unique triplets in
     //that add up to zero
     public static List<List<Integer>> searchTriplets(int[]arr){
-        //for loop to loop through array
-        //basecase first incase there are no numbers in array
-        //three pointers, left, right, middle(starting from left)
-        //if pointers all add up to 0, return them
-        //How to find unique pointers, LinkedList?
+        if (arr == null || 0 == arr.length) {
+            throw new IllegalArgumentException();
+        }
+        Arrays.sort(arr);
         List<List<Integer>> triplets = new ArrayList<>();
-
+        for (int i = 0; i < arr.length - 2; i++) {
+            if (i > 0 && arr[i] == arr[i - 1])
+                continue;
+            searchPair(arr, -arr[i], i + 1, triplets);    
+        }
         return triplets;
-
-
-
+    }
+    public static void searchPair(int[] arr, int targetSum, int left, 
+    List<List<Integer>> triplets) {
+        int right = arr.length - 1;
+        while (left < right) {
+            int currentSum = arr[left] + arr[right];
+            if(currentSum == targetSum) { //found the triplet
+                triplets.add(Arrays.asList(-targetSum, arr[left], arr[right]));
+                left++;
+                right--;
+                while (left < right && arr[left] == arr[left - 1]){
+                    left++; // skip same element to avoid duplicate triplets
+                }
+                while (left < right && arr[right] == arr[right + 1]){
+                    right--; //skip same elements to avoid duplicate triplets
+                }
+            }
+            else if (targetSum > currentSum) {
+                left++;
+            }
+            else {
+                right--;
+            }
+        }
     }
 }
