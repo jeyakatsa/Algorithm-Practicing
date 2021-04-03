@@ -260,6 +260,9 @@ public class Array {
         //return subArray[arr[i], arr[i+1]]
         //else if arr[i] >= target or arr[i] * arr[i+1] >= target
         //return null
+
+
+        //THEIR SOLUTION: On^2 time, On space)
         List<List<Integer>> result = new ArrayList<>();
         int product = 1, left = 0;
         for (int right = 0; right < arr.length; right++) {
