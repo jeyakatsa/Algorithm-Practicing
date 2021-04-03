@@ -315,5 +315,17 @@ public class Array {
     }
 
 
+    //Quadruple Sum to Target
+    //Given array of unsorted numbers and target, find all unique
+    //quadriplets in it, whose sum is equal to target
+    public static int[] quadruplets(int[] arr, int target) {
+        if (arr == null || arr.length < 4) {
+            throw new IllegalArgumentException();
+        }
+        int i = 0, first = i+1, second = i+2, third = i+3;
+        for (i = 0; i < arr.length; i++)
+    }
+
+
     
 }
