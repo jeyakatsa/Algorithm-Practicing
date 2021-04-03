@@ -4,7 +4,7 @@ public class Array {
     public static void main (String[] args){
         int[] arr = {1,3,2,6,-1,4,1,8,2};
         int[] sortedArr = {1 ,1 ,2 ,3, 4, 5, 9, 9};
-        int k = 7;
+        int k = 3;
 
         // int [] result = Array.search(arr, k);
         // System.out.print("Pair in array whose sum equals target: ["
@@ -17,7 +17,7 @@ public class Array {
         //     System.out.print(num + " ");
         // System.out.println();
 
-        System.out.println(searchSumTriplet(arr, k));
+        System.out.println(lessTriplets(arr, k));
     }
 
 
@@ -198,4 +198,48 @@ public class Array {
         }
         return targetSum - smallestDifference;
     }
+
+    //Triplets Sum is less than target
+    public static int lessTriplets (int[] arr, int target) {
+        if (arr == null || arr.length < 3) {
+            throw new IllegalArgumentException();
+        }
+        // //My Attempted Solution:
+        // //Sort Array first...
+        // //set 3 target pointers...
+        // //while left is less than right, find sum that's less than target sum
+        // Arrays.sort(arr);        
+        // int i = 0, left = i + 1, right = arr.length - 1;
+        // for(i = 0; i < arr.length - 2; i++){
+        //     while (left < right) {
+        //         int sum = arr[i] + arr[left] + arr[right];
+        //         if (sum < targetSum) {
+
+        //         }
+        //     }
+        // }
+
+        //Their Convoluted Solution:
+        Arrays.sort(arr);
+        int count = 0;
+        for (int i = 0; i < arr.length - 2; i++) {
+          count += searchPair(arr, target - arr[i], i);
+        }
+        return count;
+    }
+    private static int searchPair(int[] arr, int targetSum, int first) {
+        int count = 0;
+        int left = first + 1, right = arr.length - 1;
+        while (left < right) {
+          if (arr[left] + arr[right] < targetSum) { // found the triplet
+            // since arr[right] >= arr[left], therefore, we can replace arr[right] by any number between 
+            // left and right to get a sum less than the target sum
+            count += right - left;
+            left++;
+          } else {
+            right--; // we need a pair with a smaller sum
+          }
+        }
+        return count;
+      }
 }
