@@ -4,7 +4,7 @@ public class Array {
     public static void main (String[] args){
         int[] arr = {1,3,2,6,-1,4,1,8,2};
         int[] sortedArr = {1 ,1 ,2 ,3, 4, 5, 9, 9};
-        int k = 3;
+        int k = 100;
 
         // int [] result = Array.search(arr, k);
         // System.out.print("Pair in array whose sum equals target: ["
@@ -17,7 +17,7 @@ public class Array {
         //     System.out.print(num + " ");
         // System.out.println();
 
-        System.out.println(lessTriplets(arr, k));
+        System.out.println(contiguousArray(arr, k));
     }
 
 
@@ -244,7 +244,7 @@ public class Array {
     }
 
     //Subarrays with Product Less than a Target (contiguous)
-    private static int[] contiguousArray(int[] arr, int target) {
+    private static List<List<Integer>> contiguousArray(int[] arr, int target) {
         if (arr == null || arr.length == 0) {
             throw new IllegalArgumentException();
         }
@@ -257,9 +257,25 @@ public class Array {
         //return subArray[arr[i]];
         //loop through array again (for output consistency)
         //if arr[i] * arr[i+1] < target
-        //return subArray[arr[i] +]
+        //return subArray[arr[i], arr[i+1]]
         //else if arr[i] >= target or arr[i] * arr[i+1] >= target
         //return null
+        List<List<Integer>> result = new ArrayList<>();
+        int product = 1, left = 0;
+        for (int right = 0; right < arr.length; right++) {
+          product *= arr[right];
+          while (product >= target && left < arr.length)
+            product /= arr[left++];
+          // since the product of all numbers from left to right is less than the target therefore,
+          // all subarrays from left to right will have a product less than the target too; to avoid
+          // duplicates, we will start with a subarray containing only arr[right] and then extend it
+          List<Integer> tempList = new LinkedList<>();
+          for (int i = right; i >= left; i--) {
+            tempList.add(0, arr[i]);
+            result.add(new ArrayList<>(tempList));
+          }
+        }
+        return result;
     }
 
     
