@@ -4,6 +4,7 @@ public class Array {
     public static void main (String[] args){
         int[] arr = {1,3,2,6,-1,4,1,8,2};
         int[] sortedArr = {1 ,1 ,2 ,3, 4, 5, 9, 9};
+        int[] dutchArr = {0, 1, 2, 2, 2, 1, 0, 1};
         int k = 100;
 
         // int [] result = Array.search(arr, k);
@@ -17,7 +18,10 @@ public class Array {
         //     System.out.print(num + " ");
         // System.out.println();
 
-        System.out.println(contiguousArray(arr, k));
+        sort(dutchArr);
+        for (int num : dutchArr) {
+            System.out.print(num + " ");
+        }
     }
 
 
@@ -262,7 +266,7 @@ public class Array {
         //return null
 
 
-        //THEIR SOLUTION: On^2 time, On space)
+        //THEIR SOLUTION: (On^2 time, On space)
         List<List<Integer>> result = new ArrayList<>();
         int product = 1, left = 0;
         for (int right = 0; right < arr.length; right++) {
@@ -280,6 +284,36 @@ public class Array {
         }
         return result;
     }
+
+    //Dutch National Flag
+    public static void sort(int[] arr){
+        //base case to set 
+        //sort array. then return array
+        if (arr == null || arr.length == 0) {
+            throw new IllegalArgumentException();
+        }
+        int low = 0, high = arr.length - 1;
+        for (int i = 0; i <= high;) {
+            if (arr[i] == 0) {
+                swap(arr, i, low);
+                i++;
+                low++;
+            }
+            else if (arr[i] == 1) {
+                i++;
+            }
+            else { //case for arr[i] == 2
+                swap (arr, i, high);
+                high--;
+            }
+        }
+    }
+    private static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
 
     
 }
