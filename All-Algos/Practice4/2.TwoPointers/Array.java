@@ -258,6 +258,8 @@ public class Array {
         //loop through array again (for output consistency)
         //if arr[i] * arr[i+1] < target
         //return subArray[arr[i] +]
+        //else if arr[i] >= target or arr[i] * arr[i+1] >= target
+        //return null
     }
 
     
