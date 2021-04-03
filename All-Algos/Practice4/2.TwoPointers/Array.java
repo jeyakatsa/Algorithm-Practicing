@@ -241,5 +241,24 @@ public class Array {
           }
         }
         return count;
-      }
+    }
+
+    //Subarrays with Product Less than a Target (contiguous)
+    private static int[] contiguousArray(int[] arr, int target) {
+        if (arr == null || arr.length == 0) {
+            throw new IllegalArgumentException();
+        }
+        //My BRUTE FORCE APPROACH
+        //base case for if array is empty
+        //initiate subarray to return contiguous less than target
+        //Sort Array (to simplify)
+        //loop through array
+        //if arr[i] < target
+        //return subArray[arr[i]];
+        //loop through array again (for output consistency)
+        //if arr[i] * arr[i+1] < target
+        //return subArray[arr[i] +]
+    }
+
+    
 }
