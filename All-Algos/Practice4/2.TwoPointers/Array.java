@@ -17,7 +17,7 @@ public class Array {
         //     System.out.print(num + " ");
         // System.out.println();
 
-        System.out.println(searchTriplets(arr));
+        System.out.println(searchSumTriplet(arr, k));
     }
 
 
