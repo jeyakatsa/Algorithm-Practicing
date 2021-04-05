@@ -6,13 +6,13 @@ public class LinkedList {
         head.next.next.next = new LinkedList(4);
         head.next.next.next.next = new LinkedList(5);
         head.next.next.next.next.next = new LinkedList(6);
-        System.out.println("LinkedList cycle start: " + findCycleStart(head));
+        System.out.println("LinkedList cycle start: " + findCycleStart(head).value);
     
         head.next.next.next.next.next.next = head.next.next;
-        System.out.println("LinkedList cycle start: " + findCycleStart(head));
+        System.out.println("LinkedList cycle start: " + findCycleStart(head).value);
     
         head.next.next.next.next.next.next = head.next.next.next;
-        System.out.println("LinkedList cycle start: " + findCycleStart(head));
+        System.out.println("LinkedList cycle start: " + findCycleStart(head).value);
     }
 
 
@@ -37,31 +37,46 @@ public class LinkedList {
     }
 
     //Start of LinkedList Cycle...
-    public static LinkedList intersection(LinkedList head) {
+    public static LinkedList findCycleStart(LinkedList head) {
+        int cycleLength = 0;
+        // find the LinkedList cycle
         LinkedList slow = head;
         LinkedList fast = head;
         while (fast != null && fast.next != null) {
-            fast = fast.next.next;
-            slow = slow.next;
-            if (slow == fast)
-                return slow; // found the cycle
+          fast = fast.next.next;
+          slow = slow.next;
+          if (slow == fast) { // found the cycle
+            cycleLength = calculateCycleLength(slow);
+            break;
+          }
         }
-        return null;
-    }
-
-    public static LinkedList findCycleStart(LinkedList head) {
-        if (head == null || head.next == null) {
-            return null;
+    
+        return findStart(head, cycleLength);
+    }    
+    private static int calculateCycleLength(LinkedList slow) {
+        LinkedList current = slow;
+        int cycleLength = 0;
+        do {
+            current = current.next;
+            cycleLength++;
+        } while (current != slow);
+        
+        return cycleLength;
+    }    
+    private static LinkedList findStart(LinkedList head, int cycleLength) {
+        LinkedList pointer1 = head, pointer2 = head;
+        // move pointer2 ahead 'cycleLength' nodes
+        while (cycleLength > 0) {
+          pointer2 = pointer2.next;
+          cycleLength--;
         }
-        LinkedList intersect = intersection(head);
-        if(intersect == null) {
-            return null;
+    
+        // increment both pointers until they meet at the start of the cycle
+        while (pointer1 != pointer2) {
+          pointer1 = pointer1.next;
+          pointer2 = pointer2.next;
         }
-        LinkedList start = head;
-        while (intersect != start) {
-            start = start.next;
-            intersect = intersect.next;
-        }
-        return start;
+    
+        return pointer1;
     }
 }
