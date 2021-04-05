@@ -37,7 +37,7 @@ public class LinkedList {
     }
 
     //Start of LinkedList Cycle...
-    public static LinkedList findCycleStart(LinkedList head) {
+    public static LinkedList intersection(LinkedList head) {
         LinkedList slow = head;
         LinkedList fast = head;
         while (fast != null && fast.next != null) {
@@ -46,6 +46,22 @@ public class LinkedList {
             if (slow == fast)
                 return slow; // found the cycle
         }
-        return false;
+        return null;
+    }
+
+    public static LinkedList findCycleStart(LinkedList head) {
+        if (head == null || head.next == null) {
+            return null;
+        }
+        LinkedList intersect = intersection(head);
+        if(intersect == null) {
+            return null;
+        }
+        LinkedList start = head;
+        while (intersect != start) {
+            start = start.next;
+            intersect = intersect.next;
+        }
+        return start;
     }
 }
