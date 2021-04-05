@@ -6,13 +6,13 @@ public class LinkedList {
         head.next.next.next = new LinkedList(4);
         head.next.next.next.next = new LinkedList(5);
         head.next.next.next.next.next = new LinkedList(6);
-        System.out.println("LinkedList has cycle: " + hasCycle(head));
+        System.out.println("LinkedList cycle start: " + findCycleStart(head));
     
         head.next.next.next.next.next.next = head.next.next;
-        System.out.println("LinkedList has cycle: " + hasCycle(head));
+        System.out.println("LinkedList cycle start: " + findCycleStart(head));
     
         head.next.next.next.next.next.next = head.next.next.next;
-        System.out.println("LinkedList has cycle: " + hasCycle(head));
+        System.out.println("LinkedList cycle start: " + findCycleStart(head));
     }
 
 
@@ -23,6 +23,7 @@ public class LinkedList {
         this.value = value;
     }
 
+    //Check if List has cycle
     public static boolean hasCycle(LinkedList head) {
         LinkedList slow = head;
         LinkedList fast = head;
@@ -31,6 +32,19 @@ public class LinkedList {
           slow = slow.next;
           if (slow == fast)
             return true; // found the cycle
+        }
+        return false;
+    }
+
+    //Start of LinkedList Cycle...
+    public static LinkedList findCycleStart(LinkedList head) {
+        LinkedList slow = head;
+        LinkedList fast = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (slow == fast)
+                return slow; // found the cycle
         }
         return false;
     }
