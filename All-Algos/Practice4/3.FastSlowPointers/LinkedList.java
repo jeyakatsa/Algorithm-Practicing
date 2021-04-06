@@ -79,6 +79,4 @@ public class LinkedList {
 
     return pointer1;
   }
-
-  //Happy Number
 }
