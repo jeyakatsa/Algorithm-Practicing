@@ -11,7 +11,7 @@ public class HappyNumber {
       slow = findSquareSum(slow); // move one step
       fast = findSquareSum(findSquareSum(fast)); // move two steps
     } while (slow != fast); // found the cycle
-
+ 
     return slow == 1; // see if the cycle is stuck on the number '1'
   }
 
