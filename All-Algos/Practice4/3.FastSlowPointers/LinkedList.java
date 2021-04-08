@@ -16,7 +16,11 @@ public class LinkedList {
     // head.next.next.next.next.next.next = head.next.next.next;
     // System.out.println("LinkedList cycle start: " + findCycleStart(head).value);
 
-
+    reorder(head);
+    while (head != null) {
+      System.out.print(head.value + " ");
+      head = head.next;
+    }
   }
 
 
@@ -131,7 +135,6 @@ public class LinkedList {
       return true;
     return false;
   }
-
   private static LinkedList reverse(LinkedList head) {
     LinkedList prev = null;
     while (head != null) {
@@ -142,4 +145,47 @@ public class LinkedList {
     }
     return prev;
   }
+
+  //Reorder LinkedList
+  public static void reorder(LinkedList head) {
+    if (head == null || head.next == null)
+      return;
+
+    // find the middle of the LinkedList
+    LinkedList slow = head, fast = head;
+    while (fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+
+    // slow is now pointing to the middle node
+    LinkedList headSecondHalf = reversed(slow); // reverse the second half
+    LinkedList headFirstHalf = head;
+
+    // rearrange to produce the LinkedList in the required order
+    while (headFirstHalf != null && headSecondHalf != null) {
+      LinkedList temp = headFirstHalf.next;
+      headFirstHalf.next = headSecondHalf;
+      headFirstHalf = temp;
+
+      temp = headSecondHalf.next;
+      headSecondHalf.next = headFirstHalf;
+      headSecondHalf = temp;
+    }
+    // set the next of the last node to 'null'
+    if (headFirstHalf != null)
+      headFirstHalf.next = null;
+  }
+  private static LinkedList reversed(LinkedList head) {
+    LinkedList prev = null;
+    while (head != null) {
+      LinkedList next = head.next;
+      head.next = prev;
+      prev = head;
+      head = next;
+    }
+    return prev;
+  }
+
+
 }
