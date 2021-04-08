@@ -6,7 +6,7 @@ public class LinkedList {
     head.next.next.next = new LinkedList(4);
     head.next.next.next.next = new LinkedList(5);
     head.next.next.next.next.next = new LinkedList(6);
-    System.out.println("Middle Node is: " +  findMiddle(head).value);
+    System.out.println("Is Palindrome? " +  isPalindrome(head));
 
     // System.out.println("LinkedList cycle start: " + findCycleStart(head).value);
 
@@ -99,5 +99,47 @@ public class LinkedList {
     }
 
     return slow;
+  }
+
+  //Palindrome
+  public static boolean isPalindrome(LinkedList head) {
+    if (head == null || head.next == null)
+      return true;
+
+    // find middle of the LinkedList
+    LinkedList slow = head;
+    LinkedList fast = head;
+    while (fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+
+    LinkedList headSecondHalf = reverse(slow); // reverse the second half
+    LinkedList copyHeadSecondHalf = headSecondHalf; // store the head of reversed part to revert back later
+
+    // compare the first and the second half
+    while (head != null && headSecondHalf != null) {
+      if (head.value != headSecondHalf.value) {
+        break; // not a palindrome
+      }
+      head = head.next;
+      headSecondHalf = headSecondHalf.next;
+    }
+
+    reverse(copyHeadSecondHalf); // revert the reverse of the second half
+    if (head == null || headSecondHalf == null) // if both halves match
+      return true;
+    return false;
+  }
+
+  private static LinkedList reverse(LinkedList head) {
+    LinkedList prev = null;
+    while (head != null) {
+      LinkedList next = head.next;
+      head.next = prev;
+      prev = head;
+      head = next;
+    }
+    return prev;
   }
 }
