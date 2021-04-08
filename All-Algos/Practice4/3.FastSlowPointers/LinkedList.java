@@ -6,13 +6,17 @@ public class LinkedList {
     head.next.next.next = new LinkedList(4);
     head.next.next.next.next = new LinkedList(5);
     head.next.next.next.next.next = new LinkedList(6);
-    System.out.println("LinkedList cycle start: " + findCycleStart(head).value);
+    System.out.println("Middle Node is: " +  findMiddle(head).value);
 
-    head.next.next.next.next.next.next = head.next.next;
-    System.out.println("LinkedList cycle start: " + findCycleStart(head).value);
+    // System.out.println("LinkedList cycle start: " + findCycleStart(head).value);
 
-    head.next.next.next.next.next.next = head.next.next.next;
-    System.out.println("LinkedList cycle start: " + findCycleStart(head).value);
+    // head.next.next.next.next.next.next = head.next.next;
+    // System.out.println("LinkedList cycle start: " + findCycleStart(head).value);
+
+    // head.next.next.next.next.next.next = head.next.next.next;
+    // System.out.println("LinkedList cycle start: " + findCycleStart(head).value);
+
+
   }
 
 
@@ -78,5 +82,22 @@ public class LinkedList {
     }
 
     return pointer1;
+  }
+
+  //find middle
+  public static LinkedList findMiddle(LinkedList head) {
+    if (head == null) {
+      throw new IllegalArgumentException("No Value in List");
+    }
+
+    LinkedList slow = head;
+    LinkedList fast = head;
+
+    while (fast != null && fast.next !=null) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+
+    return slow;
   }
 }
