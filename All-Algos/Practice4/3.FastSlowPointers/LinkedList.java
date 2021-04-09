@@ -146,7 +146,7 @@ public class LinkedList {
     return prev;
   }
 
-  //Reorder LinkedList
+  //Rearrange LinkedList
   public static void reorder(LinkedList head) {
     if (head == null || head.next == null)
       return;
