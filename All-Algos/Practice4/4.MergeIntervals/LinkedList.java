@@ -41,6 +41,17 @@ class MergeIntervals {
     return mergedIntervals;
   }
 
+  //Insert Interval
+  public static List<Interval> insert(List<Interval> intervals, Interval newInterval) {
+    List<Interval> mergedIntervals = new ArrayList<>();
+    if (intervals.size() < 2) {
+      return intervals;
+    }
+
+    return mergedIntervals;
+  }
+
+
   public static void main(String[] args) {
     List<Interval> input = new ArrayList<Interval>();
     input.add(new Interval(1, 4));
