@@ -102,22 +102,44 @@ class MergeIntervals {
     return result.toArray(new Interval[result.size()]); 
   }
 
+  //Conflicting Appointments
+  public static boolean canAttend(Interval[] intervals) {
+    if (intervals == null || intervals.length == 0) {
+      return false;
+    }
+    Arrays.sort(intervals, (a, b) -> Integer.compare(a.start, b.start));
+
+    // find any overlapping appointment
+    for (int i = 1; i < intervals.length; i++) {
+      if (intervals[i].start < intervals[i - 1].end) {
+        // please note the comparison above, it is "<" and not "<="
+        // while merging we needed "<=" comparison, as we will be merging the two
+        // intervals having condition "intervals[i].start == intervals[i - 1].end" but
+        // such intervals don't represent conflicting appointments as one starts right
+        // after the other
+        return false;
+      }
+    }
+    return true;  
+  }
+
 
   public static void main(String[] args) {
-    Interval[] input1 = new Interval[] { new Interval(1, 3), new Interval(5, 6), new Interval(7, 9) };
-    Interval[] input2 = new Interval[] { new Interval(2, 3), new Interval(5, 7) };
-    Interval[] result = merge2(input1, input2);
-    System.out.print("Intervals Intersection: ");
-    for (Interval interval : result)
-      System.out.print("[" + interval.start + "," + interval.end + "] ");
-    System.out.println();
 
-    input1 = new Interval[] { new Interval(1, 3), new Interval(5, 7), new Interval(9, 12) };
-    input2 = new Interval[] { new Interval(5, 10) };
-    result = merge2(input1, input2);
-    System.out.print("Intervals Intersection: ");
-    for (Interval interval : result)
-      System.out.print("[" + interval.start + "," + interval.end + "] ");
+
+    Interval[] input = new Interval[] { new Interval(1, 3), new Interval(5, 7), new Interval(9, 12) };
+    boolean result = canAttend(input);
+    System.out.print("Can attend? " + result);
+
+    // Interval[] input1 = new Interval[] { new Interval(1, 3), new Interval(5, 6), new Interval(7, 9) };
+    // Interval[] input2 = new Interval[] { new Interval(2, 3), new Interval(5, 7) };
+    // Interval[] result = merge2(input1, input2);
+    // System.out.print("Intervals Intersection: ");
+    // for (Interval interval : result)
+    //   System.out.print("[" + interval.start + "," + interval.end + "] ");
+    // System.out.println();
+
+
 
 
     // List<Interval> input = new ArrayList<Interval>();
@@ -147,4 +169,6 @@ class MergeIntervals {
     //   System.out.print("[" + interval.start + "," + interval.end + "] ");
     // System.out.println();
   }
+
+
 }
