@@ -12,6 +12,9 @@ class Interval {
 
 class MergeIntervals {
 
+
+
+  //MergeLikely Intervals
   public static List<Interval> merge(List<Interval> intervals) {
     if (intervals.size() < 2)
       return intervals;
@@ -40,6 +43,9 @@ class MergeIntervals {
 
     return mergedIntervals;
   }
+
+
+
 
   //Insert Interval
   public static List<Interval> insert(List<Interval> intervals, Interval newInterval) {
@@ -71,6 +77,19 @@ class MergeIntervals {
   }
 
 
+
+  //Intervals Intersection
+  //Given two lists of intervals, find intersection of two lists.
+  public static Interval[] merge2(Interval[] arr1, Interval[] arr2) {
+    List<Interval> intervalsIntersection = new ArrayList<Interval>();
+    if ((arr1 == null || arr1.length == 0) || (arr2 == null || arr2.length == 0)) {
+      return arr1 + arr2;
+    }
+
+    return intervalsIntersection.toArray(new Interval[intervalsIntersection.size()]);
+  }
+
+
   public static void main(String[] args) {
     List<Interval> input = new ArrayList<Interval>();
     input.add(new Interval(1, 4));
@@ -94,8 +113,8 @@ class MergeIntervals {
     input.add(new Interval(1, 4));
     input.add(new Interval(2, 6));
     input.add(new Interval(3, 5));
-    System.out.print("Merged intervals: ");
-    for (Interval interval : MergeIntervals.merge(input))
+    System.out.print("Intervals aftr inserting new interval: ");
+    for (Interval interval : MergeIntervals.insert(input, new Interval(2, 9)))
       System.out.print("[" + interval.start + "," + interval.end + "] ");
     System.out.println();
   }
