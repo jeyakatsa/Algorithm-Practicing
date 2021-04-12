@@ -1,12 +1,49 @@
 public class Sorting {
 
+  //Find all Missing Numbers
+  public static int findAllMissing(int[] nums) {
+    if (nums == null || nums.length == 0) {
+      return -1;
+    }
+    int i = 0;
+    while(i < nums.length) {
+      if (nums[i] < nums.length && nums[i] != nums[nums[i]])
+        swap(nums, i, nums[i]);
+      else
+        i++;
+    }
+
+    int missing = 0;
+
+    if (nums[i] != nums[nums[i]]){
+      missing = nums[i]++;
+    }
+
+    return missing;
+
+  }
+
 
   //Find missing number [eg. 6,2,3,1,5 = 4]
   //sort array first
   //iterate through array
   //if subarray[i]+1 does not equal subarray[i]+1
   //return
+  public static int findMissingNumber(int[] nums) {
+    int i = 0;
+    while (i < nums.length) {
+      if (nums[i] < nums.length && nums[i] != nums[nums[i]])
+        swap(nums, i, nums[i]);
+      else
+        i++;
+    }
+    // find the first number missing from its index, that will be our required number
+    for (i = 0; i < nums.length; i++)
+      if (nums[i] != i)
+        return i;
 
+    return nums.length;
+  }
 
   //Sort Array...
   public static void sort(int[] nums) {
@@ -26,22 +63,24 @@ public class Sorting {
   }
   
   public static void main(String[] args) {
-    int[] arr = new int[] { 3, 1, 5, 4, 2 };
-    sort(arr);
-    for (int num : arr)
-      System.out.print(num + " ");
-    System.out.println();
+    int[] arr = new int[] { 3, 1, 5, 4, 2, 9, 0 };
+  //   sort(arr);
+  //   for (int num : arr)
+  //     System.out.print(num + " ");
+  //   System.out.println();
 
-    arr = new int[] { 2, 6, 4, 3, 1, 5 };
-    sort(arr);
-    for (int num : arr)
-      System.out.print(num + " ");
-    System.out.println();
+  //   arr = new int[] { 2, 6, 4, 3, 1, 5 };
+  //   sort(arr);
+  //   for (int num : arr)
+  //     System.out.print(num + " ");
+  //   System.out.println();
 
-    arr = new int[] { 1, 5, 6, 4, 3, 2 };
-    sort(arr);
-    for (int num : arr)
-      System.out.print(num + " ");
-    System.out.println();
+  //   arr = new int[] { 1, 5, 6, 4, 3, 2 };
+  //   sort(arr);
+  //   for (int num : arr)
+  //     System.out.print(num + " ");
+  //   System.out.println();
+  
+    System.out.print(findAllMissing(arr));
   }
 }
