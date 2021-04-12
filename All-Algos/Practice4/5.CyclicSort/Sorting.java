@@ -1,25 +1,27 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Sorting {
 
   //Find all Missing Numbers
-  public static int findAllMissing(int[] nums) {
+  public static List<Integer> findAllMissing(int[] nums) {
     if (nums == null || nums.length == 0) {
-      return -1;
+      throw new IllegalArgumentException();
     }
     int i = 0;
     while(i < nums.length) {
-      if (nums[i] < nums.length && nums[i] != nums[nums[i]])
-        swap(nums, i, nums[i]);
+      if (nums[i] != nums[nums[i] - 1])
+        swap(nums, i, nums[i] - 1);
       else
         i++;
     }
 
-    int missing = 0;
+    List<Integer> missingNumbers = new ArrayList<>();
+    for (i = 0; i < nums.length; i++)
+      if (nums[i] != i + 1)
+        missingNumbers.add(i + 1);
 
-    if (nums[i] != nums[nums[i]]){
-      missing = nums[i]++;
-    }
-
-    return missing;
+    return missingNumbers;
 
   }
 
@@ -44,6 +46,8 @@ public class Sorting {
 
     return nums.length;
   }
+
+
 
   //Sort Array...
   public static void sort(int[] nums) {
@@ -80,7 +84,9 @@ public class Sorting {
   //   for (int num : arr)
   //     System.out.print(num + " ");
   //   System.out.println();
+
+    List<Integer> missing = findAllMissing(new int[] { 3, 1, 5, 4, 2, 9, 0 });
   
-    System.out.print(findAllMissing(arr));
+    System.out.print("Missing numbers: " + missing);
   }
 }
