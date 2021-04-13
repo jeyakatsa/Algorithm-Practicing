@@ -65,9 +65,35 @@ public class Sorting {
     arr[i] = arr[j];
     arr[j] = temp;
   }
+
+
+
+  //Find Duplicate Number
+  //Base Case if nothing in array
+  //Sort Array
+  //if nums[i] == nums[i]+1
+  //return nums[i]
+  public static int findDuplicate(int[] nums){
+    if(nums == null || nums.length == 0) {
+      throw new IllegalArgumentException();
+    }
+    int i = 0;
+    while (i < nums.length) {
+      if (nums[i] != i + 1) {
+        if (nums[i] != nums[nums[i] - 1])
+          swap(nums, i, nums[i] - 1);
+        else // we have found the duplicate
+          return nums[i];
+      } else {
+        i++;
+      }
+    }
+
+    return -1;
+  }
   
   public static void main(String[] args) {
-    int[] arr = new int[] { 3, 1, 5, 4, 2, 9, 0 };
+    int[] arr = new int[] { 2, 1, 5, 4, 2, 9, 0 };
   //   sort(arr);
   //   for (int num : arr)
   //     System.out.print(num + " ");
@@ -85,8 +111,12 @@ public class Sorting {
   //     System.out.print(num + " ");
   //   System.out.println();
 
-    List<Integer> missing = findAllMissing(new int[] { 3, 1, 5, 4, 2, 9, 0 });
+    // List<Integer> missing = findAllMissing(new int[] { 3, 1, 5, 4, 2, 9, 0 });
   
-    System.out.print("Missing numbers: " + missing);
+    // System.out.print("Missing numbers: " + missing);
+
+
+
+    System.out.println("Duplicate Numbers: " + findDuplicate(arr));
   }
 }
