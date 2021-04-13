@@ -3,6 +3,53 @@ import java.util.List;
 
 public class Sorting {
 
+  //Find all duplicate numbers
+  public static List<Integer> findAllDuplicate(int[] nums) {
+    if(nums == null || nums.length == 0) {
+      throw new IllegalArgumentException("No Array Found!");
+    }
+    int i = 0;
+    while(i < nums.length) {
+      if (nums[i] != nums[nums[i] - 1]) {
+        swap(nums, i, nums[i] - 1);
+      }
+      else {
+        i++;
+      }
+    }
+    List<Integer> duplicateNumbers = new ArrayList<>();
+    for (i = 0; i < nums.length; i++) {
+      if (nums[i] != i + 1)
+        duplicateNumbers.add(nums[i]);
+    }
+
+    return duplicateNumbers;
+  }
+  
+  //Find Duplicate Number
+  //Base Case if nothing in array
+  //Sort Array
+  //if nums[i] == nums[i]+1
+  //return nums[i]
+  public static int findDuplicate(int[] nums){
+    if(nums == null || nums.length == 0) {
+      throw new IllegalArgumentException();
+    }
+    int i = 0;
+    while (i < nums.length) {
+      if (nums[i] != i + 1) {
+        if (nums[i] != nums[nums[i] - 1])
+          swap(nums, i, nums[i] - 1);
+        else // we have found the duplicate
+          return nums[i];
+      } else {
+        i++;
+      }
+    }
+
+    return -1;
+  }
+
   //Find all Missing Numbers
   public static List<Integer> findAllMissing(int[] nums) {
     if (nums == null || nums.length == 0) {
@@ -66,34 +113,9 @@ public class Sorting {
     arr[j] = temp;
   }
 
-
-
-  //Find Duplicate Number
-  //Base Case if nothing in array
-  //Sort Array
-  //if nums[i] == nums[i]+1
-  //return nums[i]
-  public static int findDuplicate(int[] nums){
-    if(nums == null || nums.length == 0) {
-      throw new IllegalArgumentException();
-    }
-    int i = 0;
-    while (i < nums.length) {
-      if (nums[i] != i + 1) {
-        if (nums[i] != nums[nums[i] - 1])
-          swap(nums, i, nums[i] - 1);
-        else // we have found the duplicate
-          return nums[i];
-      } else {
-        i++;
-      }
-    }
-
-    return -1;
-  }
   
   public static void main(String[] args) {
-    int[] arr = new int[] { 2, 1, 5, 4, 2, 9, 0 };
+    List<Integer> arr = findAllDuplicate(new int[] { 2, 1, 5, 4, 1, 2, 9, 0 });
   //   sort(arr);
   //   for (int num : arr)
   //     System.out.print(num + " ");
@@ -117,6 +139,6 @@ public class Sorting {
 
 
 
-    System.out.println("Duplicate Numbers: " + findDuplicate(arr));
+    System.out.println("Duplicate Numbers: " + arr);
   }
 }
