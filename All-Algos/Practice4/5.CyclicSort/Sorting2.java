@@ -18,6 +18,10 @@ public class Sorting2 {
             }
         }
 
+        for (i = 0; i < arr.length; i++)
+            if (arr[i] != i + 1)
+            return new int[] { arr[i], i + 1 };
+
 
         return new int[] { -1, -1};
     }
