@@ -17,11 +17,9 @@ public class Sorting2 {
                 i++;
             }
         }
-
         for (i = 0; i < arr.length; i++)
             if (arr[i] != i + 1)
             return new int[] { arr[i], i + 1 };
-
 
         return new int[] { -1, -1};
     }
@@ -36,6 +34,7 @@ public class Sorting2 {
 
 
     public static void main (String[] args) {
-        int[] arr = {2, 2, 4, 5};
+        int[] arr = findCorruptPair(new int[] {2,3,4,1,1,5});
+        System.out.println(arr[0] + ", " + arr[1]);
     }
 }
