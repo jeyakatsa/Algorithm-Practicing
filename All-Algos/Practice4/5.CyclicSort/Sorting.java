@@ -3,11 +3,12 @@ import java.util.List;
 
 public class Sorting {
 
+  
   //Find all duplicate numbers
   public static List<Integer> findAllDuplicate(int[] nums) {
-    if(nums == null || nums.length == 0) {
-      throw new IllegalArgumentException("No Array Found!");
-    }
+    // if(nums == null || nums.length == 0) {
+    //   throw new IllegalArgumentException("No Array Found!");
+    // }
     int i = 0;
     while(i < nums.length) {
       if (nums[i] != nums[nums[i] - 1]) {
@@ -115,7 +116,7 @@ public class Sorting {
 
   
   public static void main(String[] args) {
-    List<Integer> arr = findAllDuplicate(new int[] { 2, 1, 5, 4, 1, 2, 9, 0 });
+    List<Integer> arr = findAllDuplicate(new int[] { 2, 1, 5, 4, 1, 2, 9 });
   //   sort(arr);
   //   for (int num : arr)
   //     System.out.print(num + " ");
@@ -133,9 +134,9 @@ public class Sorting {
   //     System.out.print(num + " ");
   //   System.out.println();
 
-    // List<Integer> missing = findAllMissing(new int[] { 3, 1, 5, 4, 2, 9, 0 });
+  // List<Integer> missing = findAllMissing(new int[] { 3, 1, 5, 4, 2, 9, 0 });
   
-    // System.out.print("Missing numbers: " + missing);
+  // System.out.print("Missing numbers: " + missing);
 
 
 
