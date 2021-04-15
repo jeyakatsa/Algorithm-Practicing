@@ -53,7 +53,6 @@ public class Sorting2 {
             }
         }
         return arr.length + 1;
-
     }
 
 
