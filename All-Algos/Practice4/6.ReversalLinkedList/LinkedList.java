@@ -1,20 +1,30 @@
-public class LinkedList {
-    class ListNode {
-        int value = 0;
-        ListNode next;
+class ListNode {
+    int value = 0;
+    ListNode next;
 
-        ListNode(int value) {
-            this.value = value;
-        }
+    ListNode(int value) {
+        this.value = value;
     }
+}
 
+public class LinkedList {
     public static ListNode reverse(ListNode head) {
         if(head == null) {
             throw new IllegalArgumentException("No Numbers/Integers Available!");
         }
-        return head;
 
+        ListNode current = head;
+        ListNode previous = null;
+        ListNode next = null;
         
+        while (current != null) {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        
+        return previous;    
     }
 
     public static void main(String[] args) {
