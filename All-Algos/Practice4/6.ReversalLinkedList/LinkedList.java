@@ -27,6 +27,25 @@ public class LinkedList {
         return previous;    
     }
 
+    public static ListNode reverseSub(ListNode head) {
+        if(head == null) {
+            throw new IllegalArgumentException("No Numbers/Integers Available");
+        }
+
+        ListNode current = head;
+        ListNode previous = null;
+        ListNode next = null;
+
+        while (current != null) {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+
+        return previous;
+    }
+
     public static void main(String[] args) {
         ListNode head = new ListNode(2);
         head.next = new ListNode(4);
@@ -35,6 +54,7 @@ public class LinkedList {
         head.next.next.next.next = new ListNode(10);
 
         ListNode result = reverse(head);
+        ListNode result2 = reverseSub(head);
         while(result != null) {
             System.out.print("Nodes of the reversed LinkedList are: ");
             while(result != null) {
