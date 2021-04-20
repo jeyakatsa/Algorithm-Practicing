@@ -66,15 +66,39 @@ public class LinkedList {
 
   //Reverse K,
   public static ListNode reverseK(ListNode head, int k) {
-    if (head == null || k <= 0) {
-      throw new IllegalArgumentException(
-        "No Integers attributed to LinkedList or positive integers attributed to target integer!");
+    if (k <= 1 || head == null)
+      return head;
+
+    ListNode current = head, previous = null;
+    while (true) {
+      ListNode lastNodeOfPreviousPart = previous;
+      // after reversing the LinkedList 'current' will become the last node of the sub-list
+      ListNode lastNodeOfSubList = current;
+      ListNode next = null; // will be used to temporarily store the next node
+      // reverse 'k' nodes
+      for (int i = 0; current != null && i < k; i++) {
+        next = current.next;
+        current.next = previous;
+        previous = current;
+        current = next;
+      }
+
+      // connect with the previous part
+      if (lastNodeOfPreviousPart != null)
+        lastNodeOfPreviousPart.next = previous; // 'previous' is now the first node of the sub-list
+      else // this means we are changing the first node (head) of the LinkedList
+        head = previous;
+
+      // connect with the next part
+      lastNodeOfSubList.next = current;
+
+      if (current == null) // break, if we've reached the end of the LinkedList
+        break;
+      // prepare for the next sub-list
+      previous = lastNodeOfSubList;
     }
 
-    //if k == nodes.length
-    //excetucte code...
-
-
+    return head;
   }
 
   public static void main(String[] args) {
@@ -84,13 +108,15 @@ public class LinkedList {
     head.next.next.next = new ListNode(8);
     head.next.next.next.next = new ListNode(10);
 
-    ListNode result = reverse(head);
+    // ListNode result = reverse(head);
     
-    ListNode result2 = reverseSub(head, 2, 4);
+    // ListNode result2 = reverseSub(head, 2, 4);
+
+    ListNode result3 = reverseK(head, 2);
     System.out.print("Nodes of the reversed LinkedList are: ");
-    while(result2 != null) {
-        System.out.print(result2.value + " ");
-        result2 = result2.next;
+    while(result3 != null) {
+        System.out.print(result3.value + " ");
+        result3 = result3.next;
     }
   }
 
