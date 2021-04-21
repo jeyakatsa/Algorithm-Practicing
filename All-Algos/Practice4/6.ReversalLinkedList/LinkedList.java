@@ -130,7 +130,7 @@ public class LinkedList {
         head = previous;
       }
 
-      lastNodeOfSubList = current;
+      lastNodeOfSubList.next = current;
 
       for (int i = 0; current != null && i < k; ++i) {
         previous = current;
@@ -140,6 +140,8 @@ public class LinkedList {
 
     return head;
   }
+
+  //Rotate LinkedList
 
   public static void main(String[] args) {
     ListNode head = new ListNode(1);
@@ -155,7 +157,7 @@ public class LinkedList {
     
     // ListNode result2 = reverseSub(head, 2, 4);
 
-    ListNode result3 = reverseK(head, 2);
+    ListNode result3 = reverseOtherK(head, 2);
     System.out.print("Nodes of the reversed LinkedList are: ");
     while(result3 != null) {
         System.out.print(result3.value + " ");
