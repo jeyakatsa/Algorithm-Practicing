@@ -143,22 +143,30 @@ public class LinkedList {
 
   //Rotate LinkedList
 
-  public static ListNode rotateLinkedList(ListNode head, int rotate) {
-    if (head == null || rotate <= 0) {
+  public static ListNode rotate(ListNode head, int rotations) {
+    if (head == null || head.next == null || rotations <= 0) {
       return head;
     }
 
-    ListNode current = head;
-    ListNode previous = null;
-    ListNode next = null;
-
-    while (current != null) {
-      next = current.next;
-      current.next = previous;
-      previous = current;
-      current = next;
-
+    // find the length and the last node of the list
+    ListNode lastNode = head;
+    int listLength = 1;
+    while (lastNode.next != null) {
+      lastNode = lastNode.next;
+      listLength++;
     }
+
+    lastNode.next = head; // connect the last node with the head to make it a circular list
+    rotations %= listLength; // no need to do rotations more than the length of the list
+    int skipLength = listLength - rotations;
+    ListNode lastNodeOfRotatedList = head;
+    for (int i = 0; i < skipLength - 1; i++)
+      lastNodeOfRotatedList = lastNodeOfRotatedList.next;
+
+    // 'lastNodeOfRotatedList.next' is pointing to the sub-list of 'k' ending nodes
+    head = lastNodeOfRotatedList.next;
+    lastNodeOfRotatedList.next = null;
+    return head;
   }
 
   public static void main(String[] args) {
@@ -175,7 +183,7 @@ public class LinkedList {
     
     // ListNode result2 = reverseSub(head, 2, 4);
 
-    ListNode result3 = reverseOtherK(head, 2);
+    ListNode result3 = rotate(head, 2);
     System.out.print("Nodes of the reversed LinkedList are: ");
     while(result3 != null) {
         System.out.print(result3.value + " ");
