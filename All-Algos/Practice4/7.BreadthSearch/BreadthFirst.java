@@ -72,36 +72,67 @@ class LevelOrderTraversal {
 
     //Zigzag Traversal
     public static List<List<Integer>> zigZag(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
+    List<Double> result = new ArrayList<>();
+    if (root == null)
+      return result;
+
+    Queue<TreeNode> queue = new LinkedList<>();
+    queue.offer(root);
+    while (!queue.isEmpty()) {
+      int levelSize = queue.size();
+      double levelSum = 0;
+      for (int i = 0; i < levelSize; i++) {
+        TreeNode currentNode = queue.poll();
+        // add the node's value to the running sum
+        levelSum += currentNode.val;
+        // insert the children of current node to the queue
+        if (currentNode.left != null)
+          queue.offer(currentNode.left);
+        if (currentNode.right != null)
+          queue.offer(currentNode.right);
+      }
+      // append the current level's average to the result array
+      result.add(levelSum / levelSize);
+    }
+
+    return result;
+    }
+
+    //Level Averages in a Binary Tree
+    public static List<List<Integer>> averageOfLevels(ListNode root) {
+        //base case if root node is null
         if (root == null) {
-            return result;
+            throw new IllegalArgumentException("Nothing in Root!");
         }
+        //while currentlevel is not null
+        //add left + right then divide by # of leafs
+        //return result
+        //move down tree
+        //once reached end of tree, break
+        List<Double> result = new ArrayList<>();
+        if (root == null)
+          return result;
+    
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        boolean leftToRight = true;
-        while(!queue.isEmpty()){
-            int levelSize = queue.size();
-            List<Integer> currentLevel = new ArrayList<>(levelSize);
-            for (int i = 0; i < levelSize; i++) {
-                TreeNode currentNode = queue.poll();
-
-                //add the node to the current level based on the traverse direction
-                if(leftToRight)
-                    currentLevel.add(currentNode.val);
-                else
-                    currentLevel.add(0, currentNode.val);
-
-                //insert the children of current node in the queue
-                if(currentNode.left != null)
-                    queue.offer(currentNode.left);
-                if(currentNode.right != null)
-                    queue.offer(currentNode.right);    
-            }
-            result.add(currentLevel);
-            //reverse traversal direction
-            leftToRight = !leftToRight;
+        while (!queue.isEmpty()) {
+          int levelSize = queue.size();
+          double levelSum = 0;
+          for (int i = 0; i < levelSize; i++) {
+            TreeNode currentNode = queue.poll();
+            // add the node's value to the running sum
+            levelSum += currentNode.val;
+            // insert the children of current node to the queue
+            if (currentNode.left != null)
+              queue.offer(currentNode.left);
+            if (currentNode.right != null)
+              queue.offer(currentNode.right);
+          }
+          // append the current level's average to the result array
+          result.add(levelSum / levelSize);
         }
-        return result;
+    
+        return result;        
     }
 
 
