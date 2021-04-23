@@ -102,9 +102,6 @@ class LevelOrderTraversal {
     //Level Averages in a Binary Tree
     public static List<List<Integer>> averageOfLevels(ListNode root) {
         //base case if root node is null
-        if (root == null) {
-            throw new IllegalArgumentException("Nothing in Root!");
-        }
         //while currentlevel is not null
         //add left + right then divide by # of leafs
         //return result
@@ -135,6 +132,34 @@ class LevelOrderTraversal {
     
         return result;        
     }
+
+    //Minimum Depth of a Binary Tree
+    public static int findDepth(TreeNode root) {
+        if (root == null)
+          return 0;
+    
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int minimumTreeDepth = 0;
+        while (!queue.isEmpty()) {
+          minimumTreeDepth++;
+          int levelSize = queue.size();
+          for (int i = 0; i < levelSize; i++) {
+            TreeNode currentNode = queue.poll();
+    
+            // check if this is a leaf node
+            if (currentNode.left == null && currentNode.right == null)
+              return minimumTreeDepth;
+    
+            // insert the children of current node in the queue
+            if (currentNode.left != null)
+              queue.add(currentNode.left);
+            if (currentNode.right != null)
+              queue.add(currentNode.right);
+          }
+        }
+        return minimumTreeDepth;
+    }    
 
 
     public static void main(String[] args) {
