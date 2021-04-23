@@ -1,4 +1,4 @@
-import java.util.*;
+
 
 class TreeNode {
     int val;
@@ -72,30 +72,31 @@ class LevelOrderTraversal {
 
     //Zigzag Traversal
     public static List<List<Integer>> zigZag(TreeNode root) {
-    List<Double> result = new ArrayList<>();
-    if (root == null)
-      return result;
+        List<Double> result = new ArrayList<>();
+        if (root == null){
+            return result;
+        }
 
-    Queue<TreeNode> queue = new LinkedList<>();
-    queue.offer(root);
-    while (!queue.isEmpty()) {
-      int levelSize = queue.size();
-      double levelSum = 0;
-      for (int i = 0; i < levelSize; i++) {
-        TreeNode currentNode = queue.poll();
-        // add the node's value to the running sum
-        levelSum += currentNode.val;
-        // insert the children of current node to the queue
-        if (currentNode.left != null)
-          queue.offer(currentNode.left);
-        if (currentNode.right != null)
-          queue.offer(currentNode.right);
-      }
-      // append the current level's average to the result array
-      result.add(levelSum / levelSize);
-    }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int levelSize = queue.size();
+            double levelSum = 0;
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode currentNode = queue.poll();
+                // add the node's value to the running sum
+                levelSum += currentNode.val;
+                // insert the children of current node to the queue
+                if (currentNode.left != null)
+                queue.offer(currentNode.left);
+                if (currentNode.right != null)
+                queue.offer(currentNode.right);
+            }
+            // append the current level's average to the result array
+            result.add(levelSum / levelSize);
+        }
 
-    return result;
+        return result;
     }
 
     //Level Averages in a Binary Tree
@@ -145,7 +146,7 @@ class LevelOrderTraversal {
         root.right.right = new TreeNode(5);
         root.right.left.left = new TreeNode(20);
         root.right.left.right = new TreeNode(17);
-        List<List<Integer>> result = LevelOrderTraversal.zigZag(root);
+        List<Double> result = LevelOrderTraversal.averageOfLevels(root);
         System.out.println("Level order traversal: " + result);
     }        
 }
