@@ -161,6 +161,15 @@ class LevelOrderTraversal {
         return minimumTreeDepth;
     }    
 
+    //Level Order Successor
+    public static int successor(TreeNode root){
+        if (root == null) {
+            return 0;
+        }
+
+        Queue<TreeNode> queu = new LinkedList<>();
+    }
+
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(12);
