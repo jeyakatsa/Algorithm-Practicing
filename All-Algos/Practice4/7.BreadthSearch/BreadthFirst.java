@@ -29,7 +29,15 @@ class TreeNode {
             }
             System.out.println();
         }
-    }    
+    }
+    public void printTree() {
+        TreeNode current = this;
+        System.out.print("Traversal using 'next' pointer: ");
+        while (current != null) {
+          System.out.print(current.val + " ");
+          current = current.next;
+        }
+      }   
 }
 
 
@@ -230,39 +238,52 @@ class LevelOrderTraversal {
             }
         }
     }
-
-    public static void connect3(TreeNode root) {
-
-    }
     
     public static void connect2(TreeNode root) {
-        if (root == null){
+        if (root == null)
             return;
+  
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        TreeNode currentNode = null, previousNode = null;
+        while (!queue.isEmpty()) {
+            currentNode = queue.poll();
+            if (previousNode != null)
+                previousNode.next = currentNode;
+            previousNode = currentNode;
+    
+            // insert the children of current node in the queue
+            if (currentNode.left != null)
+                queue.offer(currentNode.left);
+            if (currentNode.right != null)
+                queue.offer(currentNode.right);
         }
+    }
 
-        //base case
-        //instantiate que
+    public static List<TreeNode> traverseRight(TreeNode root) {
+        List<TreeNode> result = new ArrayList<>();
+        if (root == null)
+          return result;
+    
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
-            TreeNode previousNode = null;
-            int levelSize = queue.size();
-
-            for (int i = 0; i < levelSize; i++) {
-                TreeNode currentNode = queue.poll();
-                if (previousNode != null) {
-                    previousNode.next = currentNode;
-                } 
-                previousNode = currentNode;
-                if (currentNode.left != null) {
-                    queue.add(currentNode.left);
-                }
-                if (currentNode.right != null) {
-                    queue.add(currentNode.right);
-                } 
-            }   
+          int levelSize = queue.size();
+          for (int i = 0; i < levelSize; i++) {
+            TreeNode currentNode = queue.poll();
+            // if it is the last node of this level, add it to the result
+            if (i == levelSize - 1)
+              result.add(currentNode);
+            // insert the children of current node in the queue
+            if (currentNode.left != null)
+              queue.offer(currentNode.left);
+            if (currentNode.right != null)
+              queue.offer(currentNode.right);
+          }
         }
-    }
+    
+        return result;
+      }    
 
 
     public static void main(String[] args) {
@@ -280,8 +301,8 @@ class LevelOrderTraversal {
         // result = LevelOrderSuccessor.findSuccessor(root, 9);
         // if (result != null)
         //   System.out.println(result.val + " ");
-        ConnectLevelOrderSiblings.connect2(root);
+        connect2(root);
         System.out.println("Level order traversal using 'next' pointer: ");
-        root.printLevelOrder();        
+        root.printTree();        
     }        
 }
