@@ -4,10 +4,32 @@ class TreeNode {
     int val;
     TreeNode left;
     TreeNode right;
+    TreeNode next;
 
     TreeNode(int x){
         val = x;
+        left = right = next = null;
     }
+
+  // level order traversal using 'next' pointer
+  void printLevelOrder() {
+        TreeNode nextLevelRoot = this;
+        while (nextLevelRoot != null) {
+            TreeNode current = nextLevelRoot;
+            nextLevelRoot = null;
+            while (current != null) {
+                System.out.print(current.val + " ");
+                if (nextLevelRoot == null) {
+                    if (current.left != null)
+                        nextLevelRoot = current.left;
+                    else if (current.right != null)
+                        nextLevelRoot = current.right;
+                }
+                current = current.next;
+            }
+            System.out.println();
+        }
+    }    
 }
 
 
@@ -142,33 +164,72 @@ class LevelOrderTraversal {
         queue.add(root);
         int minimumTreeDepth = 0;
         while (!queue.isEmpty()) {
-          minimumTreeDepth++;
-          int levelSize = queue.size();
-          for (int i = 0; i < levelSize; i++) {
-            TreeNode currentNode = queue.poll();
-    
-            // check if this is a leaf node
-            if (currentNode.left == null && currentNode.right == null)
-              return minimumTreeDepth;
-    
-            // insert the children of current node in the queue
-            if (currentNode.left != null)
-              queue.add(currentNode.left);
-            if (currentNode.right != null)
-              queue.add(currentNode.right);
-          }
+            minimumTreeDepth++;
+            int levelSize = queue.size();
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode currentNode = queue.poll();
+        
+                // check if this is a leaf node
+                if (currentNode.left == null && currentNode.right == null)
+                return minimumTreeDepth;
+        
+                // insert the children of current node in the queue
+                if (currentNode.left != null)
+                queue.add(currentNode.left);
+                if (currentNode.right != null)
+                queue.add(currentNode.right);
+            }
         }
         return minimumTreeDepth;
     }    
 
     //Level Order Successor
     public static int successor(TreeNode root){
-        if (root == null) {
-            return 0;
+        if (root == null)
+            return null;
+  
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode currentNode = queue.poll();
+            // insert the children of current node in the queue
+            if (currentNode.left != null)
+                queue.offer(currentNode.left);
+            if (currentNode.right != null)
+                queue.offer(currentNode.right);
+    
+            // break if we have found the key
+            if (currentNode.val == key)
+                break;
         }
-
-        Queue<TreeNode> queu = new LinkedList<>();
+  
+        return queue.peek(); 
     }
+
+    public static void connect(TreeNode root) {
+        if (root == null)
+            return;
+  
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode previousNode = null;
+            int levelSize = queue.size();
+            // connect all nodes of this level
+            for (int i = 0; i < levelSize; i++) {
+            TreeNode currentNode = queue.poll();
+            if (previousNode != null)
+                previousNode.next = currentNode;
+            previousNode = currentNode;
+    
+            // insert the children of current node in the queue
+            if (currentNode.left != null)
+                queue.offer(currentNode.left);
+            if (currentNode.right != null)
+                queue.offer(currentNode.right);
+            }
+        }
+    }    
 
 
     public static void main(String[] args) {
@@ -180,7 +241,14 @@ class LevelOrderTraversal {
         root.right.right = new TreeNode(5);
         root.right.left.left = new TreeNode(20);
         root.right.left.right = new TreeNode(17);
-        List<Double> result = LevelOrderTraversal.averageOfLevels(root);
-        System.out.println("Level order traversal: " + result);
+        // TreeNode result = LevelOrderSuccessor.findSuccessor(root, 12);
+        // if (result != null)
+        //   System.out.println(result.val + " ");
+        // result = LevelOrderSuccessor.findSuccessor(root, 9);
+        // if (result != null)
+        //   System.out.println(result.val + " ");
+        ConnectLevelOrderSiblings.connect(root);
+        System.out.println("Level order traversal using 'next' pointer: ");
+        root.printLevelOrder();        
     }        
 }
