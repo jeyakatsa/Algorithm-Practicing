@@ -9,9 +9,9 @@ class TreeNode {
     TreeNode(int x) {
       val = x;
     }
-  }
+}
   
-  class TreePathSum {
+class TreePathSum {
 
     //Sum of Paths
     public static boolean hasPath(TreeNode root, int sum) {
@@ -61,6 +61,30 @@ class TreeNode {
 
         currentPath.remove(currentPath.size() - 1);
     }
+
+
+
+    //Sum of Path
+    public static int findSumOfPathNumbers(TreeNode root) {
+        return findSumOfPath(root, 0);
+    }
+    public static int findSumOfPath(TreeNode currentNode, int pathSum) {
+        if (currentNode == null) {
+            return 0;
+        }
+
+        //calculate the path number of the current node
+        pathSum = 10 * pathSum + currentNode.val;
+
+        //if the current node is a lead, return the current path sum.
+        if (currentNode.left == null && currentNode.right == null) {
+            return pathSum;
+        }
+
+        //traverse the left and the right subtree
+        return findSumOfPath(currentNode.left, pathSum) +
+        findSumOfPath(currentNode.right, pathSum);
+    }
   
     public static void main (String[] args){
       TreeNode root = new TreeNode(12);
@@ -69,9 +93,10 @@ class TreeNode {
       root.left.left = new TreeNode(9);
       root.right.left = new TreeNode(10);
       root.right.right = new TreeNode(5);
-      int sum = 23;
-      List<List<Integer>> result = findPaths(root, sum);
-      System.out.println("Tree paths with sum: " + sum + 
-      ": " + result);
+    //   int sum = 23;
+    //   List<List<Integer>> result = findPaths(root, sum);
+    //   System.out.println("Tree paths with sum: " + sum + 
+    //   ": " + result);
+    System.out.println("Sum of path: " + findSumOfPathNumbers(root));
     }
-  }
+}
