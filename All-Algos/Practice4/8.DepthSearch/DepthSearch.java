@@ -85,6 +85,34 @@ class TreePathSum {
         return findSumOfPath(currentNode.left, pathSum) +
         findSumOfPath(currentNode.right, pathSum);
     }
+
+    //Find with Given Sequence.
+    public static boolean findSequence(TreeNode root, int[] sequence) {
+        if (root == null) {
+            return sequence.length == 0;
+        }
+        return findSequenceRecursive(root, sequence, 0);
+    }
+    public static boolean findSequenceRecursive(TreeNode currentNode, 
+    int[] sequence, int sequenceIndex) {
+        if (currentNode == null) {
+            return false;
+        }
+        if (sequenceIndex >= sequence.length || 
+        currentNode.val != sequence[sequenceIndex]) {
+            return false;
+        }
+        //if the current node is a leaf, add it is the end of the sequence,
+        //we found a path!
+        if (currentNode.left == null && currentNode.right == null
+        && sequenceIndex == sequence.length -1) {
+            return true;
+        }
+        //Recursively call to traverse left and right sub-tree
+        //return true if any of the two recursive call return true
+        return findSequenceRecursive(currentNode.left, sequence, sequenceIndex + 1) ||
+        findSequenceRecursive(currentNode.right, sequence, sequenceIndex + 1);
+    }
   
     public static void main (String[] args){
       TreeNode root = new TreeNode(12);
@@ -97,6 +125,9 @@ class TreePathSum {
     //   List<List<Integer>> result = findPaths(root, sum);
     //   System.out.println("Tree paths with sum: " + sum + 
     //   ": " + result);
-    System.out.println("Sum of path: " + findSumOfPathNumbers(root));
+
+    // System.out.println("Sum of path: " + findSumOfPathNumbers(root));
+
+    System.out.println("Tree has path in Sequence: " + findSequence(root, new int[] {12, 7, 9}));
     }
 }
