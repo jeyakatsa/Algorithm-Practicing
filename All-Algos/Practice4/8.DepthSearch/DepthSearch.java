@@ -86,6 +86,8 @@ class TreePathSum {
         findSumOfPath(currentNode.right, pathSum);
     }
 
+
+
     //Find with Given Sequence.
     public static boolean findSequence(TreeNode root, int[] sequence) {
         if (root == null) {
@@ -113,6 +115,40 @@ class TreePathSum {
         return findSequenceRecursive(currentNode.left, sequence, sequenceIndex + 1) ||
         findSequenceRecursive(currentNode.right, sequence, sequenceIndex + 1);
     }
+
+    //Count Paths for a Sum
+    public static int countPaths(TreeNode root, int S) {
+        List<Integer> currentPath = new LinkedList<>();
+        return countPathSum(root, S, currentPath);
+      }    
+    private static int countPathSum(TreeNode currentNode, int S, List<Integer> currentPath) {
+        if (currentNode == null)
+          return 0;
+    
+        // add the current node to the path
+        currentPath.add(currentNode.val);
+        int pathCount = 0, pathSum = 0;
+        // find the sums of all sub-paths in the current path list
+        ListIterator<Integer> pathIterator = currentPath.listIterator(currentPath.size());
+        while (pathIterator.hasPrevious()) {
+          pathSum += pathIterator.previous();
+          // if the sum of any sub-path is equal to 'S' we increment our path count.
+          if (pathSum == S) {
+            pathCount++;
+          }
+        }
+    
+        // traverse the left sub-tree
+        pathCount += countPathSum(currentNode.left, S, currentPath);
+        // traverse the right sub-tree
+        pathCount += countPathSum(currentNode.right, S, currentPath);
+    
+        // remove the current node from the path to backtrack, 
+        // we need to remove the current node while we are going up the recursive call stack.
+        currentPath.remove(currentPath.size() - 1);
+    
+        return pathCount;
+    }    
   
     public static void main (String[] args){
       TreeNode root = new TreeNode(12);
@@ -128,6 +164,8 @@ class TreePathSum {
 
     // System.out.println("Sum of path: " + findSumOfPathNumbers(root));
 
-    System.out.println("Tree has path in Sequence: " + findSequence(root, new int[] {12, 7, 9}));
+    // System.out.println("Tree has path in Sequence: " + findSequence(root, new int[] {12, 7, 9}));
+    
+    System.out.println("Tree has path: " + countPaths(root, 11));
     }
 }
