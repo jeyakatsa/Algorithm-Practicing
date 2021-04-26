@@ -27,33 +27,28 @@ public class Subsets {
 
     //Subsets With Duplicates
     public static List<List<Integer>> findSubsetDuplicates(int[] nums) {
+        // sort the numbers to handle duplicates
+        Arrays.sort(nums);
         List<List<Integer>> subsets = new ArrayList<>();
-        if(nums == null) {
-            return subsets;
-        }
         subsets.add(new ArrayList<>());
-        for (int currentNumber : nums) {
-            int n = subsets.size();
-            for (int i = 0; i < n; i++) {
-                List<Integer> set = new ArrayList<>(subsets.get(i));
-                set.add(currentNumber);
+        int startIndex = 0, endIndex = 0;
+        for (int i = 0; i < nums.length; i++) {
+            startIndex = 0;
+            // if current and the previous elements are same, 
+            // create new subsets only from the subsets 
+            // added in the previous step
+            if (i > 0 && nums[i] == nums[i - 1])
+                startIndex = endIndex + 1;
+            endIndex = subsets.size() - 1;
+            for (int j = startIndex; j <= endIndex; j++) {
+                // create a new subset from the existing subset 
+                // and add the current element to it
+                List<Integer> set = new ArrayList<>(subsets.get(j));
+                set.add(nums[i]);
                 subsets.add(set);
             }
         }
         return subsets;
-    }
-
-    public static List<List<Integer>> sub(int[] nums) {
-        List<List<Integer>> subsets = new ArrayList<>();
-        subsets.add(new ArrayList<>());
-        for(int currentNumber : nums) {
-            int n = subsets.size();
-            for(int i = 0; i < n; i++) {
-                List<Integer> set = new ArrayList<>(subsets.get(i));
-                set.add(currentNumber);
-                subsets.add(set);
-            }
-        }
     }
 
     public static void main(String[] args) {
