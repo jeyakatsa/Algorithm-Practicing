@@ -51,11 +51,36 @@ public class Subsets {
         return subsets;
     }
 
+    public static List<List<Integer>> findPermutations(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        Queue<List<Integer>> permutations = new LinkedList<>();
+        permutations.add(new ArrayList<>());
+        for (int currentNumber : nums) {
+            //we will take all existing permutations and add
+            //the current number to new permutations
+            int n = permutations.size();
+            for (int i = 0; i < n; i++) {
+                List<Integer> oldPermutation = permutations.poll();
+                for (int j = 0; j <= oldPermutation.size(); j++) {
+                    List<Integer> newPermutation = new ArrayList<Integer>(oldPermutation);
+                    newPermutation.add(j, currentNumber);
+                    if(newPermutation.size() == nums.length) {
+                        result.add(newPermutation);
+                    }
+                    else {
+                        permutations.add(newPermutation);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         List<List<Integer>> result = Subsets.findSubsets(new int[] { 1, 3 });
         System.out.println("Here is the list of subsets: " + result);
     
-        result = Subsets.findSubsets(new int[] { 1, 5, 3 });
-        System.out.println("Here is the list of subsets: " + result);
+        result = Subsets.findPermutations(new int[] { 1, 5, 3 });
+        System.out.println("Here is the list of permutations: " + result);
       }    
 }
