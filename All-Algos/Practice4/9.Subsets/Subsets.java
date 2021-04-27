@@ -51,6 +51,7 @@ public class Subsets {
         return subsets;
     }
 
+    //Number Permutations.
     public static List<List<Integer>> findPermutations(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         Queue<List<Integer>> permutations = new LinkedList<>();
@@ -75,6 +76,14 @@ public class Subsets {
         }
         return result;
     }
+
+    //String Permutations
+    public static List<String> stringPermutation(String str) {
+        List<String> permutations = new ArrayList<>();
+        
+    }
+
+
 
     public static void main(String[] args) {
         List<List<Integer>> result = Subsets.findSubsets(new int[] { 1, 3 });
