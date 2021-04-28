@@ -22,6 +22,7 @@ public class BinarySearch {
         }
         return i;
     }
+    //OTHER'S SOLUTIONS...
     public static int agnosticBinarySearch(int[] arr, int key) {
         if (arr == null || arr.length == 0) {
             return -1;
@@ -29,28 +30,49 @@ public class BinarySearch {
         int start = 0, end = arr.length - 1;
         boolean isAscending = arr[start] < arr[end];
         while (start <= end) {
-          // calculate the middle of the current range
-          int mid = start + (end - start) / 2;
+            // calculate the middle of the current range
+            int mid = start + (end - start) / 2;
     
-          if (key == arr[mid])
-            return mid;
-    
-          if (isAscending) { // ascending order
-            if (key < arr[mid]) {
-              end = mid - 1; // the 'key' can be in the first half
-            } else { // key > arr[mid]
-              start = mid + 1; // the 'key' can be in the second half
+            if (key == arr[mid])
+                return mid;
+        
+            if (isAscending) { // ascending order
+                if (key < arr[mid]) {
+                end = mid - 1; // the 'key' can be in the first half
+                } else { // key > arr[mid]
+                start = mid + 1; // the 'key' can be in the second half
+                }
+            } else { // descending order        
+                if (key > arr[mid]) {
+                end = mid - 1; // the 'key' can be in the first half
+                } else { // key < arr[mid]
+                start = mid + 1; // the 'key' can be in the second half
+                }
             }
-          } else { // descending order        
-            if (key > arr[mid]) {
-              end = mid - 1; // the 'key' can be in the first half
-            } else { // key < arr[mid]
-              start = mid + 1; // the 'key' can be in the second half
-            }
-          }
         }
         return -1; // element not found        
-      }
+    }
+    
+    //Ceiling of a Number
+    public static int searchCeiling(int[] arr, int key) {
+        if (arr == null || arr.length == 0 || key > arr[arr.length - 1]) {
+            return -1;
+        }
+        int start = 0, end = arr.length - 1;
+        while (start <= end) {
+          int mid = start + (end - start) / 2;
+          if (key < arr[mid]) {
+            end = mid - 1;
+          } else if (key > arr[mid]) {
+            start = mid + 1;
+          } else { // found the key
+            return mid;
+          }
+        }
+        // since the loop is running until 'start <= end', so at the end of the while loop, 'start == end+1'
+        // we are not able to find the element in the given array, so the next big number will be arr[start]
+        return start;
+    }
     
       public static void main(String[] args) {
         System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 4, 6, 10 }, 10));
