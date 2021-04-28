@@ -80,6 +80,26 @@ public class Subsets {
     //String Permutations
     public static List<String> stringPermutation(String str) {
         List<String> permutations = new ArrayList<>();
+        permutations.add(str);
+
+        //Process every character
+        for (int i = 0; i < str.length(); i++) {
+            if (Character.isLetter(str.charAt(i))) { // only process characters, skip digits
+                // we will take all existing permutations and change the letter case appropriately
+                int n = permutations.size();
+                for (int j = 0; j < n; j++) {
+                    char[] chs = permutations.get(j).toCharArray();
+                    //if current character is in upper case change it to lower case
+                    if (Character.isUpperCase(chs[i])) {
+                        chs[i] = Character.toLowerCase(chs[i]);
+                    } else {
+                        chs[i] = Character.toUpperCase(chs[i]);
+                    }
+                    permutations.add(String.valueOf(chs));
+                }
+            }
+        }
+        return permutations;
         
     }
 
@@ -91,5 +111,8 @@ public class Subsets {
     
         result = Subsets.findPermutations(new int[] { 1, 5, 3 });
         System.out.println("Here is the list of permutations: " + result);
+
+        List<String> result2 = stringPermutation("Alk9");
+        System.out.println("String permutations are: " + result2);
       }    
 }
