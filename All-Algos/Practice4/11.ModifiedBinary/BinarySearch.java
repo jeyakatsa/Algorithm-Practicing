@@ -73,11 +73,34 @@ public class BinarySearch {
         // we are not able to find the element in the given array, so the next big number will be arr[start]
         return start;
     }
+
+    //Next Letter
+    public static char searchNextLetter(char[] letters, char key) {
+        int n = letters.length;
+        if (key < letters[0] || key > letters[n - 1])
+          return letters[0];
+    
+        int start = 0, end = n - 1;
+        while (start <= end) {
+          int mid = start + (end - start) / 2;
+          if (key < letters[mid]) {
+            end = mid - 1;
+          } else { //if (key >= letters[mid]) {
+            start = mid + 1;
+          }
+        }
+        // since the loop is running until 'start <= end', so at the end of the while loop, 'start == end+1'
+        return letters[start % n];
+    }
     
       public static void main(String[] args) {
         System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 4, 6, 10 }, 10));
         System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 5));
         System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 10, 6, 4 }, 10));
         System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 10, 6, 4 }, 4));
+        System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'f'));
+        System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'b'));
+        System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'm'));
+        System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'h'));        
       }
 }
