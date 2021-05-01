@@ -300,29 +300,69 @@ public class BinarySearch {
 
     // we are not able to find the element in the given array
     return -1;
+  }
+
+  //Rotation Count
+  public static int countRotations(int[] arr) {
+  //   //base case
+  //   //rotate start, end etc.
+  //   //if start to mid is greater than mid to end
+  //   //return count of how many integers from start to mid
+  //  // else return -1
+  //   if (arr == null || arr.length == 0) {
+  //     return -1;
+  //   }
+  //   int start = 0, end = arr.length - 1;
+  //   while (start < end) {
+  //     int mid = start + (end - start) / 2;
+
+  //     if (start)// STUCK
+  //   }
+  //   return -1; 
+
+    int start = 0, end = arr.length - 1;
+    while (start < end) {
+      int mid = start + (end - start) / 2;
+
+      if (mid < end && arr[mid] > arr[mid + 1]) // if mid is greater than the next element
+        return mid + 1;
+      if (mid > start && arr[mid - 1] > arr[mid]) // if mid is smaller than the previous element
+        return mid;
+
+      if (arr[start] < arr[mid]) { // left side is sorted, so the pivot is on right side
+        start = mid + 1;
+      } else { // right side is sorted, so the pivot is on the left side     
+        end = mid - 1;
+      }
+    }
+
+    return 0; // the array has not been rotated  
   }  
+
 
   
   public static void main(String[] args) {
-    System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 4, 6, 10 }, 10));
-    System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 5));
-    System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 10, 6, 4 }, 10));
-    System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 10, 6, 4 }, 4));
-    System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'f'));
-    System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'b'));
-    System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'm'));
-    System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'h'));
-    int[] result = FindRange.findRange(new int[] { 4, 6, 6, 6, 9 }, 6);
-    System.out.println("Range: [" + result[0] + ", " + result[1] + "]");
-    result = FindRange.findRange(new int[] { 1, 3, 8, 10, 15 }, 10);
-    System.out.println("Range: [" + result[0] + ", " + result[1] + "]");
-    result = FindRange.findRange(new int[] { 1, 3, 8, 10, 15 }, 12);
-    System.out.println("Range: [" + result[0] + ", " + result[1] + "]"); 
-    ArrayReader reader = new ArrayReader(new int[] { 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 });
-    System.out.println(SearchInfiniteSortedArray.search(reader, 16));
-    System.out.println(SearchInfiniteSortedArray.search(reader, 11));
-    reader = new ArrayReader(new int[] { 1, 3, 8, 10, 15 });
-    System.out.println(SearchInfiniteSortedArray.search(reader, 15));
-    System.out.println(SearchInfiniteSortedArray.search(reader, 200));   
+    // System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 4, 6, 10 }, 10));
+    // System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 5));
+    // System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 10, 6, 4 }, 10));
+    // System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 10, 6, 4 }, 4));
+    // System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'f'));
+    // System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'b'));
+    // System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'm'));
+    // System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'h'));
+    // int[] result = FindRange.findRange(new int[] { 4, 6, 6, 6, 9 }, 6);
+    // System.out.println("Range: [" + result[0] + ", " + result[1] + "]");
+    // result = FindRange.findRange(new int[] { 1, 3, 8, 10, 15 }, 10);
+    // System.out.println("Range: [" + result[0] + ", " + result[1] + "]");
+    // result = FindRange.findRange(new int[] { 1, 3, 8, 10, 15 }, 12);
+    // System.out.println("Range: [" + result[0] + ", " + result[1] + "]"); 
+    // ArrayReader reader = new ArrayReader(new int[] { 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 });
+    // System.out.println(SearchInfiniteSortedArray.search(reader, 16));
+    // System.out.println(SearchInfiniteSortedArray.search(reader, 11));
+    // reader = new ArrayReader(new int[] { 1, 3, 8, 10, 15 });
+    // System.out.println(SearchInfiniteSortedArray.search(reader, 15));
+    // System.out.println(SearchInfiniteSortedArray.search(reader, 200));   
+
+    System.out.println(countRotations(new int[] {5, 6, 8, 1, 2, 3}));
   }
 }
