@@ -185,6 +185,33 @@ public class BinarySearch {
       return arr[start];
     return arr[end];
   }
+
+
+  //Bitonic Array Maximum
+  public static int findMax(int[] arr) {
+
+    //MY SOLUTION: Wrong AF
+    //base case if array doesn't exist
+    //sort array
+    //loop through array
+    //if (arr[i] > arr[i+1]) temp = arr[i], arr[i] = arr[i+1], arr[i+1] = temp;
+    ///exit loop then return array.length - 1
+    if (arr == null || arr.length == 0) {
+      return -1;
+    }
+    for (int i = 0; i < arr.length; i++) {
+      if (arr[i] > arr[i+1]) {
+        int temp = arr[i];
+        arr[i] = arr[i+1];
+        arr[i+1] = temp;
+      }
+      else {
+        
+      }
+
+    }
+    return arr[arr.length - 1];
+  }  
   
   public static void main(String[] args) {
     System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 4, 6, 10 }, 10));
