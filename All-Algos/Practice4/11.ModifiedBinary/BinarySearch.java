@@ -124,6 +124,67 @@ public class BinarySearch {
   }
 
   //Search in a Sorted Infinite Array
+  class ArrayReader {
+    int[] arr;
+    ArrayReader(int[] arr) {
+      this.arr = arr;
+    }
+    public int get(int index) {
+      if (index >= arr.length)
+        return Integer.MAX_VALUE;
+      return arr[index];
+    }
+  }
+  public static int search(ArrayReader reader, int key) {
+    // find the proper bounds first
+    int start = 0, end = 1;
+    while (reader.get(end) < key) {
+      int newStart = end + 1;
+      end += (end - start + 1) * 2; // increase to double the bounds size
+      start = newStart;
+    }
+    return binarySearch(reader, key, start, end);
+  }
+  private static int binarySearch(ArrayReader reader, int key, int start, int end) {
+    while (start <= end) {
+      int mid = start + (end - start) / 2;
+      if (key < reader.get(mid)) {
+        end = mid - 1;
+      } else if (key > reader.get(mid)) {
+        start = mid + 1;
+      } else { // found the key
+        return mid;
+      }
+    }
+    return -1;
+  }
+
+  //Search Minimum Difference.
+  public static int searchMinDiffElement(int[] arr, int key) {
+    if (key < arr[0])
+      return arr[0];
+    if (key > arr[arr.length - 1])
+      return arr[arr.length - 1];
+
+    int start = 0, end = arr.length - 1;
+    while (start <= end) {
+      int mid = start + (end - start) / 2;
+      if (key < arr[mid]) {
+        end = mid - 1;
+      } else if (key > arr[mid]) {
+        start = mid + 1;
+      } else {
+        return arr[mid];
+      }
+    }
+
+    // at the end of the while loop, 'start == end+1'
+    // we are not able to find the element in the given array
+    // return the element which is closest to the 'key'
+    if ((arr[start] - key) < (key - arr[end]))
+      return arr[start];
+    return arr[end];
+  }
   
   public static void main(String[] args) {
     System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 4, 6, 10 }, 10));
@@ -139,6 +200,12 @@ public class BinarySearch {
     result = FindRange.findRange(new int[] { 1, 3, 8, 10, 15 }, 10);
     System.out.println("Range: [" + result[0] + ", " + result[1] + "]");
     result = FindRange.findRange(new int[] { 1, 3, 8, 10, 15 }, 12);
-    System.out.println("Range: [" + result[0] + ", " + result[1] + "]");    
+    System.out.println("Range: [" + result[0] + ", " + result[1] + "]"); 
+    ArrayReader reader = new ArrayReader(new int[] { 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 });
+    System.out.println(SearchInfiniteSortedArray.search(reader, 16));
+    System.out.println(SearchInfiniteSortedArray.search(reader, 11));
+    reader = new ArrayReader(new int[] { 1, 3, 8, 10, 15 });
+    System.out.println(SearchInfiniteSortedArray.search(reader, 15));
+    System.out.println(SearchInfiniteSortedArray.search(reader, 200));   
   }
 }
