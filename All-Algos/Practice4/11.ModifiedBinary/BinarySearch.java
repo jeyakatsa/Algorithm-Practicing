@@ -235,7 +235,7 @@ public class BinarySearch {
       return keyIndex;
     return binarySearching(arr, key, maxIndex + 1, arr.length - 1);
   }
-  public static int findMaxBitonic(int[] arr, int key) {
+  public static int findMaxBitonic(int[] arr) {
     if (arr == null || arr.length == 0) {
       return -1;
     }
@@ -248,7 +248,6 @@ public class BinarySearch {
         start = mid + 1;
       }
     }
-    // TODO: Write your code here
     return start;
   } 
   // order-agnostic binary search
@@ -275,6 +274,34 @@ public class BinarySearch {
     }
     return -1; // element is not found
   }   
+
+  //Search in Rotared Array
+  public static int search(int[] arr, int key) {
+    int start = 0, end = arr.length - 1;
+    while (start <= end) {
+      int mid = start + (end - start) / 2;
+      if (arr[mid] == key)
+        return mid;
+
+      if (arr[start] <= arr[mid]) { // left side is sorted in ascending order
+        if (key >= arr[start] && key < arr[mid]) {
+          end = mid - 1;
+        } else { //key > arr[mid]
+          start = mid + 1;
+        }
+      } else { // right side is sorted in ascending order       
+        if (key > arr[mid] && key <= arr[end]) {
+          start = mid + 1;
+        } else {
+          end = mid - 1;
+        }
+      }
+    }
+
+    // we are not able to find the element in the given array
+    return -1;
+  }  
+
   
   public static void main(String[] args) {
     System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 4, 6, 10 }, 10));
