@@ -122,6 +122,8 @@ public class BinarySearch {
     }
     return keyIndex;
   }
+
+  //Search in a Sorted Infinite Array
   
   public static void main(String[] args) {
     System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 4, 6, 10 }, 10));
@@ -132,5 +134,11 @@ public class BinarySearch {
     System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'b'));
     System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'm'));
     System.out.println(NextLetter.searchNextLetter(new char[] { 'a', 'c', 'f', 'h' }, 'h'));
+    int[] result = FindRange.findRange(new int[] { 4, 6, 6, 6, 9 }, 6);
+    System.out.println("Range: [" + result[0] + ", " + result[1] + "]");
+    result = FindRange.findRange(new int[] { 1, 3, 8, 10, 15 }, 10);
+    System.out.println("Range: [" + result[0] + ", " + result[1] + "]");
+    result = FindRange.findRange(new int[] { 1, 3, 8, 10, 15 }, 12);
+    System.out.println("Range: [" + result[0] + ", " + result[1] + "]");    
   }
 }
