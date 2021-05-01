@@ -103,7 +103,7 @@ public class BinarySearch {
   }
 
   // modified Binary Search
-  private static int search(int[] arr, int key, boolean findMaxIndex) {
+  private static int searchItt(int[] arr, int key, boolean findMaxIndex) {
     int keyIndex = -1;
     int start = 0, end = arr.length - 1;
     while (start <= end) {
@@ -135,7 +135,7 @@ public class BinarySearch {
       return arr[index];
     }
   }
-  public static int search(ArrayReader reader, int key) {
+  public static int searchIt(ArrayReader reader, int key) {
     // find the proper bounds first
     int start = 0, end = 1;
     while (reader.get(end) < key) {
@@ -227,7 +227,54 @@ public class BinarySearch {
     return arr[start];
   }
 
-  //
+  //Bitonic Array Search
+  public static int searchMaxBitonic(int[] arr, int key) {
+    int maxIndex = findMaxBitonic(arr);
+    int keyIndex = binarySearching(arr, key, 0, maxIndex);
+    if (keyIndex != -1)
+      return keyIndex;
+    return binarySearching(arr, key, maxIndex + 1, arr.length - 1);
+  }
+  public static int findMaxBitonic(int[] arr, int key) {
+    if (arr == null || arr.length == 0) {
+      return -1;
+    }
+    int start = 0, end = arr.length - 1;
+    while (start <= end) {
+      int mid = start + (end - start) / 2;
+      if (arr[mid] > arr[mid + 1]){
+        end = mid;
+      } else {
+        start = mid + 1;
+      }
+    }
+    // TODO: Write your code here
+    return start;
+  } 
+  // order-agnostic binary search
+  private static int binarySearching(int[] arr, int key, int start, int end) {
+    while (start <= end) {
+      int mid = start + (end - start) / 2;
+
+      if (key == arr[mid])
+        return mid;
+
+      if (arr[start] < arr[end]) { // ascending order
+        if (key < arr[mid]) {
+          end = mid - 1;
+        } else { // key > arr[mid]
+          start = mid + 1;
+        }
+      } else { // descending order        
+        if (key > arr[mid]) {
+          end = mid - 1;
+        } else { // key < arr[mid]
+          start = mid + 1;
+        }
+      }
+    }
+    return -1; // element is not found
+  }   
   
   public static void main(String[] args) {
     System.out.println(BinarySearch.agnosticBinarySearch(new int[] { 4, 6, 10 }, 10));
