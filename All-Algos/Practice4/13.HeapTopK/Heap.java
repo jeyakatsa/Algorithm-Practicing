@@ -52,7 +52,7 @@ public class Heap {
           // ignoring sqrt
           return (x * x) + (y * y);
         }
-      }
+    }
     public static List<Point> findClosestPoints(Point[] points, int k) {
         PriorityQueue<Point> maxHeap = new PriorityQueue<>((p1, p2) -> p2.distFromOrigin() - p1.distFromOrigin());
         // put first 'k' points in the max heap
@@ -70,7 +70,27 @@ public class Heap {
     
         // the heap has 'k' points closest to the origin, return them in a list
         return new ArrayList<>(maxHeap);
-      }    
+    }
+    
+    //MinHeap RopeLength
+    public static int minimumCostToConnectRopes(int[] ropeLengths) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>((n1, n2) -> n1 - n2);
+        // add all ropes to the min heap
+        for (int i = 0; i < ropeLengths.length; i++)
+          minHeap.add(ropeLengths[i]);
+    
+        // go through the values of the heap, in each step take top (lowest) rope lengths from the min heap
+        // connect them and push the result back to the min heap. 
+        // keep doing this until the heap is left with only one rope
+        int result = 0, temp = 0;
+        while (minHeap.size() > 1) {
+          temp = minHeap.poll() + minHeap.poll();
+          result += temp;
+          minHeap.add(temp);
+        }
+    
+        return result;
+    }    
     
     public static void main(String[] args) {
         List<Integer> result = findKLargestNumbers(new int[] { 3, 1, 5, 12, 2, 11 }, 3);
@@ -78,5 +98,11 @@ public class Heap {
 
         result = findKLargestNumbers(new int[] { 5, 12, 11, -1, 12 }, 3);
         System.out.println("Here are the top K numbers: " + result);
+
+        // Point[] points = new Point[] { new Point(1, 3), new Point(3, 4), new Point(2, -1) };
+        // List<Point> results = findClosestPoints(points, 2);
+        // System.out.print("Here are the k points closest the origin: ");
+        // for (Point p : results)
+        //   System.out.print("[" + p.x + " , " + p.y + "] ");        
     }
 }
