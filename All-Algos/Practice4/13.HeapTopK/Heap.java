@@ -159,7 +159,30 @@ public class Heap {
             sortedString.append(entry.getKey());
         }
         return sortedString.toString();
-      }    
+    } 
+    
+    // //Kth Largest Number in Stream (Issues with this one...)
+    // PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>((n1, n2) -> n1 - n2);
+    // final int kk;
+  
+    // public KthLargestNumberInStream(int[] nums, int k) {
+    //   this.kk = k;
+    //   // add the numbers in the min heap
+    //   for (int i = 0; i < nums.length; i++)
+    //     add(nums[i]);
+    // }
+  
+    // public int add(int num) {
+    //   // add the new number in the min heap
+    //   minHeap.add(num);
+  
+    //   // if heap has more than 'k' numbers, remove one number
+    //   if (minHeap.size() > this.k)
+    //     minHeap.poll();
+  
+    //   // return the 'Kth largest number
+    //   return minHeap.peek();
+    // }    
     
     public static void main(String[] args) {
         List<Integer> result = findKLargestNumbers(new int[] { 3, 1, 5, 12, 2, 11 }, 3);
