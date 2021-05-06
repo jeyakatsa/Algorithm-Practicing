@@ -258,7 +258,10 @@ public class Heap {
       distinctElementsCount -= k;
 
     return distinctElementsCount;
-  }    
+  }
+
+  //Sum of Elements
+  
     
   public static void main(String[] args) {
     List<Integer> result = findKLargestNumbers(new int[] { 3, 1, 5, 12, 2, 11 }, 3);
