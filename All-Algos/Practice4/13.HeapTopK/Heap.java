@@ -261,7 +261,30 @@ public class Heap {
   }
 
   //Sum of Elements
-  
+  public static int findSumOfElements(int[] nums, int k1, int k2) {
+    // base case if nums are null or if k1 > k2
+    // sort array first
+    // while k1 < k2
+    // loop through array
+    // if k1 < k2
+
+    PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>((n1, n2) -> n1 - n2);
+    // insert all numbers to the min heap
+    for (int i = 0; i < nums.length; i++)
+      minHeap.add(nums[i]);
+
+    // remove k1 small numbers from the min heap
+    for (int i = 0; i < k1; i++)
+      minHeap.poll();
+
+    int elementSum = 0;
+    // sum next k2-k1-1 numbers
+    for (int i = 0; i < k2 - k1 - 1; i++)
+      elementSum += minHeap.poll();
+
+    return elementSum;
+  }  
+
     
   public static void main(String[] args) {
     List<Integer> result = findKLargestNumbers(new int[] { 3, 1, 5, 12, 2, 11 }, 3);
