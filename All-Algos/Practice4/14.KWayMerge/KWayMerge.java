@@ -9,8 +9,7 @@ public class KWayMerge {
         ListNode(int value) {
             this.value = value;
         }
-    }
-        
+    }        
     //Merge K Sorted Elements, if [l1 = 1345] & [l2 = 1257] == 11234557
     public static ListNode merge(ListNode[] lists) {
         PriorityQueue<ListNode> minHeap = new PriorityQueue<ListNode>((n1, n2) -> n1.value - n2.value);
@@ -38,6 +37,11 @@ public class KWayMerge {
         return resultHead;
     }
 
+
+
+
+    
+
     static class Node {
         int elementIndex;
         int arrayIndex;
@@ -47,7 +51,6 @@ public class KWayMerge {
             this.arrayIndex = arrayIndex;
         }
     }
-
     public static int findKthSmallest(List<Integer[]> lists, int k) {
         PriorityQueue<Node> minHeap = new PriorityQueue<Node>(
             (n1, n2) -> lists.get(n1.arrayIndex)[n1.elementIndex] - lists.get(n2.arrayIndex)[n2.elementIndex]);
@@ -70,7 +73,14 @@ public class KWayMerge {
             minHeap.add(node);
         }
         return result;
-      }    
+      }
+      
+      
+      
+      //Kth Smallest Number in M Sorted Lists
+
+
+
     
     public static void main(String[] args) {
         // ListNode l1 = new ListNode(2);
