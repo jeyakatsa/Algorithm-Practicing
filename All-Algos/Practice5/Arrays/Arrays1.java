@@ -13,13 +13,22 @@ public class Arrays1 {
         }
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
-                if (nums[j] == target - nums[i]) {
+                if (nums[j] + nums[i] == target) {
                     return new int[] { i, j };
                 }
             }
         }
         return nums; 
     }
+
+    public int maxSubArray(int[] nums) {
+        int currMax=nums[0],max=nums[0];
+        for(int i=1;i<nums.length;i++){
+            currMax=Math.max(currMax+nums[i],nums[i]);
+            max=Math.max(max,currMax);
+        }
+        return max;
+    }    
 
 
   
