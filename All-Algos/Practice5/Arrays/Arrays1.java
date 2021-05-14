@@ -80,9 +80,11 @@ public class Arrays1 {
     //  * @param {number} n
     //  * @return {void} Do not return anything, modify nums1 in-place instead.
     //  */
-    var nums1 = [1,2,3,4,5];
-    var nums2 = [6,7,8,9,10];
-    var merge = function (nums1, m, nums2, n) {
+
+    //My Soluton :WRONG:
+    int[] nums1 = {1,2,3,4,5};
+    int[] nums2 = {6,7,8,9,10};
+    public void merge(int[]nums1, int m, int[]nums2, int n) {
         //brute force approach
         //basecase if nothing in nums1 and nums 2 arrays..
         //sort num1
@@ -115,8 +117,17 @@ public class Arrays1 {
                 //will return to this once I figure out how to remove m elements from nums2.length
             }
         }
-        int [] result = {nums1 + nums2};
+        int [] result = {nums1, nums2};
     };    
+    //Correct Solution: RIGHT:
+    public void merge2(int[] nums1, int m, int[] nums2, int n) {
+        int i = m-1, j = n-1, k = m+n-1;
+        while (i>=0 && j>=0) {
+             nums1[k--] = nums1[i]>nums2[j]?nums1[i--]:nums2[j--];
+        }
+        while (i==-1 && j>=0) 
+            nums1[j] = nums2[j--];
+    }    
 
   
 }
