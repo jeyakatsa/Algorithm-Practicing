@@ -4,7 +4,11 @@ public class Arrays1 {
 
     public static void main (String[] args) {
         int[] nums = {1, 4, 6, 8, 20};
+        int[] nums2 = {5, 9, 10};
         System.out.println(twoSum(nums, 7));
+        System.out.println(buildTree(nums, nums2));
+
+
     }
 
 
@@ -25,6 +29,12 @@ public class Arrays1 {
     }
 
 
+
+
+
+
+
+
     //MAXIMUM SUBARRAY1
     public int maxSubArray(int[] nums) {
         int currMax=nums[0],max=nums[0];
@@ -34,6 +44,11 @@ public class Arrays1 {
         }
         return max;
     }
+
+
+
+
+
 
 
     //MERGE INTERVALS    
@@ -77,6 +92,10 @@ public class Arrays1 {
         ans.add(new int[]{start , end});
         return ans.toArray(new int[0][]);
     } 
+
+
+
+
 
 
     //MERGE SORTED ARRAY:
@@ -137,37 +156,42 @@ public class Arrays1 {
             nums1[j] = nums2[j--];
     }   
     
+
+
+
+
+
+
+
+
     
-    //MERGE SORTED ARRAY (binary Tree Node)
-    class Solution {
-        int preorderIndex;
-        Map<Integer, Integer> inorderIndexMap;
-        public TreeNode buildTree(int[] preorder, int[] inorder) {
-            preorderIndex = 0;
-            // build a hashmap to store value -> its index relations
-            inorderIndexMap = new HashMap<>();
-            for (int i = 0; i < inorder.length; i++) {
-                inorderIndexMap.put(inorder[i], i);
-            }
-    
-            return arrayToTree(preorder, 0, preorder.length - 1);
+    //CONSTRUCT BINARY TREE FROM INORDER, PREORDER TRAVERSAL
+    static int preorderIndex;
+    static Map<Integer, Integer> inorderIndexMap;
+    public static TreeNode buildTree(int[] preorder, int[] inorder) {
+        preorderIndex = 0;
+        // build a hashmap to store value -> its index relations
+        inorderIndexMap = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            inorderIndexMap.put(inorder[i], i);
         }
-    
-        private TreeNode arrayToTree(int[] preorder, int left, int right) {
-            // if there are no elements to construct the tree
-            if (left > right) return null;
-    
-            // select the preorder_index element as the root and increment it
-            int rootValue = preorder[preorderIndex++];
-            TreeNode root = new TreeNode(rootValue);
-    
-            // build left and right subtree
-            // excluding inorderIndexMap[rootValue] element because it's the root
-            root.left = arrayToTree(preorder, left, inorderIndexMap.get(rootValue) - 1);
-            root.right = arrayToTree(preorder, inorderIndexMap.get(rootValue) + 1, right);
-            return root;
-        }
-    }    
+        return arrayToTree(preorder, 0, preorder.length - 1);
+    }
+    private static TreeNode arrayToTree(int[] preorder, int left, int right) {
+        // if there are no elements to construct the tree
+        if (left > right) return null;
+
+        // select the preorder_index element as the root and increment it
+        int rootValue = preorder[preorderIndex++];
+        TreeNode root = new TreeNode(rootValue);
+
+        // build left and right subtree
+        // excluding inorderIndexMap[rootValue] element because it's the root
+        root.left = arrayToTree(preorder, left, inorderIndexMap.get(rootValue) - 1);
+        root.right = arrayToTree(preorder, inorderIndexMap.get(rootValue) + 1, right);
+        return root;
+    }
+  
 
 
   
