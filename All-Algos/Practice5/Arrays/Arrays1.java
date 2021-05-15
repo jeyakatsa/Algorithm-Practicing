@@ -109,43 +109,43 @@ public class Arrays1 {
     //  * @return {void} Do not return anything, modify nums1 in-place instead.
     //  */
     //My Soluton :WRONG:
-    int[] nums1 = {1,2,3,4,5};
-    int[] nums2 = {6,7,8,9,10};
-    public void merge(int[]nums1, int m, int[]nums2, int n) {
-        //brute force approach
-        //basecase if nothing in nums1 and nums 2 arrays..
-        //sort num1
-        //if num1.length != m, subtract first m points, else break
-        //sort num2
-        //if num2.length != n, subtract first n points, else break
-        //create result array
-        //merge num1 + num2 into result array
+    // static int[] nums1 = {1,2,3,4,5};
+    // static int[] nums2 = {6,7,8,9,10};
+    // public static void merge(int[]nums1, int m, int[]nums2, int n) {
+    //     //brute force approach
+    //     //basecase if nothing in nums1 and nums 2 arrays..
+    //     //sort num1
+    //     //if num1.length != m, subtract first m points, else break
+    //     //sort num2
+    //     //if num2.length != n, subtract first n points, else break
+    //     //create result array
+    //     //merge num1 + num2 into result array
         
-        // if (nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0) {
-        //     return null;
-        // }
-        for (int i = 0; i < nums1.length; i++) {
-            if (nums1[i] > nums1[i++]){
-                int temp = nums1[i];
-                nums1[i] = nums1[i++];
-                nums1[i++] = temp;
-            }
-            if (nums1.length != m) {
-                //will return to this once I figure out how to remove m elements from nums1.length
-            }
-        }
-        for (int i = 0; i < nums2.length; i++) {
-            if (nums2[i] > nums2[i++]){
-                int temp = nums2[i];
-                nums2[i] = nums2[i++];
-                nums2[i++] = temp;
-            }
-            if (nums2.length != m) {
-                //will return to this once I figure out how to remove m elements from nums2.length
-            }
-        }
-        int [] result = {nums1, nums2};
-    };    
+    //     // if (nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0) {
+    //     //     return null;
+    //     // }
+    //     for (int i = 0; i < nums1.length; i++) {
+    //         if (nums1[i] > nums1[i++]){
+    //             int temp = nums1[i];
+    //             nums1[i] = nums1[i++];
+    //             nums1[i++] = temp;
+    //         }
+    //         if (nums1.length != m) {
+    //             //will return to this once I figure out how to remove m elements from nums1.length
+    //         }
+    //     }
+    //     for (int i = 0; i < nums2.length; i++) {
+    //         if (nums2[i] > nums2[i++]){
+    //             int temp = nums2[i];
+    //             nums2[i] = nums2[i++];
+    //             nums2[i++] = temp;
+    //         }
+    //         if (nums2.length != m) {
+    //             //will return to this once I figure out how to remove m elements from nums2.length
+    //         }
+    //     }
+    //     int [] result = {nums1, nums2};
+    // };    
     //Correct Solution: RIGHT:
     public void merge2(int[] nums1, int m, int[] nums2, int n) {
         int i = m-1, j = n-1, k = m+n-1;
@@ -166,6 +166,19 @@ public class Arrays1 {
 
     
     //CONSTRUCT BINARY TREE FROM INORDER, PREORDER TRAVERSAL
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode (int val) {
+            this.val = val;
+        }
+        TreeNode (int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }    
     static int preorderIndex;
     static Map<Integer, Integer> inorderIndexMap;
     public static TreeNode buildTree(int[] preorder, int[] inorder) {
