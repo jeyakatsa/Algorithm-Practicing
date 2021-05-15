@@ -8,6 +8,7 @@ public class Arrays1 {
     }
 
 
+    //TWO SUM
     //O(n) brute force solution...
     public static int[] twoSum(int[] nums, int target) {
         if (nums == null || nums.length == 0) {
@@ -23,6 +24,8 @@ public class Arrays1 {
         return nums; 
     }
 
+
+    //MAXIMUM SUBARRAY1
     public int maxSubArray(int[] nums) {
         int currMax=nums[0],max=nums[0];
         for(int i=1;i<nums.length;i++){
@@ -31,7 +34,9 @@ public class Arrays1 {
         }
         return max;
     }
-    
+
+
+    //MERGE INTERVALS    
     public int[][] merge(int[][] intervals) {
     
         //create empty dynamic array
@@ -73,6 +78,10 @@ public class Arrays1 {
         return ans.toArray(new int[0][]);
     } 
 
+
+    //MERGE SORTED ARRAY:
+    //
+    //
     // /**
     //  * @param {number[]} nums1
     //  * @param {number} m
@@ -80,7 +89,6 @@ public class Arrays1 {
     //  * @param {number} n
     //  * @return {void} Do not return anything, modify nums1 in-place instead.
     //  */
-
     //My Soluton :WRONG:
     int[] nums1 = {1,2,3,4,5};
     int[] nums2 = {6,7,8,9,10};
@@ -127,7 +135,11 @@ public class Arrays1 {
         }
         while (i==-1 && j>=0) 
             nums1[j] = nums2[j--];
-    }    
+    }   
+    
+    
+    //MERGE SORTED ARRAY
+
 
   
 }
