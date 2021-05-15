@@ -204,6 +204,30 @@ public class Arrays1 {
         root.right = arrayToTree(preorder, inorderIndexMap.get(rootValue) + 1, right);
         return root;
     }
+
+
+
+
+    //BEST TIME TO BUY STOCK...
+    public int maxProfit(int[] prices) {
+        if (prices == null || prices.length == 0) {
+            return -1;
+        }
+        int minprice = Integer.MAX_VALUE;
+        int maxprofit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minprice)
+                minprice = prices[i];
+            else if (prices[i] - minprice > maxprofit)
+                maxprofit = prices[i] - minprice;
+        }
+        return maxprofit;
+    }  
+
+    
+    
+
+    
   
 
 
