@@ -109,5 +109,31 @@ public class DynamicProgramming1 {
             }
         }
         return maxsqlen * maxsqlen;        
+    }
+
+    //COIN CHANGE Few Number of coins...
+    // Input: coins = [1,2,5], amount = 11
+    // Output: 3
+    // Explanation: 11 = 5 + 5 + 1
+    public int coinChange(int[] coins, int amount) {
+        if (coins == null || coins.length == 0) {
+            return -1;
+        }
+        int min = Integer.MAX_VALUE;
+        int total = 1;
+        int[] dp = new int[amount + 1];
+        dp[0] = 0;
+        while (total <= amount) {
+            min = Integer.MAX_VALUE;
+            for (int i = 0; i < coins.length; i++) {
+                int diff = total - coins[i];
+                if (diff > 0 && dp[diff] > 0 || diff == 0) {
+                    min = Math.min(min, dp[diff] + 1);
+                }
+            }
+            dp[total++] = (min == Integer.MAX_VALUE ? -1 : min);
+        }
+        return dp[amount];
+        
     }    
 }
