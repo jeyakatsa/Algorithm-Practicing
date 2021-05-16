@@ -1,5 +1,8 @@
+import java.util.*;
+
 public class DynamicProgramming1 {
     public static void main(String[] args) {
+        String string = "leetcode";
 
     }
 
@@ -14,7 +17,7 @@ public class DynamicProgramming1 {
     }   
 
     //LONGEST PALINDROMIC STRING
-    public String longestPalindrome(String s) {
+    public static String longestPalindrome(String s) {
         if (s == null || s.length() < 1) return "";
         int start = 0, end = 0;
         for (int i = 0; i < s.length(); i++) {
@@ -28,7 +31,7 @@ public class DynamicProgramming1 {
         }
         return s.substring(start, end + 1);
     }
-    private int expandAroundCenter(String s, int left, int right) {
+    private static int expandAroundCenter(String s, int left, int right) {
         int L = left, R = right;
         while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
             L--;
@@ -42,7 +45,7 @@ public class DynamicProgramming1 {
     // Input: s = "226"
     // Output: 3
     // Explanation: "226" could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
-    public int numDecodings(String s) {
+    public static int numDecodings(String s) {
         if (s == null || s.length() == 0) {
             return 0;
         }
@@ -61,5 +64,24 @@ public class DynamicProgramming1 {
             }
         }
         return dp[n];
-    }    
+    }
+    
+    //WORD BREAK
+    public static boolean wordBreak(String s, List<String> wordDict) {
+        // put all words into a hashset
+        Set<String> set = new HashSet<>(wordDict);
+        return wb(s, set);
+    }
+    private static boolean wb(String s, Set<String> set) {
+        int len = s.length();
+        if (len == 0) {
+            return true;
+        }
+        for (int i = 1; i <= len; ++i) {
+            if (set.contains(s.substring(0, i)) && wb(s.substring(i), set)) {
+                return true;
+            }
+        }
+        return false;
+    }   
 }
