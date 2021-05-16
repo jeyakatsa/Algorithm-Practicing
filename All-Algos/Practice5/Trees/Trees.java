@@ -24,7 +24,9 @@ public class Trees {
               root = root.left;
            }
            root = stack.pop();
-           if(pre != null && root.val <= pre.val) return false;
+           if(pre != null && root.val <= pre.val) {
+               return false; 
+            }
            pre = root;
            root = root.right;
         }
