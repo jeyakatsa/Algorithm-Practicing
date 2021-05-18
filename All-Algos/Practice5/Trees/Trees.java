@@ -78,7 +78,6 @@ public class Trees {
 
         return arrayToTree(preorder, 0, preorder.length - 1);
     }
-
     private TreeNode arrayToTree(int[] preorder, int left, int right) {
         // if there are no elements to construct the tree
         if (left > right) return null;
@@ -92,5 +91,25 @@ public class Trees {
         root.left = arrayToTree(preorder, left, inorderIndexMap.get(rootValue) - 1);
         root.right = arrayToTree(preorder, inorderIndexMap.get(rootValue) + 1, right);
         return root;
+    }  
+    
+    
+    //RETURN RIGHT SIDE OF TREE... DFS solution:
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> result = new ArrayList<Integer>();
+        rightView(root, result, 0);
+        return result;
+    }
+    public void rightView(TreeNode curr, List<Integer> result, int currDepth){
+        if(curr == null){
+            return;
+        }
+        if(currDepth == result.size()){
+            result.add(curr.val);
+        }
+        
+        rightView(curr.right, result, currDepth + 1);
+        rightView(curr.left, result, currDepth + 1);
+        
     }    
 }
