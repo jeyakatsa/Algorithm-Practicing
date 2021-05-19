@@ -34,6 +34,7 @@ public class Trees {
         return true;
     }
 
+    //ZIG ZAG LEVEL TRAVERSAL
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         TreeNode c=root;
         List<List<Integer>> ans =new ArrayList<List<Integer>>();
