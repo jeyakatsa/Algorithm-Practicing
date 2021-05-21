@@ -21,6 +21,7 @@ public class LinkedList {
     }
 
 
+    //IS PALINDROME?
     public static boolean isPalindrome(ListNode head) {
         /*
         Approach: Use dual pointer method to get the middle of the linked list. The idea is, have a slow pointer and a fast
@@ -37,27 +38,21 @@ public class LinkedList {
                   half, if the problem statement asked us to do so.
                   
         Complexity analysis: Time: O(n), Space: O(1)          
-        */
-        
-        if(head==null || head.next==null) return true;
-        
+        */  
+        if(head==null || head.next==null) return true;   
         //  Reverse the first half
-        
         ListNode prevSlowNode = null;
         ListNode slowNode = head;
         ListNode fastNode = head;
         while(fastNode!=null && fastNode.next !=null){
             fastNode = fastNode.next.next;                                      //Move fast pointer
-            
             //Reverse
             ListNode nextSlowNode = slowNode.next;                              //Store next node in a variable
             slowNode.next = prevSlowNode;                                       //Point current node to prev node
             prevSlowNode = slowNode;                                            //Move prev node to next (curr) node
             slowNode = nextSlowNode;                                            //Move curr node to next node
         }
-        
         //  Find the pointers to the two halves
-        
         ListNode firstHalfPointer = prevSlowNode;                               //Point to prevSlowNode, like like 4 in
                                                                                 //[2,4,5,7] or [2,4,5,7,8]
         ListNode secondHalfPointer = null;
@@ -67,9 +62,7 @@ public class LinkedList {
         else if(fastNode.next==null){                                           //List is of odd length, like [2,4,5,7,8]
             secondHalfPointer = slowNode.next;                                  //Point to slowNode.next, like 7 in [2,4,5,7,8]
         }
-
         //  Compare the two halves
-        
         while(firstHalfPointer!=null && secondHalfPointer!=null){
             if(firstHalfPointer.val != secondHalfPointer.val){
                 return false;
@@ -77,9 +70,12 @@ public class LinkedList {
             firstHalfPointer = firstHalfPointer.next;
             secondHalfPointer = secondHalfPointer.next;
         }
-        
         return true;
     }
+
+
+
+
 
     //REVERSE LINKEDLIST
     public static ListNode reverseList(ListNode head) {
@@ -92,6 +88,69 @@ public class LinkedList {
             curr = nextTemp;
         }
         return prev;
-    }    
+    }   
+    
+    
+
+    //ADD TWO NUMBERS
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        // We will use sizes to understand which list's nodes should be frozen for a while.
+        int s1 = size(l1);
+        int s2 = size(l2);
+        ListNode resHead = null;
+        ListNode n = null;
+        while (l1 != null || l2 != null) {
+            int v1 = 0;
+            int v2 = 0;
+            if (s1 >= s2) {
+                v1 = l1 != null ? l1.val : 0;
+                l1 = l1.next;
+                s1--;
+            }
+            // Comparing with s1 + 1 since s1 might be decremented previously
+            if (s2 >= s1 + 1) {
+                v2 = l2 != null ? l2.val : 0;
+                l2 = l2.next;
+                s2--;
+            }
+            // Creating the resulting list in the reversed order.
+            n = new ListNode(v1 + v2);
+            n.next = resHead;
+            resHead = n;
+        }
+        int carry = 0;
+        resHead = null;
+        // Now, let's perform the normalization.
+        while (n != null) {
+            n.val += carry;
+            if (n.val >= 10) {
+                n.val = n.val % 10;
+                carry = 1;
+            } else {
+                carry = 0;
+            }
+            ListNode buf = n.next;
+            n.next = resHead;
+            resHead = n;
+            n = buf;
+        }
+        if (carry > 0) {
+            n = new ListNode(1);
+            n.next = resHead;
+            resHead = n;
+        }
+        return resHead;
+    }
+    private int size(ListNode l) {
+        int s = 0;
+        while (l != null) {
+            l = l.next;
+            s++;
+        }
+        return s;
+    }  
+    
+    
+    //
        
 }
