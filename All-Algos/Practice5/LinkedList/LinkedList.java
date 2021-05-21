@@ -2,9 +2,14 @@ public class LinkedList {
     public static void main (String[] args) {
         ListNode head = new ListNode(1);
         head.next = new ListNode(2);
-        head.next.next = new ListNode(1);
+        head.next.next = new ListNode(3);
 
-        isPalindrome(head);
+        ListNode result = reverseList(head);
+        while(result != null) {
+            System.out.println(result.val);
+            result = result.next;
+
+        }
     }
 
     public static class ListNode {
@@ -75,5 +80,18 @@ public class LinkedList {
         
         return true;
     }
+
+    //REVERSE LINKEDLIST
+    public static ListNode reverseList(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode nextTemp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextTemp;
+        }
+        return prev;
+    }    
        
 }
