@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class LinkedList {
     public static void main (String[] args) {
         ListNode head = new ListNode(1);
@@ -15,6 +17,8 @@ public class LinkedList {
     public static class ListNode {
         int val;
         ListNode next;
+        public int label;
+        public Object random;
         ListNode() {}
         ListNode(int val) { this.val = val; }
         ListNode(int val, ListNode next) { this.val = val; this.next = next; }
@@ -94,60 +98,23 @@ public class LinkedList {
 
     //ADD TWO NUMBERS
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        // We will use sizes to understand which list's nodes should be frozen for a while.
-        int s1 = size(l1);
-        int s2 = size(l2);
-        ListNode resHead = null;
-        ListNode n = null;
-        while (l1 != null || l2 != null) {
-            int v1 = 0;
-            int v2 = 0;
-            if (s1 >= s2) {
-                v1 = l1 != null ? l1.val : 0;
-                l1 = l1.next;
-                s1--;
-            }
-            // Comparing with s1 + 1 since s1 might be decremented previously
-            if (s2 >= s1 + 1) {
-                v2 = l2 != null ? l2.val : 0;
-                l2 = l2.next;
-                s2--;
-            }
-            // Creating the resulting list in the reversed order.
-            n = new ListNode(v1 + v2);
-            n.next = resHead;
-            resHead = n;
-        }
+        ListNode dummyHead = new ListNode(0);
+        ListNode p = l1, q = l2, curr = dummyHead;
         int carry = 0;
-        resHead = null;
-        // Now, let's perform the normalization.
-        while (n != null) {
-            n.val += carry;
-            if (n.val >= 10) {
-                n.val = n.val % 10;
-                carry = 1;
-            } else {
-                carry = 0;
-            }
-            ListNode buf = n.next;
-            n.next = resHead;
-            resHead = n;
-            n = buf;
+        while (p != null || q != null) {
+            int x = (p != null) ? p.val : 0;
+            int y = (q != null) ? q.val : 0;
+            int sum = carry + x + y;
+            carry = sum / 10;
+            curr.next = new ListNode(sum % 10);
+            curr = curr.next;
+            if (p != null) p = p.next;
+            if (q != null) q = q.next;
         }
         if (carry > 0) {
-            n = new ListNode(1);
-            n.next = resHead;
-            resHead = n;
+            curr.next = new ListNode(carry);
         }
-        return resHead;
-    }
-    private int size(ListNode l) {
-        int s = 0;
-        while (l != null) {
-            l = l.next;
-            s++;
-        }
-        return s;
+        return dummyHead.next;
     }  
     
     
@@ -162,6 +129,36 @@ public class LinkedList {
 			l2.next = mergeTwoLists(l1, l2.next);
 			return l2;
 		}
-    }    
+    }
+
+
+
+
+
+    //RANDOM LIST
+    public ListNode copyRandomList(ListNode head) {
+        if (head == null)
+            return null;
+        
+        Map<ListNode, ListNode> map =  new HashMap<ListNode, ListNode>();
+    
+        ListNode curNode = head;
+        while(curNode != null)
+        {
+            map.put(curNode, new ListNode(curNode.val));
+            curNode = curNode.next;
+        }
+        
+        for(Map.Entry<ListNode, ListNode> entry : map.entrySet())  // key -> value;  node -> copy
+        {
+            ListNode node = entry.getValue();
+            node.next = map.get(entry.getKey().next);
+            node.random = map.get(entry.getKey().random);
+        }
+        
+        return map.get(head);
+    }   
+    
+  
        
 }
