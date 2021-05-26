@@ -26,4 +26,18 @@ public class Recursion {
 
         return sum;
     } 
+
+    //KTH SYMBOL
+    public int kthGrammar(int N, int K) {
+        return Integer.bitCount(K - 1) & 1;
+    }
+    // think of the problem like this
+    /*        0
+          /       \
+         0          1
+       /   \      /    \
+      0     1    1      0
+     / \     / \   / \   / \
+    0  1   1   0  1  0  0  1
+    */      
 }
