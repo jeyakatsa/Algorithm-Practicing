@@ -164,7 +164,28 @@ public class Recursion {
 		}    
     }
 
-    
+    //BINARY TREE RIGHT SIDE VIEW
+    //Depth First Search
+    public static List<Integer> rightSideView(TreeNode root) {
+        if (root == null) {
+            return null;           
+        } 
+        //Create List Integer
+        List<Integer> rightSide = new ArrayList<>();
+        showRightSideView(rightSide, root, 0);
+        return rightSide;         
+    } 
+    public static void showRightSideView(List<Integer> rightSide, TreeNode node, int depth) {
+        if (node == null)
+            return;
+        if (depth == rightSide.size()) {
+            rightSide.add(node.val);
+        }
+        showRightSideView(rightSide, node.right, depth + 1);
+        showRightSideView(rightSide, node.left, depth + 1);
+    }          
+
+
 
 
 }
