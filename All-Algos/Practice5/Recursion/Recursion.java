@@ -14,6 +14,8 @@ public class Recursion {
         head2.next.next.next = new TreeNode(8);
 
         TreeNode result = mergeSorted(head, head2);
+
+        List<Integer> result2 = rightSideView(head);        
         System.out.print("Merged Sorted List: ");
         while(result != null) {
             System.out.print(result.val + " ");
