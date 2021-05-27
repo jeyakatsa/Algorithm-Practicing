@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 public class Recursion {
 
     public static void main (String[] args) {
@@ -15,6 +14,7 @@ public class Recursion {
         head2.next.next.next = new TreeNode(8);
 
         TreeNode result = mergeSorted(head, head2);
+        System.out.print("Merged Sorted List: ");
         while(result != null) {
             System.out.print(result.val + " ");
             result = result.next;
@@ -163,6 +163,8 @@ public class Recursion {
 			return l2;
 		}    
     }
+
+    
 
 
 }
