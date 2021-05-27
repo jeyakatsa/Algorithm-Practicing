@@ -7,12 +7,14 @@ public class Recursion {
         int val;
         TreeNode right;
         TreeNode left;
+        TreeNode next;
         TreeNode () {}
         TreeNode (int val) {this.val = val;}
-        TreeNode (int val, TreeNode right, TreeNode left) {
+        TreeNode (int val, TreeNode right, TreeNode left, TreeNode next) {
             this.left = left;
             this.right = right;
             this.val = val;
+            this.next = next;
         }
     }
 
@@ -57,8 +59,7 @@ public class Recursion {
         boolean[] used=new boolean[nums.length];
         
         return partition(nums,used,0,0,0,target,k);
-    }
-    
+    }    
     private boolean partition(int[] nums,boolean[] used,int idx,int currentSum,int currentSet,int targetSum,int targetSet){
         if(currentSet==targetSet) return true;
         
@@ -106,5 +107,27 @@ public class Recursion {
             for(String rest : intermediate)
                 result.add(first + rest);
         return result;
-    }     
+    } 
+
+    //ADD TWO NUMBERS
+    public static TreeNode addTwoNumbers(TreeNode l1, TreeNode l2) {
+        TreeNode curr = new TreeNode(0);
+        int carry = 0;
+        while (l1 != null || l2 != null) {
+            int x = (l1 != null) ? l1.val : 0;
+            int y = (l2 != null) ? l2.val : 0;
+            int sum = carry + x + y;
+            carry = sum / 10;
+            curr.next = new TreeNode(sum % 10);
+            curr = curr.next;
+            if (l1 != null) l1 = l1.next;
+            if (l2 != null) l2 = l2.next;
+        }
+        if (carry > 0) {
+            curr.next = new TreeNode(carry);
+        }
+        return curr.next;
+    }
+
+
 }
