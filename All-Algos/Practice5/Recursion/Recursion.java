@@ -3,6 +3,24 @@ import java.util.*;
 
 public class Recursion {
 
+    public static void main (String[] args) {
+        TreeNode head = new TreeNode(1);
+        head.next = new TreeNode(4);
+        head.next.next = new TreeNode(7);
+        head.next.next.next = new TreeNode(10);
+
+        TreeNode head2 = new TreeNode(2);
+        head2.next = new TreeNode(3);
+        head2.next.next = new TreeNode(5);
+        head2.next.next.next = new TreeNode(8);
+
+        TreeNode result = mergeSorted(head, head2);
+        while(result != null) {
+            System.out.print(result.val + " ");
+            result = result.next;
+        }
+    }
+
     public static class TreeNode {
         int val;
         TreeNode right;
@@ -127,6 +145,23 @@ public class Recursion {
             curr.next = new TreeNode(carry);
         }
         return curr.next;
+    }
+
+    //MERGE TWO SORTED LISTS
+    public static TreeNode mergeSorted(TreeNode l1, TreeNode l2) {
+        if (l1 == null || l2 == null) {
+            return null;
+        }
+        //Create result TreeNode
+        //Sorted here...
+        if (l1.val <= l2.val) {
+			l1.next = mergeSorted(l1.next, l2);
+			return l1;
+		}
+        else {
+			l2.next = mergeSorted(l1, l2.next);
+			return l2;
+		}    
     }
 
 
