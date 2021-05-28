@@ -45,6 +45,8 @@ public class HashTables {
         throw new IllegalArgumentException("No two sum solution");
     }   
     
+
+
     //LONGEST SUBSTRING WITHOUT REPEATING CHARACTERS
     public int lengthOfLongestSubstring(String s) {
         int ret = 0;
@@ -59,6 +61,7 @@ public class HashTables {
         return ret;
     }  
     
+
     
     //COPY AND RETURN LIST "RANDOM POINTER"
     class Node {
@@ -109,8 +112,7 @@ public class HashTables {
         list=new HashMap<Integer,Integer>();
         array=new int[100001];
         random=new Random();
-    }
-    
+    }  
     /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
     public boolean insert(int val) {
         if(list.containsKey(val)){
@@ -122,8 +124,7 @@ public class HashTables {
             index++;
             return true;
         }
-    }
-    
+    } 
     /** Removes a value from the set. Returns true if the set contained the specified element. */
     public boolean remove(int val) {
         if(!list.containsKey(val)){
@@ -138,11 +139,39 @@ public class HashTables {
             index--;
             return true;
         }
-    }
-    
+    }  
     /** Get a random element from the set. */
     public int getRandom() {
         return array[random.nextInt(index)];
     }
+
+
+    //VERIFYING ALIEN DICTIONARY
+    Map<Character, Integer> map;
+    public boolean isAlienSorted(String[] words, String order) {
+        map = new HashMap<>();
+        for (int i = 0; i < order.length(); i++) {
+            map.put(order.charAt(i), i);
+        }
+        for (int i = 0; i < words.length - 1; i++) {
+            if (!compare(words[i], words[i + 1])) return false;
+        }
+        return true;
+    }
+    private boolean compare(String s1, String s2) {
+        int l1 = s1.length(), l2 = s2.length();
+        for (int i = 0, j = 0; i < l1 && j < l2; i++, j++) {
+            if (s1.charAt(i) != s2.charAt(j)) {
+                if (map.get(s1.charAt(i)) > map.get(s2.charAt(j))) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+        if (l1 > l2) return false;
+        return true;
+    }
+
 
 }
