@@ -20,6 +20,29 @@ public class HashTables {
             map.put(sum, map.getOrDefault(sum, 0) + 1);
         }
         return count;        
-    }    
+    } 
+
+    //TWO SUM (Which Subarrays Equal Target)
+    public int[] twoSum(int[] nums, int target) {
+    // MY SOLUTION    
+    //   if (nums == null || nums.length == 0 || target == 0) {
+    //       throw new IllegalArgumentException("Error: Check if array or target has proper integers!");
+    //   }
+    //   int sum = 0;
+    //   int[] result;
+    //   HashMap<Integer, Integer> map = new HashMap <>();
+    //   for (int i = 0; i < nums.length; i++) {
+
+    //   }
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[] { map.get(complement), i };
+            }
+            map.put(nums[i], i);
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }      
 
 }
