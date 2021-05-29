@@ -4,7 +4,7 @@ public class Arrays2 {
 
 
 
-    // MAX AREA
+    // MAX AREA (Horizontal vs Vertical)
     // We will use long instead of int to prevent overflow
     public int maxArea(int h, int w, int[] horizontalCuts, int[] verticalCuts) {
         // Start by sorting the inputs
@@ -74,5 +74,39 @@ public class Arrays2 {
         }
         return current;
     }
+
+
+
+    
+    //HIGH FIVE (Average of the top 5 grades of each student)
+    private int K;
+
+    public int[][] highFive(int[][] items) {
+        this.K = 5;
+        TreeMap<Integer, Queue<Integer>> allScores = new TreeMap<>();
+        for (int[] item : items) {
+            int id = item[0];
+            int score = item[1];
+            if (!allScores.containsKey(id))
+                // max heap
+                allScores.put(id, new PriorityQueue<>((a,b) -> b - a));
+            // Add score to the max heap
+            allScores.get(id).add(score);
+        }
+
+        List<int[]> solution = new ArrayList<>();
+
+        for (int id : allScores.keySet()) {
+            int sum = 0;
+            // obtain the top k scores (k = 5)
+            for (int i = 0; i < this.K; ++i)
+                sum += allScores.get(id).poll();
+            solution.add(new int[] {id, sum / this.K});
+        }
+        int[][] solutionArray = new int[solution.size()][];
+        return solution.toArray(solutionArray);
+    } 
+
+
 
 }
