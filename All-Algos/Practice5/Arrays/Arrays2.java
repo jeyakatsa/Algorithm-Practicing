@@ -150,17 +150,28 @@ public class Arrays2 {
 
     //PIVOT INDEX
     public int pivotIndex(int[] nums) {
-        //start from the left then add
-        //start from the right, then subtract
-        //if right integers all equal left integers
-        //return left integer
-        int sum = 0, leftsum = 0;
-        for (int x: nums) sum += x;
-        for (int i = 0; i < nums.length; ++i) {
-            if (leftsum == sum - leftsum - nums[i]) return i;
-            leftsum += nums[i];
+        
+        int leftSum = 0;
+        int totalSum = 0;
+        
+        int i = 0;
+        while(i < nums.length) {
+            totalSum += nums[i];
+            i++;
         }
+        
+        i = 0;
+        while(i < nums.length) {
+            if(totalSum - nums[i] == leftSum) {
+                return i;
+            } else {
+                leftSum += nums[i];
+                totalSum -= nums[i];
+            }
+            i++;
+        }
+        
         return -1;
-    }   
-    
+    }
+
 }
