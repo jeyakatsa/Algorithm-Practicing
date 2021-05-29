@@ -135,7 +135,7 @@ public class Arrays2 {
     }
     
 
-    
+
 
     //BEST TIME TO BUY/SELL STOCK II
     public int maxProfit(int[] prices) {
@@ -148,5 +148,19 @@ public class Arrays2 {
     }
 
 
-
+    //PIVOT INDEX
+    public int pivotIndex(int[] nums) {
+        //start from the left then add
+        //start from the right, then subtract
+        //if right integers all equal left integers
+        //return left integer
+        int sum = 0, leftsum = 0;
+        for (int x: nums) sum += x;
+        for (int i = 0; i < nums.length; ++i) {
+            if (leftsum == sum - leftsum - nums[i]) return i;
+            leftsum += nums[i];
+        }
+        return -1;
+    }   
+    
 }
