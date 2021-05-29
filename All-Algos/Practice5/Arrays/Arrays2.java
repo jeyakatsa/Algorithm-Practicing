@@ -80,7 +80,6 @@ public class Arrays2 {
 
     //HIGH FIVE (Average of the top 5 grades of each student)
     private int K;
-
     public int[][] highFive(int[][] items) {
         this.K = 5;
         TreeMap<Integer, Queue<Integer>> allScores = new TreeMap<>();
@@ -93,9 +92,7 @@ public class Arrays2 {
             // Add score to the max heap
             allScores.get(id).add(score);
         }
-
         List<int[]> solution = new ArrayList<>();
-
         for (int id : allScores.keySet()) {
             int sum = 0;
             // obtain the top k scores (k = 5)
@@ -123,7 +120,6 @@ public class Arrays2 {
         }
         reverse(nums, i + 1);
     }
-
     private void reverse(int[] nums, int start) {
         int i = start, j = nums.length - 1;
         while (i < j) {
@@ -132,12 +128,24 @@ public class Arrays2 {
             j--;
         }
     }
-
     private void swap(int[] nums, int i, int j) {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
-    }    
+    }
+    
+
+    
+
+    //BEST TIME TO BUY/SELL STOCK II
+    public int maxProfit(int[] prices) {
+        int maxprofit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1])
+                maxprofit += prices[i] - prices[i - 1];
+        }
+        return maxprofit;
+    }
 
 
 
