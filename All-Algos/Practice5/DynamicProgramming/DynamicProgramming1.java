@@ -85,6 +85,7 @@ public class DynamicProgramming1 {
         return false;
     }
 
+    
 
     //MAXIMAL SQUARE
     //[0, 0, 1, 1, 1]
@@ -110,6 +111,9 @@ public class DynamicProgramming1 {
         }
         return maxsqlen * maxsqlen;        
     }
+
+
+
 
     //COIN CHANGE Few Number of coins...
     // Input: coins = [1,2,5], amount = 11
