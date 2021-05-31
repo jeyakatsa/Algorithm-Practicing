@@ -13,8 +13,10 @@ public class Trees {
             this.right = right;
         }
     }
+
+
     
-    //
+    //CHECK IF BST is VALID
     public boolean isValidBST(TreeNode root) {
         if (root == null) return true;
         Stack<TreeNode> stack = new Stack<>();
@@ -33,6 +35,8 @@ public class Trees {
         }
         return true;
     }
+
+
 
     //ZIG ZAG LEVEL TRAVERSAL
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
@@ -66,7 +70,8 @@ public class Trees {
         return ans;
     }   
 
-    //Consruct Tree from Inorder, Preorder Traversal
+
+    //CONSTRUCT TREE FROM INORDER, PREORDER
     int preorderIndex;
     Map<Integer, Integer> inorderIndexMap;
     public TreeNode buildTree(int[] preorder, int[] inorder) {
@@ -95,6 +100,7 @@ public class Trees {
     }  
     
     
+
     //RETURN RIGHT SIDE OF TREE... DFS solution:
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> result = new ArrayList<Integer>();
@@ -185,7 +191,21 @@ public class Trees {
         return (t1.val == t2.val)
             && isMirror(t1.right, t2.left)
             && isMirror(t1.left, t2.right);
-    }  
+    } 
+    
+    
+    
+    //COUNT GOOD NODES IN BST
+    public int goodNodes(TreeNode root) {
+        return goodNodes(root, -10000);
+    }
+    public int goodNodes(TreeNode root, int ma) {
+        if (root == null) return 0;
+        int res = root.val >= ma ? 1 : 0;
+        res += goodNodes(root.left, Math.max(ma, root.val));
+        res += goodNodes(root.right, Math.max(ma, root.val));
+        return res;
+    }    
       
 
 
