@@ -116,7 +116,7 @@ public class Trees {
      
     //LOWEST COMMON ANCESTOR!!!!.......
     private TreeNode ans;
-    public Solution() {
+    public Trees() {
         // Variable to store LCA node.
         this.ans = null;
     }
@@ -142,5 +142,16 @@ public class Trees {
         // Traverse the tree
         this.recurseTree(root, p, q);
         return this.ans;
+    }
+
+    
+
+
+    public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+        
     }    
+
+
+
+
 }
