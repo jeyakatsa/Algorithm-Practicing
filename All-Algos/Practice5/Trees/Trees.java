@@ -144,12 +144,47 @@ public class Trees {
         return this.ans;
     }
 
-    
 
 
-    public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+
+    //CHECK IF TREE HAS SUBTREE
+    public boolean isSubtree(TreeNode s, TreeNode t) { // takes O(m x n)
+        if (s == null) {
+            return t == null;
+        }
+        return isSame(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t);
+    }
+
+    private boolean isSame(TreeNode t1, TreeNode t2) { // takes O(n)
+        if (t1 == null && t2 == null) {
+            return true;
+        }
+        if (t1 == null || t2 == null) {
+            return false;
+        }        
+        if (t1.val != t2.val) {
+            return false;
+        }
+        return isSame(t1.left, t2.left) && isSame(t1.right, t2.right);
+    }
+    public boolean isSubtreek(TreeNode root, TreeNode subRoot) {
+        //O(n)
+        //loop through tree,
+        //while left < right
+        //if subRoot.right != null && subRoot.left != null
+        //return true
+        if (root == null || subRoot == null) {
+            return false;
+        }
+        while (root.left < root.right) {
+            if (subRoot.right != null && subRoot.left != null) {
+                return true;
+            }
+        }
+        return false;
+
         
-    }    
+    }
 
 
 
