@@ -114,6 +114,8 @@ public class Trees {
     } 
 
      
+
+
     //LOWEST COMMON ANCESTOR!!!!.......
     private TreeNode ans;
     public Trees() {
@@ -165,8 +167,26 @@ public class Trees {
         if (t1.val != t2.val) {
             return false;
         }
-        return isSame(t1.left, t2.left) && isSame(t1.right, t2.right);
+        return isSame(t1.left, t2.left) 
+        && isSame(t1.right, t2.right);
     }
+
+
+
+    //SYMMETRIC TREE
+    public boolean isSymmetric(TreeNode root) {
+        return isMirror(root, root);
+    }
+    public boolean isMirror(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null) 
+            return true;
+        if (t1 == null || t2 == null) 
+            return false;
+        return (t1.val == t2.val)
+            && isMirror(t1.right, t2.left)
+            && isMirror(t1.left, t2.right);
+    }  
+      
 
 
 
