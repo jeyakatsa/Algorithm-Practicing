@@ -1,7 +1,23 @@
 import java.util.*;
 
 public class Trees {
-    public class TreeNode {
+    public static void main (String[] args) {
+        TreeNode root = new TreeNode(2);
+        root.left = new TreeNode(3);
+        root.right = new TreeNode(4);
+
+        invertTree(root);
+
+        while (root != null) {
+            System.out.print(root.val + " " + root.left.val + " " + root.right.val);
+            break;
+        }
+
+    }
+
+
+
+    public static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
@@ -236,6 +252,27 @@ public class Trees {
     public boolean hasNext() {
         return this.index + 1 < this.nodesSorted.size();
     }
+
+
+
+
+    //INVERT TREE
+    public static TreeNode invertTree(TreeNode root) {
+        if (root == null) return null;
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+            TreeNode temp = current.left;
+            current.left = current.right;
+            current.right = temp;
+            if (current.left != null) queue.add(current.left);
+            if (current.right != null) queue.add(current.right);
+        }
+        return root;
+    }    
+
+    
       
 
 
