@@ -211,6 +211,7 @@ public class Trees {
 
 
 
+    //BINARY SEARCH ITERATOR
     ArrayList<Integer> nodesSorted;
     int index;
     public void BSTIterator(TreeNode root) {
