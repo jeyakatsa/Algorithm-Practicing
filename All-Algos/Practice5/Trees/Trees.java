@@ -192,20 +192,49 @@ public class Trees {
             && isMirror(t1.right, t2.left)
             && isMirror(t1.left, t2.right);
     } 
-    
+
     
     
     //COUNT GOOD NODES IN BST
     public int goodNodes(TreeNode root) {
-        return goodNodes(root, -10000);
+        return preorder(root, root.val);
     }
-    public int goodNodes(TreeNode root, int ma) {
-        if (root == null) return 0;
-        int res = root.val >= ma ? 1 : 0;
-        res += goodNodes(root.left, Math.max(ma, root.val));
-        res += goodNodes(root.right, Math.max(ma, root.val));
-        return res;
-    }    
+    private int preorder(TreeNode n, int v) {
+        if (n == null) // base cases.
+            return 0;
+        int max = Math.max(n.val, v); // maximum so far on the path.
+        return (n.val >= v ? 1 : 0) 
+        + preorder(n.left, max) 
+        + preorder(n.right, max); // recurse to children.
+    } 
+
+
+
+
+    ArrayList<Integer> nodesSorted;
+    int index;
+    public void BSTIterator(TreeNode root) {
+        // Array containing all the nodes in the sorted order
+        this.nodesSorted = new ArrayList<Integer>();
+        // Pointer to the next smallest element in the BST
+        this.index = -1;
+        // Call to flatten the input binary search tree
+        this._inorder(root);
+    }
+    private void _inorder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        this._inorder(root.left);
+        this.nodesSorted.add(root.val);
+        this._inorder(root.right);
+    }
+    public int next() {
+        return this.nodesSorted.get(++this.index);
+    }
+    public boolean hasNext() {
+        return this.index + 1 < this.nodesSorted.size();
+    }
       
 
 
