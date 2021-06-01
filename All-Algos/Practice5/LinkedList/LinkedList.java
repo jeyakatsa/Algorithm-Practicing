@@ -192,7 +192,54 @@ public class LinkedList {
         }
         
         return map.get(head);
-    }   
+    }  
+
+
+
+
+
+    //REVERSE LINKED LIST BASED ON NODES
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if (head == null || left <= 0 || right <= 0) {
+            throw new IllegalArgumentException("Nope! Try again!");
+        }
+        
+        
+        //head.val == left || head.val == right
+        // Move the two pointers until they reach the proper starting point
+        // in the list.
+        ListNode cur = head, prev = null;
+        while (left > 1) {
+            prev = cur;
+            cur = cur.next;
+            left--;
+            right--;
+        }
+
+        // The two pointers that will fix the final connections.
+        ListNode con = prev, tail = cur;
+
+        // Iteratively reverse the nodes until right becomes 0.
+        ListNode third = null;
+        while (right > 0) {
+            third = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = third;
+            right--;
+        }
+
+        // Adjust the final connections as explained in the algorithm
+        if (con != null) {
+            con.next = prev;
+        } else {
+            head = prev;
+        }
+
+        tail.next = cur;
+        return head;
+    }
+
     
   
        

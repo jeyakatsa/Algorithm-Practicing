@@ -74,7 +74,6 @@ public class Trees1 {
     public boolean isLeaf(Node t) {
         return t.left == null && t.right == null;
     }
-
     public void addLeaves(List<Integer> res, Node root) {
         if (isLeaf(root)) {
             res.add(root.val);
@@ -87,7 +86,6 @@ public class Trees1 {
             }
         }
     }
-
     public List<Integer> boundaryOfBinaryTree(Node root) {
         ArrayList<Integer> res = new ArrayList<>();
         if (root == null) {
@@ -106,7 +104,6 @@ public class Trees1 {
             } else {
                 t = t.right;
             }
-
         }
         addLeaves(res, root);
         Stack<Integer> s = new Stack<>();
