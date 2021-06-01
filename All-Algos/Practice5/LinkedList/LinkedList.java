@@ -203,8 +203,6 @@ public class LinkedList {
         if (head == null || left <= 0 || right <= 0) {
             throw new IllegalArgumentException("Nope! Try again!");
         }
-        
-        
         //head.val == left || head.val == right
         // Move the two pointers until they reach the proper starting point
         // in the list.
@@ -215,10 +213,8 @@ public class LinkedList {
             left--;
             right--;
         }
-
         // The two pointers that will fix the final connections.
         ListNode con = prev, tail = cur;
-
         // Iteratively reverse the nodes until right becomes 0.
         ListNode third = null;
         while (right > 0) {
@@ -228,17 +224,32 @@ public class LinkedList {
             cur = third;
             right--;
         }
-
         // Adjust the final connections as explained in the algorithm
         if (con != null) {
             con.next = prev;
         } else {
             head = prev;
         }
-
         tail.next = cur;
         return head;
     }
+
+
+
+    //REMOVE LINKED LIST ELEMENTS (Value)
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode sentinel = new ListNode(0);
+        sentinel.next = head;
+    
+        ListNode prev = sentinel, curr = head;
+        while (curr != null) {
+          if (curr.val == val) prev.next = curr.next;
+          else prev = curr;
+          curr = curr.next;
+        }
+        return sentinel.next;
+    }    
+
 
     
   
