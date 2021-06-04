@@ -104,6 +104,8 @@ public class Recursion {
         return false;
     }
 
+
+
     //LETTER COMBINATIONS OF NUMBERS
     Map<Integer, List<String>> digitMap = new HashMap<Integer, List<String>>();
     Recursion() {
@@ -129,6 +131,7 @@ public class Recursion {
         return result;
     } 
 
+
     //ADD TWO NUMBERS
     public static TreeNode addTwoNumbers(TreeNode l1, TreeNode l2) {
         TreeNode curr = new TreeNode(0);
@@ -149,6 +152,7 @@ public class Recursion {
         return curr.next;
     }
 
+
     //MERGE TWO SORTED LISTS
     public static TreeNode mergeSorted(TreeNode l1, TreeNode l2) {
         if (l1 == null || l2 == null) {
@@ -165,6 +169,8 @@ public class Recursion {
 			return l2;
 		}    
     }
+
+
 
     //BINARY TREE RIGHT SIDE VIEW
     //Depth First Search
@@ -224,7 +230,44 @@ public class Recursion {
             return false;
         }
         return (turns == 0 || turns == 1) && (!xwin || !owin);
-    }    
+    }
+
+
+
+    //LONGEST SUBSTRING
+    public int longestSubstring(String s, int k) {
+        //if s[i].charAt(j) >= k
+        if (s == null || s.isEmpty() || k > s.length()) {
+            return 0;
+        }
+        int[] countMap = new int[26];
+        int n = s.length();
+        int result = 0;
+        for (int start = 0; start < n; start++) {
+            // reset the count map
+            Arrays.fill(countMap, 0);
+            for (int end = start; end < n; end++) {
+                countMap[s.charAt(end) - 'a']++;
+                if (isValid(s, start, end, k, countMap)) {
+                    result = Math.max(result, end - start + 1);
+                }
+            }
+        }
+        return result;
+    }
+    private boolean isValid(String s, int start, int end, int k, int[] countMap) {
+        int countLetters = 0, countAtLeastK = 0;
+        for (int freq : countMap) {
+            if (freq > 0) countLetters++;
+            if (freq >= k) countAtLeastK++;
+        }
+        return countAtLeastK == countLetters;
+    }   
+    
+    
+
+
+
 
 
 
