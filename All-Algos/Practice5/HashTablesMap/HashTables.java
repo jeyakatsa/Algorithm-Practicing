@@ -239,8 +239,7 @@ public class HashTables {
                 }
             }
         }
-    }
-    
+    }  
     class MyHashMap {
         private int key_space;
         private List<Bucket> hash_table;
