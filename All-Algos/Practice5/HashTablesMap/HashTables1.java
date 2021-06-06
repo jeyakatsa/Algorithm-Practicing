@@ -126,8 +126,7 @@ public class HashTables1 {
     
     //SHORTEST WORD DISTANCE II
     HashMap<String, ArrayList<Integer>> locations;
-
-    public WordDistance(String[] words) {
+    public void WordDistance(String[] words) {
         this.locations = new HashMap<String, ArrayList<Integer>>();
 
         // Prepare a mapping from a word to all it's locations (indices).
@@ -137,7 +136,6 @@ public class HashTables1 {
             this.locations.put(words[i], loc);
         }
     }
-
     public int shortest(String word1, String word2) {
         ArrayList<Integer> loc1, loc2;
 
