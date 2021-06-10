@@ -128,17 +128,48 @@ public class DynamicProgramming2 {
             Bstarts.computeIfAbsent(B[j], x -> new ArrayList<>()).add(j);
         }
 
-        for (int i = 0; i < A.length; i++) if (Bstarts.containsKey(A[i])) {
-            for (int j: Bstarts.get(A[i])) {
-                int k = 0;
-                while (i+k < A.length && j+k < B.length && A[i+k] == B[j+k]) {
-                    k++;
+        for (int i = 0; i < A.length; i++) {
+            if (Bstarts.containsKey(A[i])) {
+                for (int j: Bstarts.get(A[i])) {
+                    int k = 0;
+                    while (i+k < A.length && j+k < B.length && A[i+k] == B[j+k]) {
+                        k++;
+                    }
+                    ans = Math.max(ans, k);
                 }
-                ans = Math.max(ans, k);
             }
         }
         return ans;
     }  
+
+
+
+
+    //HOUSE ROBBER
+    public int rob(int[] nums) {
+        
+        int N = nums.length;
+        
+        // Special handling for empty array case.
+        if (N == 0) {
+            return 0;
+        }
+        
+        int[] maxRobbedAmount = new int[nums.length + 1];
+        
+        // Base case initializations.
+        maxRobbedAmount[N] = 0;
+        maxRobbedAmount[N - 1] = nums[N - 1];
+        
+        // DP table calculations.
+        for (int i = N - 2; i >= 0; --i) {
+            
+            // Same as the recursive solution.
+            maxRobbedAmount[i] = Math.max(maxRobbedAmount[i + 1], maxRobbedAmount[i + 2] + nums[i]);
+        }
+        
+        return maxRobbedAmount[0];
+    }    
 
 
 
