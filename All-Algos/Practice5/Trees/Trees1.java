@@ -21,12 +21,14 @@ public class Trees1 {
         int val;
         Node left;
         Node right;
+        Node parent;
         Node() {}
         Node(int val) { this.val = val; }
-        Node(int val, Node left, Node right) {
+        Node(int val, Node left, Node right, Node parent) {
             this.val = val;
             this.left = left;
             this.right = right;
+            this.parent = parent;
         }
     }
 
@@ -123,6 +125,17 @@ public class Trees1 {
         }
         return res;
     } 
+
+
+    //LONELIEST COMMON ANCESTOR OF A BINARY TREE
+    public Node lowestCommonAncestor(Node p, Node q) {
+        Node a = p, b = q;
+        while (a != b) {
+            a = a == null? q : a.parent;
+            b = b == null? p : b.parent;    
+        }
+        return a;
+    }
     
     
 
