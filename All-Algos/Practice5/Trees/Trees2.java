@@ -55,7 +55,7 @@ public class Trees2 {
         int tmp = a.val;
         a.val = b.val;
         b.val = tmp;
-      }
+    }
     
     public void recover (Node root) {
         Deque<Node> stack = new ArrayDeque<>();
@@ -78,5 +78,51 @@ public class Trees2 {
 
         swap(x, y);
     }    
+
+
+
+    //PATH SUM III
+    int count = 0;
+    int k;
+    HashMap<Integer, Integer> h = new HashMap<>();
+    
+    public void preorder(Node node, int currSum) {
+        if (node == null)
+            return;
+        
+        // current prefix sum
+        currSum += node.val;
+
+        // here is the sum we're looking for
+        if (currSum == k)
+            count++;
+        
+        // number of times the curr_sum − k has occured already, 
+        // determines the number of times a path with sum k 
+        // has occured upto the current node
+        count += h.getOrDefault(currSum - k, 0);
+        
+        // add the current sum into hashmap
+        // to use it during the child nodes processing
+        h.put(currSum, h.getOrDefault(currSum, 0) + 1);
+
+        // process left subtree
+        preorder(node.left, currSum);
+        // process right subtree
+        preorder(node.right, currSum);
+
+        // remove the current sum from the hashmap
+        // in order not to use it during 
+        // the parallel subtree processing
+        h.put(currSum, h.get(currSum) - 1);
+    }    
+            
+    public int pathSum(Node root, int sum) {
+        k = sum;
+        preorder(root, 0);
+        return count;
+    }    
+
+    
     
 }
