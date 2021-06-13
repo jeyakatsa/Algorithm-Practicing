@@ -57,26 +57,26 @@ public class Trees2 {
         b.val = tmp;
       }
     
-      public void recover (Node root) {
+    public void recover (Node root) {
         Deque<Node> stack = new ArrayDeque<>();
         Node x = null, y = null, pred = null;
-    
+
         while (!stack.isEmpty() || root != null) {
-          while (root != null) {
+            while (root != null) {
             stack.add(root);
             root = root.left;
-          }
-          root = stack.removeLast();
-          if (pred != null && root.val < pred.val) {
+            }
+            root = stack.removeLast();
+            if (pred != null && root.val < pred.val) {
             y = root;
             if (x == null) x = pred;
             else break;
-          }
-          pred = root;
-          root = root.right;
+            }
+            pred = root;
+            root = root.right;
         }
-    
+
         swap(x, y);
-      }    
+    }    
     
 }
