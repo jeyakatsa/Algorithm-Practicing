@@ -191,6 +191,38 @@ public class Trees1 {
 		return res;
 	} 
 
+
+    //Construct Binary Tree from Preorder and Postorder Traversal
+    int pre[];
+    int post[];
+    public Node constructFromPrePost(int[] pre, int[] post) {
+        this.pre = pre;
+        this.post = post;
+        return helper(0, pre.length-1, 0, post.length-1);
+    }
+    
+    public Node helper(int pre_start, int pre_end, int post_start, int post_end){
+        if (post_start > post_end){
+            return null;
+        }
+        
+        int cur = pre[pre_start];
+        Node root = new Node(cur);
+        if (pre_start == pre_end){
+            return root;
+        }
+        int left = pre[pre_start+1];
+        int index = 0;
+        for(int i = post_start; i<=post_end; i++){
+            if (post[i]==left){
+                index = i;
+            }
+        }
+        root.left = helper(pre_start+1, pre_start+index-post_start+1, post_start, index);
+        root.right = helper(pre_start+index-post_start+2, pre_end, index+1, post_end-1);
+        return root;
+    }    
+
     
 
 
