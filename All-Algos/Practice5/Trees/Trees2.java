@@ -121,6 +121,29 @@ public class Trees2 {
         k = sum;
         preorder(root, 0);
         return count;
+    }  
+    
+    
+
+    //CONVERT SORTED ARRAY TO BINARY TREE
+    int[] nums;
+
+    public Node helper(int left, int right) {
+      if (left > right) return null;
+  
+      // always choose left middle node as a root
+      int p = (left + right) / 2;
+  
+      // preorder traversal: node -> left -> right
+      Node root = new Node(nums[p]);
+      root.left = helper(left, p - 1);
+      root.right = helper(p + 1, right);
+      return root;
+    }
+  
+    public Node sortedArrayToBST(int[] nums) {
+      this.nums = nums;
+      return helper(0, nums.length - 1);
     }    
 
     
