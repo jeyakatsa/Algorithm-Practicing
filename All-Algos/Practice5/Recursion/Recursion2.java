@@ -45,9 +45,30 @@ public class Recursion2 {
         } else {
           int left_height = maxDepth(root.left);
           int right_height = maxDepth(root.right);
-          return java.lang.Math.max(left_height, right_height) + 1;
+          return Math.max(left_height, right_height) + 1;
         }
-      }
+    }
+
+
+    //SWAP NODES IN PAIRS
+    public TreeNode swapPairs(TreeNode head) {
+
+        // If the list has no node or has only one node left.
+        if ((head == null) || (head.next == null)) {
+            return head;
+        }
+
+        // Nodes to be swapped
+        TreeNode firstNode = head;
+        TreeNode secondNode = head.next;
+
+        // Swapping
+        firstNode.next  = swapPairs(secondNode.next);
+        secondNode.next = firstNode;
+
+        // Now the head is the second node
+        return secondNode;
+    }   
 
 
 }

@@ -56,7 +56,7 @@ public class Recursion {
     // think of the problem like this
     //n = row, k = column
     /*         0
-          /        \
+           /       \
          0           1
        /   \       /   \
       0     1     1     0
