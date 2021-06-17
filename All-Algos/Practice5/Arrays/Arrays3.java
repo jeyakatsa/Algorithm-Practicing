@@ -190,8 +190,13 @@ public class Arrays3 {
                 }
             }
         }
-    }    
+    }  
 
+
+    //3SUM CLOSEST  
+    public int threeSumClosest(int[] nums, int target) {
+        
+    }
 
 
 }
