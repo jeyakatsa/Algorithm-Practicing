@@ -195,7 +195,44 @@ public class Arrays3 {
 
     //3SUM CLOSEST  
     public int threeSumClosest(int[] nums, int target) {
+        int diff = Integer.MAX_VALUE, sz = nums.length;
+        Arrays.sort(nums);
+        for (int i = 0; i < sz && diff != 0; ++i) {
+            int lo = i + 1, hi = sz - 1;
+            while (lo < hi) {
+                int sum = nums[i] + nums[lo] + nums[hi];
+                if (Math.abs(target - sum) < Math.abs(diff))
+                    diff = target - sum;
+                if (sum < target)
+                    ++lo;
+                else
+                    --hi;
+            }
+        }
+        return target - diff;
+    }
+
+
+    //TASK SCHEDULER
+    public int leastInterval(char[] tasks, int n) {
+        // frequencies of the tasks
+        int[] frequencies = new int[26];
+        for (int t : tasks) {
+            frequencies[t - 'A']++;
+        }
+
+        Arrays.sort(frequencies);
+
+        // max frequency
+        int f_max = frequencies[25];
+        int idle_time = (f_max - 1) * n;
         
+        for (int i = frequencies.length - 2; i >= 0 && idle_time > 0; --i) {
+            idle_time -= Math.min(f_max - 1, frequencies[i]); 
+        }
+        idle_time = Math.max(0, idle_time);
+
+        return idle_time + tasks.length;
     }
 
 
