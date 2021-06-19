@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Arrays4 {
 
 
@@ -67,6 +69,26 @@ public class Arrays4 {
         }
         return result;
     }  
+
+
+
+    //Find the Duplicate Number
+    public int findDuplicate(int[] nums) {
+        Arrays.sort(nums);        
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i-1]) {            
+            // (my solution... So CLOSE!) 
+            // for (int i = 0..... if(nums[i] == nums[i++]) {
+                return nums[i];
+            }
+        }
+        return -1;
+        
+    }
 
 
     
