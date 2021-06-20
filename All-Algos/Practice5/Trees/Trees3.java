@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Trees3 {
 
     public static void main (String[] args) {
@@ -48,14 +50,33 @@ public class Trees3 {
         // both left child and right child
         int leftPath = longestPath(node.left);
         int rightPath = longestPath(node.right);
-
         // update the diameter if left_path plus right_path is larger
         diameter = Math.max(diameter, leftPath + rightPath);
-
         // return the longest one between left_path and right_path;
         // remember to add 1 for the path connecting the node and its parent
         return Math.max(leftPath, rightPath) + 1;
-    }   
+    }  
+
+
+    
+    //Closest Binary Search Tree Value
+    public void inorder(Node root, List<Integer> nums) {
+        if (root == null) return;
+        inorder(root.left, nums);
+        nums.add(root.val);
+        inorder(root.right, nums);
+      }
+    
+      public int closestValue(Node root, double target) {
+        List<Integer> nums = new ArrayList<>();
+        inorder(root, nums);
+        return Collections.min(nums, new Comparator<Integer>() {
+          @Override
+          public int compare(Integer o1, Integer o2) {
+            return Math.abs(o1 - target) < Math.abs(o2 - target) ? -1 : 1;
+          }
+        });
+      }   
 
 
 
