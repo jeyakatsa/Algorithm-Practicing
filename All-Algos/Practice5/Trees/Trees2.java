@@ -143,9 +143,6 @@ public class Trees2 {
       this.nums = nums;
       return helper(0, nums.length - 1);
     }  
-    
-    
-
 
     //Populating Next Right Pointers in Each Node
     public Node connect(Node root) {    
@@ -186,7 +183,44 @@ public class Trees2 {
         }  
         // Since the tree has now been modified, return the root node
         return root;
-    }   
+    }
+    
+    
+
+
+    //Delete Nodes And Return Forest
+    List<Node> roots;
+    Set<Integer> delSet;
+    public List<Node> delNodes(Node root, int[] to_delete) {
+        delSet = new HashSet<>();
+        roots = new ArrayList<>();
+        for (int nodeToDelete : to_delete) {
+            delSet.add(nodeToDelete);
+        }
+        if (!delSet.contains(root.val)) {
+            roots.add(root);
+        }
+        delNodesUtil(root);
+        return roots;
+    }
+    
+    public Node delNodesUtil(Node root) {
+        if (root == null) {
+            return null;
+        }
+        root.left = delNodesUtil(root.left);
+        root.right = delNodesUtil(root.right);
+        if (delSet.contains(root.val)) {
+            if (root.left != null) {
+                roots.add(root.left);
+            }
+            if (root.right != null) {
+                roots.add(root.right);
+            }
+            return null;
+        }
+        return root;
+    }  
 
     
     
