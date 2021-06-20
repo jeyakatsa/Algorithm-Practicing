@@ -65,18 +65,17 @@ public class Trees3 {
         inorder(root.left, nums);
         nums.add(root.val);
         inorder(root.right, nums);
-      }
-    
-      public int closestValue(Node root, double target) {
+    }
+    public int closestValue(Node root, double target) {
         List<Integer> nums = new ArrayList<>();
         inorder(root, nums);
         return Collections.min(nums, new Comparator<Integer>() {
-          @Override
-          public int compare(Integer o1, Integer o2) {
+            @Override
+            public int compare(Integer o1, Integer o2) {
             return Math.abs(o1 - target) < Math.abs(o2 - target) ? -1 : 1;
-          }
+            }
         });
-      }   
+    }   
 
 
 
