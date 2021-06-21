@@ -80,8 +80,8 @@ public class Trees3 {
 
 
     //Kill Process
-    public List <Integer> killProcess(List <Integer> pid, List <Integer> ppid, int kill) {
-        List <Integer> l = new ArrayList<>();
+    public List<Integer> killProcess (List<Integer> pid, List<Integer> ppid, int kill) {
+        List<Integer> l = new ArrayList<>();
         if (kill == 0)
             return l;
         l.add(kill);
