@@ -210,19 +210,39 @@ public class Arrays4 {
     //K Closest Points To Origin
     public int[][] kClosest(int[][] points, int K) {
         if(K == points.length) return points;
-        
         PriorityQueue<int[]> pq = new PriorityQueue<>(K, new Comparator<int[]>() {
             public int compare(int[] a, int[] b) {
                 return (b[0]*b[0] + b[1]*b[1]) - (a[0]*a[0] + a[1]*a[1]);
             }
-        });
-        
+        }); 
         for(int[] point: points) {
             pq.add(point);
             if(pq.size() > K) pq.poll();
         }
         return pq.toArray(new int[0][0]);
-    }    
+    } 
+    
+    
+    // //Kth Largest Element in Array
+    // My Solution:
+    // public int findKthLargest(int[] nums, int k) {
+    //     if (nums == null || nums.length == 0) {
+    //         return -1;
+    //     }
+    //     Arrays.sort(nums);
+    //     for (int i = 0; i < nums.length; i++) {
+    //         if (k == i) {
+    //             return nums[i];
+    //         }
+    //     }
+    //     return -1;
+        
+    // }
+    public int findKthLargest(int[] nums, int k) {
+        final int N = nums.length;
+        Arrays.sort(nums);
+        return nums[N - k];       
+    }      
 
 
     
