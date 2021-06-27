@@ -138,4 +138,15 @@ public class HashTables3 {
     }
 
 
+    //Encode and Decode TinyURL
+    Map<Integer, String> mapp = new HashMap<>();
+    public String encode(String longUrl) {
+        mapp.put(longUrl.hashCode(), longUrl);
+        return "http://tinyurl.com/" + longUrl.hashCode();
+    }
+    public String decode(String shortUrl) {
+        return mapp.get(Integer.parseInt(shortUrl.replace("http://tinyurl.com/", "")));
+    }    
+
+
 }
