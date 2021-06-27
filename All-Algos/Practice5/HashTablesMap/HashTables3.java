@@ -2,6 +2,11 @@ import java.util.*;
 
 public class HashTables3 {
 
+    public static void main (String[] args) {
+        String result = intToRoman(2);
+        System.out.println(result);
+    }
+
 
     //Tweet Counts Per Frequency
     Map<String, List<Integer>> map;
@@ -119,7 +124,7 @@ public class HashTables3 {
     //Integer to Roman
     private static final int[] valuess = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};    
     private static final String[] symbols = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
-    public String intToRoman(int num) {
+    public static String intToRoman(int num) {
         StringBuilder sb = new StringBuilder();
         // Loop through each symbol, stopping if num becomes 0.
         for (int i = 0; i < valuess.length && num > 0; i++) {
