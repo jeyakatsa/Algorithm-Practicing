@@ -75,5 +75,11 @@ public class DynamicProgramming4 {
         }
         return jumps;
     }
+
+
+    //Count Number of Teams
+    public int numTeams(int[] rating) {
+        
+    }    
     
 }
