@@ -79,7 +79,48 @@ public class DynamicProgramming4 {
 
     //Count Number of Teams
     public int numTeams(int[] rating) {
-        
+        int res = 0;
+        for (int i = 1; i < rating.length - 1; ++i) {
+            int less[] = new int[2], greater[] = new int[2];
+            for (int j = 0; j < rating.length; ++j) {
+                if (rating[i] < rating[j])
+                    ++less[j > i ? 1 : 0];
+                if (rating[i] > rating[j])
+                    ++greater[j > i ? 1 : 0];
+            }
+            res += less[0] * greater[1] + greater[0] * less[1];
+        }
+        return res;
+    }  
+
+
+
+    //Max Area of Island
+    int[][] grid;
+    boolean[][] seen;
+    public int area(int r, int c) {
+        if (r < 0 || r >= grid.length || c < 0 || c >= grid[0].length ||
+                seen[r][c] || grid[r][c] == 0)
+            return 0;
+        seen[r][c] = true;
+        return (1 + area(r+1, c) + area(r-1, c)
+                  + area(r, c-1) + area(r, c+1));
+    }
+    public int maxAreaOfIsland(int[][] grid) {
+        this.grid = grid;
+        seen = new boolean[grid.length][grid[0].length];
+        int ans = 0;
+        for (int r = 0; r < grid.length; r++) {
+            for (int c = 0; c < grid[0].length; c++) {
+                ans = Math.max(ans, area(r, c));
+            }
+        }
+        return ans;
     }    
+
+
+
+
+
     
 }
