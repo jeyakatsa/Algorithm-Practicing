@@ -114,6 +114,83 @@ public class Arrays5 {
             else break;
         }
         return this.hits.size();
+    } 
+    
+    
+
+
+    //Max Area of Island
+    int[][] grid;
+    boolean[][] seen;
+    public int area(int r, int c) {
+        if (r < 0 || r >= grid.length || c < 0 || c >= grid[0].length ||
+                seen[r][c] || grid[r][c] == 0)
+            return 0;
+        seen[r][c] = true;
+        return (1 + area(r+1, c) + area(r-1, c)
+                    + area(r, c-1) + area(r, c+1));
+    }
+    public int maxAreaOfIsland(int[][] grid) {
+        this.grid = grid;
+        seen = new boolean[grid.length][grid[0].length];
+        int ans = 0;
+        for (int r = 0; r < grid.length; r++) {
+            for (int c = 0; c < grid[0].length; c++) {
+                ans = Math.max(ans, area(r, c));
+            }
+        }
+        return ans;
+    }  
+    
+    
+
+    //Accounts Merge
+    public List<List<String>> accountsMerge(List<List<String>> accounts) {
+        Map<String, String> emailToName = new HashMap<>();
+        Map<String, ArrayList<String>> graph = new HashMap<>();
+        for (List<String> account: accounts) {
+            String name = "";
+            for (String email: account) {
+                if (name == "") {
+                    name = email;
+                    continue;
+                }
+                graph.computeIfAbsent(email, x-> new ArrayList<String>()).add(account.get(1));
+                graph.computeIfAbsent(account.get(1), x-> new ArrayList<String>()).add(email);
+                emailToName.put(email, name);
+            }
+        }
+        Set<String> seen = new HashSet<>();
+        List<List<String>> ans = new ArrayList<>();
+        for (String email: graph.keySet()) {
+            if (!seen.contains(email)) {
+                seen.add(email);
+                Stack<String> stack = new Stack<>();
+                stack.push(email);
+                List<String> component = new ArrayList<>();
+                while (!stack.empty()) {
+                    String node = stack.pop();
+                    component.add(node);
+                    for (String nei: graph.get(node)) {
+                        if (!seen.contains(nei)) {
+                            seen.add(nei);
+                            stack.push(nei);
+                        }
+                    }
+                }
+                Collections.sort(component);
+                component.add(0, emailToName.get(email));
+                ans.add(component);
+            }
+        }
+        return ans;
+    }  
+
+
+
+    //Exclusive Time of Functions
+    public int[] exclusiveTime(int n, List<String> logs) {
+        
     }    
     
     
