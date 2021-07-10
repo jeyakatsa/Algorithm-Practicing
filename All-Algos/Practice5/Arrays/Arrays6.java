@@ -105,43 +105,39 @@ public class Arrays6 {
   } 
   
   
+
+
   //Shortest Path in Binary Matrix
   private static final int[][] directions = 
   new int[][]{{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
-
   public int shortestPathBinaryMatrix(int[][] grid) {
-    
     // Firstly, we need to check that the start and target cells are open.
     if (grid[0][0] != 0 || grid[grid.length - 1][grid[0].length - 1] != 0) {
         return -1;
     }
-    
     // Set up the BFS.
     Queue<int[]> queue = new ArrayDeque<>();
     grid[0][0] = 1;
     queue.add(new int[]{0, 0});
-    
     // Carry out the BFS
     while (!queue.isEmpty()) {
-        int[] cell = queue.remove();
-        int row = cell[0];
-        int col = cell[1];
-        int distance = grid[row][col];
-        if (row == grid.length - 1 && col == grid[0].length - 1) {
-            return distance;
-        }
-        for (int[] neighbour : getNeighbours(row, col, grid)) {
-            int neighbourRow = neighbour[0];
-            int neighbourCol = neighbour[1];
-            queue.add(new int[]{neighbourRow, neighbourCol});
-            grid[neighbourRow][neighbourCol] = distance + 1;
-        }
+      int[] cell = queue.remove();
+      int row = cell[0];
+      int col = cell[1];
+      int distance = grid[row][col];
+      if (row == grid.length - 1 && col == grid[0].length - 1) {
+          return distance;
+      }
+      for (int[] neighbour : getNeighbours(row, col, grid)) {
+          int neighbourRow = neighbour[0];
+          int neighbourCol = neighbour[1];
+          queue.add(new int[]{neighbourRow, neighbourCol});
+          grid[neighbourRow][neighbourCol] = distance + 1;
+      }
     }
-    
     // The target was unreachable.
     return -1;
   }
-
   private List<int[]> getNeighbours(int row, int col, int[][] grid) {
     List<int[]> neighbours = new ArrayList<>();
     for (int i = 0; i < directions.length; i++) {
@@ -156,6 +152,26 @@ public class Arrays6 {
     }
     return neighbours; 
   }  
+
+
+  //Find Peak Element
+  public int findPeakElement(int[] nums) {
+    return search(nums, 0, nums.length - 1);
+  }
+  public int search(int[] nums, int l, int r) {
+      if (l == r)
+          return l;
+      int mid = (l + r) / 2;
+      if (nums[mid] > nums[mid + 1])
+          return search(nums, l, mid);
+      return search(nums, mid + 1, r);
+  }
+
+
+
+
+
+
 
 
 
