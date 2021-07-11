@@ -160,7 +160,73 @@ public class HashTables5 {
     }
     return result;
     
-}
+  }
+
+
+  //Subarray Sums Divisible by K
+  public int subarraysDivByK(int[] A, int K) {
+    Map<Integer, Integer> map = new HashMap<>();
+    map.put(0, 1);
+    int count = 0, sum = 0;
+    for(int a : A) {
+        sum = (sum + a) % K;
+        if(sum < 0) sum += K;  // Because -1 % 5 = -1, but we need the positive mod 4
+        count += map.getOrDefault(sum, 0);
+        map.put(sum, map.getOrDefault(sum, 0) + 1);
+    }
+    return count;
+  }
+
+
+
+  // //Binary Tree Vertical Order Traversal...
+  // public class TreeNode {
+  //       int val;
+  //       TreeNode left;
+  //       TreeNode right;
+  //       TreeNode() {}
+  //       TreeNode(int val) { this.val = val; }
+  //       TreeNode(int val, TreeNode left, TreeNode right) {
+  //           this.val = val;
+  //           this.left = left;
+  //           this.right = right;
+  //       }
+  // }
+  // public List<List<Integer>> verticalOrder(TreeNode root) {
+  //   List<List<Integer>> output = new ArrayList<>();
+  //   if (root == null) {
+  //     return output;
+  //   }
+
+  //   Map<Integer, ArrayList> columnTable = new HashMap<>();
+  //   Queue<Pair<TreeNode, Integer>> queue = new ArrayDeque<>();
+  //   int column = 0;
+  //   queue.offer(new Pair(root, column));
+
+  //   while (!queue.isEmpty()) {
+  //     Pair<TreeNode, Integer> p = queue.poll();
+  //     root = p.getKey();
+  //     column = p.getValue();
+
+  //     if (root != null) {
+  //       if (!columnTable.containsKey(column)) {
+  //         columnTable.put(column, new ArrayList<Integer>());
+  //       }
+  //       columnTable.get(column).add(root.val);
+
+  //       queue.offer(new Pair(root.left, column - 1));
+  //       queue.offer(new Pair(root.right, column + 1));
+  //     }
+  //   }
+
+  //   List<Integer> sortedKeys = new ArrayList<Integer>(columnTable.keySet());
+  //   Collections.sort(sortedKeys);
+  //   for(int k : sortedKeys) {
+  //     output.add(columnTable.get(k));
+  //   }
+
+  //   return output;
+  // }
 
 
 
