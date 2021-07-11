@@ -142,6 +142,28 @@ public class HashTables5 {
         n = getNext(n);
     }
     return n == 1;
-  }  
+  } 
+
+
+  //Find All Duplicates in an Array
+  public List<Integer> findDuplicates(int[] nums) {
+    if(nums == null || nums.length == 0) {
+        throw new IllegalArgumentException("Nope!");
+    }
+    List<Integer> result = new ArrayList<Integer>();
+    Arrays.sort(nums);
+    for(int i = 1; i < nums.length; i++) {
+        if (nums[i] == nums[i-1]) {
+            result.add(nums[i]);
+            i++;
+        }
+    }
+    return result;
+    
+}
+
+
+
+
     
 }
