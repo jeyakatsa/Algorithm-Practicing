@@ -94,9 +94,8 @@ public class Arrays8 {
         return res;
     }
 
-    
+
     //Search Suggestions System
-    // Equivalent code for lower_bound in Java
     int lower_bound(String[] products, int start, String word) {
         int i = start, j = products.length, mid;
         while (i < j) {
