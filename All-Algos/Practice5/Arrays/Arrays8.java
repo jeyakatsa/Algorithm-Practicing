@@ -180,6 +180,43 @@ public class Arrays8 {
     }    
 
 
+    //Invalid Transactions
+    public List<String> invalidTransactions(String[] transactions) {
+        int n = transactions.length;
+        List<String> res = new ArrayList<>();
+        if (n == 0) {
+            return res;
+        }
+        String[] names = new String[n];
+        int[] times = new int[n];
+        int[] amounts = new int[n];
+        String[] citys = new String[n];
+        boolean[] add = new boolean[n];
+        for (int i = 0; i < transactions.length; i++) {
+            String[] subs = transactions[i].split(",");
+            names[i] = subs[0];
+            times[i] = Integer.parseInt(subs[1]);
+            amounts[i] = Integer.parseInt(subs[2]);
+            citys[i] = subs[3];
+        }
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (names[i].equals(names[j]) && Math.abs(times[i] - times[j]) <= 60 && !citys[i].equals(citys[j])) {
+                    add[i] = true;
+                    add[j] = true;
+                }
+            }
+            if (amounts[i] > 1000) {
+                add[i] = true;
+            }
+            if (add[i]) {
+                res.add(transactions[i]);
+            }
+        }
+        return res;
+    }    
+
+
 
     
 }
