@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Arrays9 {
 
     //Jump Game
@@ -9,6 +11,18 @@ public class Arrays9 {
             }
         }
         return lastPos == 0;
+    }
+
+    
+    //Squares of a Sorted Array
+    public int[] sortedSquares(int[] nums) {
+        int[] result = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            result[i] = nums[i] * nums[i];
+        }
+        Arrays.sort(result);        
+        return result;
+        
     }    
     
 }
