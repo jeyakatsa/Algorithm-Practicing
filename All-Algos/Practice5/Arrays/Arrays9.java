@@ -33,6 +33,13 @@ public class Arrays9 {
             res[idx++] = nums[j];
         } 
         return res;
-    }      
+    }   
+    
+    
+    //Shortest Bridge
+    public int shortestBridge(int[][] grid) {
+        
+    }    
+
     
 }
