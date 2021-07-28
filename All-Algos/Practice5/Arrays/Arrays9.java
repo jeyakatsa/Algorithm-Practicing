@@ -157,6 +157,18 @@ public class Arrays9 {
         for (int i = 0; i < n; ++i)
             res = (res + (long)A[i] * left[i] * right[i]) % mod;
         return (int)res;
+    }  
+    
+    
+    //Sort An Array
+    public int[] sortArray(int[] nums) {
+        Arrays.sort(nums);
+        int[] result = new int[nums.length];
+        for(int i = 0; i < nums.length; i++) {
+            result[i] = nums[i];
+        }
+        return result;
+        
     }    
 
   
