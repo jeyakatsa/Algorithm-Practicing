@@ -21,7 +21,6 @@ public class Arrays10 {
     
         return ans;
     }
-    
     public int[] maxSumFromRight(int[] nums, int len) {
         int n = nums.length;
         int[] right = new int[n];
@@ -34,8 +33,7 @@ public class Arrays10 {
         }
         
         return right;  
-    }
-    
+    } 
     public int[] maxSumFromLeft(int[] nums, int len) {
         int n = nums.length;
         int[] left = new int[n];
@@ -46,7 +44,25 @@ public class Arrays10 {
             max = Math.max(max, sum);
             left[i + len - 1] = sum;
         }
+
         return left;
-    }    
+    }
+    
+    
+    //Next Greater Element II
+    public int[] nextGreaterElements(int[] nums) {
+        int[] res = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            res[i] = -1;
+            for (int j = 1; j < nums.length; j++) {
+                if (nums[(i + j) % nums.length] > nums[i]) {
+                    res[i] = nums[(i + j) % nums.length];
+                    break;
+                }
+            }
+        }
+        return res;
+    }
+
     
 }
