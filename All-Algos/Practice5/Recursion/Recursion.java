@@ -18,12 +18,14 @@ public class Recursion {
 
     public static class TreeNode {
         int val;
+        TreeNode head;
         TreeNode right;
         TreeNode left;
         TreeNode next;
         TreeNode () {}
         TreeNode (int val) {this.val = val;}
-        TreeNode (int val, TreeNode right, TreeNode left, TreeNode next) {
+        TreeNode (int val, TreeNode head, TreeNode right, TreeNode left, TreeNode next) {
+            this.head = head;
             this.left = left;
             this.right = right;
             this.val = val;
@@ -95,7 +97,20 @@ public class Recursion {
             return l2;
         }
 
-    }    
+    }  
+
+    
+    //Reverse Linked List
+    public TreeNode reverseList(TreeNode head) {
+        TreeNode prev = null;
+        while (head != null) {
+            TreeNode temp = head.next;
+            head.next = prev;
+            prev = head;
+            head = temp;
+        }
+        return prev;
+    }   
     
     
 
