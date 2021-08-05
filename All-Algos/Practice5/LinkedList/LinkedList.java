@@ -24,6 +24,8 @@ public class LinkedList {
         ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     }
 
+
+    //LRU Cache
     class LRUCache extends LinkedHashMap<Integer, Integer>{
         private int capacity;
         
@@ -44,7 +46,26 @@ public class LinkedList {
         protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
             return size() > capacity; 
         }
-    }    
+    }  
+    
+    
+    //Design HashMap
+    class MyHashMap {
+        int[] data;
+        public MyHashMap() {
+            data = new int[1000001];
+            Arrays.fill(data, -1);
+        }
+        public void put(int key, int val) {
+            data[key] = val;
+        }
+        public int get(int key) {
+            return data[key];
+        }
+        public void remove(int key) {
+            data[key] = -1;
+        }
+    }
 
 
    
