@@ -162,26 +162,25 @@ public class LinkedList {
 
     public void helper(ListNode node) {
         if (node != null) {
-        // left
-        helper(node.left);
-        // node 
-        if (last != null) {
-            // link the previous node (last)
-            // with the current one (node)
-            last.right = node;
-            node.left = last;
-        }
-        else {
-            // keep the smallest node
-            // to close DLL later on
-            first = node;
-        }
-        last = node;
-        // right
-        helper(node.right);
+            // left
+            helper(node.left);
+            // node 
+            if (last != null) {
+                // link the previous node (last)
+                // with the current one (node)
+                last.right = node;
+                node.left = last;
+            }
+            else {
+                // keep the smallest node
+                // to close DLL later on
+                first = node;
+            }
+            last = node;
+            // right
+            helper(node.right);
         }
     }
-
     public ListNode treeToDoublyList(ListNode root) {
         if (root == null) return null;
 
