@@ -16,12 +16,15 @@ public class LinkedList {
 
     public static class ListNode {
         int val;
+        ListNode right;
+        ListNode left;
         ListNode next;
         public int label;
         public ListNode random;
         ListNode() {}
         ListNode(int val) { this.val = val; }
-        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+        ListNode(int val, ListNode next) { 
+            this.val = val; this.next = next; }
     }
 
 
@@ -149,6 +152,44 @@ public class LinkedList {
         }
 
         return head;
+    }    
+
+
+    //Convert Binary Search Tree to Sorted Doubly Linked List
+    // the smallest (first) and the largest (last) nodes
+    ListNode first = null;
+    ListNode last = null;
+
+    public void helper(ListNode node) {
+        if (node != null) {
+        // left
+        helper(node.left);
+        // node 
+        if (last != null) {
+            // link the previous node (last)
+            // with the current one (node)
+            last.right = node;
+            node.left = last;
+        }
+        else {
+            // keep the smallest node
+            // to close DLL later on
+            first = node;
+        }
+        last = node;
+        // right
+        helper(node.right);
+        }
+    }
+
+    public ListNode treeToDoublyList(ListNode root) {
+        if (root == null) return null;
+
+        helper(root);
+        // close DLL
+        last.right = first;
+        first.left = last;
+        return first;
     }    
 
 
