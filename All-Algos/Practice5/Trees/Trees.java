@@ -56,13 +56,13 @@ public class Trees {
     //     private List<Integer> integers = new ArrayList<Integer>();
     //     private int position = 0; // Pointer to next integer to return.
         
-    //     public NestedIterator(List<Integer> nestedList) {
+    //     public NestedIterator(List<NestedInteger> nestedList) {
     //         flattenList(nestedList);
     //     }
 
     //     // Recursively unpacks a nested list in DFS order.
-    //     private void flattenList(List<Integer> nestedList) {
-    //         for (Integer nestedInteger : nestedList) {
+    //     private void flattenList(List<NestedInteger> nestedList) {
+    //         for (NestedInteger nestedInteger : nestedList) {
     //             if (nestedInteger.isInteger()) {
     //                 integers.add(nestedInteger.getInteger());
     //             } else {
