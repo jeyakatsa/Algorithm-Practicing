@@ -213,7 +213,7 @@ public class Arrays10 {
     }    
 
 
-    //Two Pointers
+    //3 Sum
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> res = new ArrayList<>();
