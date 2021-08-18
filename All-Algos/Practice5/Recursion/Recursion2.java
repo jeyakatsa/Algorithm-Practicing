@@ -108,7 +108,18 @@ public class Recursion2 {
     }
     public void reverseString(char[] s) {
         helper(s, 0, s.length - 1);
-    }    
+    }  
+
+
+
+    //Fibonacci Number  
+    public int fib(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        return fib(n - 1) + fib(n - 2);
+        
+    }
 
 
 
