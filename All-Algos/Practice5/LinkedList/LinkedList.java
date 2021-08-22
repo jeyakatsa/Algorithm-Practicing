@@ -189,7 +189,12 @@ public class LinkedList {
         last.right = first;
         first.left = last;
         return first;
-    }    
+    }   
+    
+    
+
+
+    
 
 
 
