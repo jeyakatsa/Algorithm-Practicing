@@ -81,22 +81,18 @@ public class Trees {
     private Deque<TreeNode> stack = new LinkedList<>();
     private Deque<Integer> upperLimits = new LinkedList<>();
     private Deque<Integer> lowerLimits = new LinkedList<>();
-
     public void update(TreeNode root, Integer low, Integer high) {
         stack.add(root);
         lowerLimits.add(low);
         upperLimits.add(high);
     }
-
     public boolean isValidBST(TreeNode root) {
         Integer low = null, high = null, val;
         update(root, low, high);
-
         while (!stack.isEmpty()) {
             root = stack.poll();
             low = lowerLimits.poll();
             high = upperLimits.poll();
-
             if (root == null) continue;
             val = root.val;
             if (low != null && val <= low) {
@@ -145,6 +141,28 @@ public class Trees {
             return this.index + 1 < this.nodesSorted.size();
         }
     } 
+
+    //Diameter of Binary Tree
+    private int diameter;
+    public int diameterOfBinaryTree(TreeNode root) {
+        diameter = 0;
+        longestPath(root);
+        return diameter;
+    }
+    private int longestPath(TreeNode node){
+        if(node == null) return 0;
+        // recursively find the longest path in
+        // both left child and right child
+        int leftPath = longestPath(node.left);
+        int rightPath = longestPath(node.right);
+
+        // update the diameter if left_path plus right_path is larger
+        diameter = Math.max(diameter, leftPath + rightPath);
+
+        // return the longest one between left_path and right_path;
+        // remember to add 1 for the path connecting the node and its parent
+        return Math.max(leftPath, rightPath) + 1;
+    }    
 
  
     
