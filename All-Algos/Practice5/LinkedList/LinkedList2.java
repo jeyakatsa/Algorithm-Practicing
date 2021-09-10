@@ -5,9 +5,15 @@ public class LinkedList2 {
         ListNode next;
         ListNode prev;
         ListNode child;
+        ListNode left;
+        ListNode right;
         public int label;
         public Object random;
         ListNode() {}
+        ListNode(ListNode left, ListNode right){
+            this.left = left;
+            this.right = right;
+        }
         ListNode(int val) { this.val = val; }
         ListNode(int val, ListNode next) { this.val = val; this.next = next; }
         ListNode(int val, ListNode next, ListNode prev) { this.prev = prev; this.val = val; this.next = next; }
@@ -32,6 +38,31 @@ public class LinkedList2 {
         odd.next = evenHead;
         return head;
     }    
+
+    //Flatten Binary Tree to LinkedList
+    public void flatten(ListNode root) {
+        // Handle the null scenario
+        if (root == null) {
+            return;
+        }
+        ListNode node = root;
+        while (node != null) {
+            // If the node has a left child
+            if (node.left != null) {
+                // Find the rightmost node
+                ListNode rightmost = node.left;
+                while (rightmost.right != null) {
+                    rightmost = rightmost.right;
+                }
+                // rewire the connections
+                rightmost.right = node.right;
+                node.right = node.left;
+                node.left = null;
+            }
+            // move on to the right side of the tree
+            node = node.right;
+        }
+    }
 
 
     
