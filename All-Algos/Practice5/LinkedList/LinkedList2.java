@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class LinkedList2 {
 
     public static class ListNode {
@@ -100,7 +102,36 @@ public class LinkedList2 {
         }
         first.next = first.next.next;
         return dummy.next;
-    }    
+    }  
+    
+    //Flatten a Multilevel Doubly Linked List
+    public ListNode flattenn(ListNode head) {
+        if (head == null) return head;
+    
+        ListNode pseudoHead = new ListNode(0, null, head, null);
+        ListNode curr, prev = pseudoHead;
+    
+        
+        Deque<ListNode> stack = new ArrayDeque<>();
+        stack.push(head);
+    
+        while (!stack.isEmpty()) {
+          curr = stack.pop();
+          prev.next = curr;
+          curr.prev = prev;
+    
+          if (curr.next != null) stack.push(curr.next);
+          if (curr.child != null) {
+            stack.push(curr.child);
+            // don't forget to remove all child pointers.
+            curr.child = null;
+          }
+          prev = curr;
+        }
+        // detach the pseudo node from the result
+        pseudoHead.next.prev = null;
+        return pseudoHead.next;
+      } 
 
 
     
