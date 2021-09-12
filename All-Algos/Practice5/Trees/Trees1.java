@@ -68,7 +68,25 @@ public class Trees1 {
     //     }
     
     //     return output;
-    // }    
+    // }   
+    
+    
+    //Invert Binary Tree
+    public Node invertTree(Node root) {
+        if (root == null) return null;
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+            Node temp = current.left;
+            current.left = current.right;
+            current.right = temp;
+            if (current.left != null) queue.add(current.left);
+            if (current.right != null) queue.add(current.right);
+        }
+        return root;
+    }   
+
 
 
     
