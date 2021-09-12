@@ -89,33 +89,64 @@ public class Trees1 {
 
 
     //Recover Binary Search Tree
-    public void swap(TreeNode a, TreeNode b) {
+    public void swap(Node a, Node b) {
         int tmp = a.val;
         a.val = b.val;
         b.val = tmp;
       }
     
-      public void recoverTree(TreeNode root) {
-        Deque<TreeNode> stack = new ArrayDeque();
-        TreeNode x = null, y = null, pred = null;
-    
+    public void recoverTree(Node root) {
+        Deque<Node> stack = new ArrayDeque<>();
+        Node x = null, y = null, pred = null;
+
         while (!stack.isEmpty() || root != null) {
-          while (root != null) {
+            while (root != null) {
             stack.add(root);
             root = root.left;
-          }
-          root = stack.removeLast();
-          if (pred != null && root.val < pred.val) {
+            }
+            root = stack.removeLast();
+            if (pred != null && root.val < pred.val) {
             y = root;
             if (x == null) x = pred;
             else break;
-          }
-          pred = root;
-          root = root.right;
+            }
+            pred = root;
+            root = root.right;
         }
-    
+
         swap(x, y);
-      }   
+    }   
+
+
+    //Balance a Binary Search Tree
+    List<Node> list = new ArrayList<>();                                         //declaring list globally so that it can be accessed thoughout the program.
+    public void InOrder(Node root) {                                           //InOrder traveral of the tree.
+        
+        if(root == null)
+            return;
+        else
+        {
+            InOrder(root.left);
+            list.add(root);
+            InOrder(root.right);    
+        }
+    }
+    public Node balancedBST(int start,int end) {                                   //creating new tree with the help of list.
+        if(start>end)
+            return null;
+        int mid = (start+end)/2;
+        Node root = list.get(mid);
+        root.left = balancedBST(start,mid-1);
+        root.right = balancedBST(mid+1,end);
+        return root;
+    }
+    public Node balanceBST(Node root) {
+        if(root ==null)
+            return null;
+        InOrder(root);
+        return balancedBST(0,list.size()-1);
+    }  
+
 
 
 
