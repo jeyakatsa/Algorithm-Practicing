@@ -1,0 +1,39 @@
+Powers of 2 Table Image (Excell)
+ 
+
+So Far: 
+
+Attempt: Arrays: 75 [10]
+Attempt: HashTables/Map: 45 [10]
+Attempt: Dynamic Programming: 30 [11]
+Attempt: Trees: 25 [15]
+Attempt: Linked List: 15 [15]
+Attempt: Recursion: 10 [10]
+
+
+About myself:
+ -place Holder
+
+Weaknesses:  -place Holder
+Strengths:  -place Holder
+
+challenges: 
+ -place Holder
+
+Mistakes/Failures: 
+ -place Holder
+
+Enjoyed: 
+ -place Holder
+
+Leadership:
+ -place Holder
+
+Conflicts: 
+ -place Holder
+
+What I'd to differently:
+ -place Holder
+
+
+
