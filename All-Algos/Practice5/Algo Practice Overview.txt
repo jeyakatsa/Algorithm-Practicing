@@ -3,12 +3,12 @@ Powers of 2 Table Image (Excell)
 
 So Far: 
 
-Attempt: Arrays: 75 [10]
-Attempt: HashTables/Map: 45 [10]
-Attempt: Dynamic Programming: 30 [11]
-Attempt: Trees: 25 [15]
-Attempt: Linked List: 15 [15]
-Attempt: Recursion: 10 [10]
+Attempt: Arrays: 75 [0]
+Attempt: HashTables/Map: 45 [0]
+Attempt: Dynamic Programming: 30 [0]
+Attempt: Trees: 25 [0]
+Attempt: Linked List: 15 [0]
+Attempt: Recursion: 10 [0]
 
 
 About myself:
