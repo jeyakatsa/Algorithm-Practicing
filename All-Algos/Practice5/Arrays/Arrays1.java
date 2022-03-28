@@ -24,28 +24,26 @@ public class Arrays1 {
     }
     //if including HashMap, then can separate for loops into solution O(n)
 
-
-    //LRU Cache
-    class LRUCache extends LinkedHashMap<Integer, Integer>{
-        private int capacity;
-        
-        public LRUCache(int capacity) {
-            super(capacity, 0.75F, true);
-            this.capacity = capacity;
+    //MERGE INTERVALS
+    public int[][] merge(int[][] intervals) {
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+        LinkedList<int[]> merged = new LinkedList<>();
+        for (int[] interval : intervals) {
+            // if the list of merged intervals is empty or if the current
+            // interval does not overlap with the previous, simply append it.
+            if (merged.isEmpty() || merged.getLast()[1] < interval[0]) {
+                merged.add(interval);
+            }
+            // otherwise, there is overlap, so we merge the current and previous
+            // intervals.
+            else {
+                merged.getLast()[1] = Math.max(merged.getLast()[1], interval[1]);
+            }
         }
-    
-        public int get(int key) {
-            return super.getOrDefault(key, -1);
-        }
-    
-        public void put(int key, int value) {
-            super.put(key, value);
-        }
-    
-        @Override
-        protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
-            return size() > capacity; 
-        }
+        return merged.toArray(new int[merged.size()][]);
     }
+
+
+
   
 }
