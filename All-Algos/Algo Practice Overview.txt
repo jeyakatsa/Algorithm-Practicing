@@ -3,7 +3,7 @@ Powers of 2 Table Image (Excell)
 
 So Far: 
 
-Attempt: Arrays: 75 [1]
+Attempt: Arrays: 75 [3]
 Attempt: HashTables/Map: 45 [1]
 Attempt: Dynamic Programming: 30 [0]
 Attempt: Trees: 25 [0]
@@ -11,29 +11,46 @@ Attempt: Linked List: 15 [0]
 Attempt: Recursion: 10 [0]
 
 
-About myself:
- -place Holder
 
-Weaknesses:  -place Holder
-Strengths:  -place Holder
+
+
+
+About myself:
+ - over 3 years of Front-End & Back-End Software Development experience
+in Solidity, Java, JavaScript, AWS, and many other tools and programs
+
+Weaknesses:  
+ - Too Nice
+Strengths:  
+ - Persistance in solving problems
 
 challenges: 
- -place Holder
+ - While building a light client for Consensys, 
+it was difficult to bridge the IDE they were using to
+the consensus layer, so in order to solve that issue, I had to use
+a trial & error approach while using StackOverflow.
 
 Mistakes/Failures: 
- -place Holder
-
-Enjoyed: 
- -place Holder
-
-Leadership:
- -place Holder
-
-Conflicts: 
- -place Holder
+ - Overpromising and underdelivering on some past projects I would
+say were by biggest mistakes and failures.
 
 What I'd to differently:
- -place Holder
+ - Underpromise, and overdeliver on expectations.
+
+Enjoyed: 
+ - Building projects that solve problems for developers and users.
+
+Leadership:
+ - I managed to convince a few developers who I was in class with
+to join me into building my Cryptocurrency project by building the
+prototype.
+
+Conflicts: 
+ - There was a conflict with a developer whom I was leading who couldn't
+solve a technical problem in time. So I had to step in and help him solve
+the issue so we could complete the project within the proposed deadline.
+
+
 
 
 
