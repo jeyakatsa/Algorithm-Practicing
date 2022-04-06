@@ -3,7 +3,7 @@ Powers of 2 Table Image (Excell)
 
 So Far: 
 
-Attempt: Arrays: 75 [3]
+Attempt: Arrays: 75 [4]
 Attempt: HashTables/Map: 45 [1]
 Attempt: Dynamic Programming: 30 [0]
 Attempt: Trees: 25 [0]
@@ -13,42 +13,67 @@ Attempt: Recursion: 10 [0]
 
 
 
+Optimism/Discord
+
+
+
+Why Ethereum Foundation?
+I love building projects that help make people's lives easier an I'm very
+passionae about cryptocurrency which is why I believe I'll
+be a great candidate for a position.
 
 
 About myself:
- - over 3 years of Front-End & Back-End Software Development experience
+ - over 3 years of Full-Stack Software Development experience
 in Solidity, Java, JavaScript, AWS, and many other tools and programs
 
 Weaknesses:  
- - Too Nice
+Too nice.
+ - In a past job I had a long time ago...
+I was (problem-solution)
 Strengths:  
- - Persistance in solving problems
+Persistance in solving problems
+ - During my coding bootcamp
+In the Cryptodea project (problem-solution)
 
 challenges: 
+   During my apprenticeship
  - While building a light client for Consensys, 
 it was difficult to bridge the IDE they were using to
 the consensus layer, so in order to solve that issue, I had to use
 a trial & error approach while using StackOverflow.
 
 Mistakes/Failures: 
- - Overpromising and underdelivering on some past projects I would
-say were by biggest mistakes and failures.
-
-What I'd to differently:
- - Underpromise, and overdeliver on expectations.
+   While at my Start-up...
+Overpromised and Underdelivered.
+- Explain Startup (problem- learning experience
+[Underpromise, and overdeliver on expectations]
 
 Enjoyed: 
  - Building projects that solve problems for developers and users.
 
 Leadership:
- - I managed to convince a few developers who I was in class with
-to join me into building my Cryptocurrency project by building the
-prototype.
+   During my coding bootcamp, 
+ - I had to convince a few developers who I was in class with
+to join me into building my Cryptocurrency project, so I resolved
+that by showing them the prototype and in the end convinced them
+to join my project. (problem-solution) 
+
+Conflict/Disagreement:
+   During my Apprenticeship at Ethereum
+- Talk about disagreement about a major project I was starting, (problem-solution) 
 
 Conflicts: 
+   During my coding bootcamp, 
+ - In the Cryptodea project (problem-solution)
  - There was a conflict with a developer whom I was leading who couldn't
 solve a technical problem in time. So I had to step in and help him solve
 the issue so we could complete the project within the proposed deadline.
+
+Ambiguity: 
+   During my Apprenticeship at Ethereum
+- I was tasked to begin R&D on a new programming language (research & dev)
+Solution, project was closed due to (explain)
 
 
 
