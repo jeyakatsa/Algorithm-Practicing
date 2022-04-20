@@ -13,24 +13,23 @@ Attempt: Recursion: 10 [0]
 
 
 
-Optimism/Discord
-
-
 
 Why Ethereum Foundation?
-I love building projects that help make people's lives easier an I'm very
-passionae about cryptocurrency which is why I believe I'll
+All my current projects are focused on onboarding more
+developers into the Ethereum Ecocystem which why I believe I'll
 be a great candidate for a position.
 
 
 About myself:
  - over 3 years of Full-Stack Software Development experience
 in Solidity, Java, JavaScript, AWS, and many other tools and programs
+including React.
 
 Weaknesses:  
 Too nice.
  - In a past job I had a long time ago...
 I was (problem-solution)
+
 Strengths:  
 Persistance in solving problems
  - During my coding bootcamp

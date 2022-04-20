@@ -61,7 +61,6 @@ public class Arrays1 {
     dfs(grid, r, c - 1);
     dfs(grid, r, c + 1);
   }
-  
   public int numIslands(char[][] grid) {
     if (grid == null || grid.length == 0) {
       return 0;
@@ -96,5 +95,18 @@ public class Arrays1 {
     }
     return count;
   }
+
+  //Best Time to Buy and Sell Stock
+  public int maxProfit(int prices[]) {
+    int maxprofit = 0;
+    for (int i = 0; i < prices.length - 1; i++) {
+        for (int j = i + 1; j < prices.length; j++) {
+            int profit = prices[j] - prices[i];
+            if (profit > maxprofit)
+                maxprofit = profit;
+        }
+    }
+    return maxprofit;
+}
   
 }
